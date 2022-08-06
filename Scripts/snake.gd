@@ -21,10 +21,6 @@ onready var speed_timer = $speed
 
 func _ready():
 	snake_length = [head, body, tail]
-	# for i in grid.get_used_cells_by_id(1):
-	# 	print(i)
-	# 	print( grid.map_to_world(i) + Vector2(ceil(16/2),ceil(16/2)) )
-		# print(snake_length[0].global_position)
 	speed_timer.start()
 
 
@@ -49,17 +45,25 @@ func move_snake():
 
 	
 func _on_speed_timeout():
-	print("okay")
 	_out_of_bound()
 	move_snake()
 
+
 # out_of_bound = (23, 143) , (143,23)
 
+
+# OUT OF BOUND SYSTEM
 func _out_of_bound():
 	for i in snake_length:
-		if i.global_position.x == 23:
-			_teleport(i,Vector2(135,0))
-			
+		if i.global_position.x == 23 and move_direction == DIRECTION["left"]:
+			_teleport(i, Vector2( 135, 0)) 
+		elif i.global_position.x == 143 and move_direction == DIRECTION["right"]: 
+			_teleport(i, Vector2( -135, 0))
+		elif i.global_position.y == 23 and move_direction == DIRECTION["up"]: 
+			_teleport(i, Vector2( 0, 135))
+		elif i.global_position.y == 143 and move_direction == DIRECTION["down"]: 
+			_teleport(i, Vector2( 0, -135))
+
 func _teleport(part ,vector):
 	part.global_translate(vector)
 	pass
