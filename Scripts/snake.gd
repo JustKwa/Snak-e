@@ -44,28 +44,21 @@ func _check_movement():
 
 
 func move_snake():
-	for i in snake_length:
-		self.position += move_direction
-	pass
+	self.position += move_direction
+
 
 	
-func _on_speed_timeout():	
-	# _out_of_bound()
+func _on_speed_timeout():
+	print("okay")
+	_out_of_bound()
 	move_snake()
 
 # out_of_bound = (23, 143) , (143,23)
 
 func _out_of_bound():
 	for i in snake_length:
-		print(i.get_name())
-		print(i.global_position.x)
-		print(typeof(i.global_position.x) == TYPE_VECTOR2)
-		match int(i.global_position):
-			23:
-				_teleport(i,Vector2(135,0))
-			
-		# if i.global_position.x == grid.cell:
-		# 	_teleport(i,Vector2(135,0))
+		if i.global_position.x == 23:
+			_teleport(i,Vector2(135,0))
 			
 func _teleport(part ,vector):
 	part.global_translate(vector)
