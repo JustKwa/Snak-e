@@ -1,5 +1,7 @@
 extends Node2D
 
+var direction = ""
+
 onready var head_sprite = $head_sprite 
 
 
@@ -7,7 +9,7 @@ func _ready():
 	pass
 
 
-func turn_to(direction):
+func turn():
 	match direction:
 		"left":
 			head_sprite.set_rotation_degrees(0)
@@ -17,3 +19,5 @@ func turn_to(direction):
 			head_sprite.set_rotation_degrees(90)
 		"down":
 			head_sprite.set_rotation_degrees(-90)
+
+

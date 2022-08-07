@@ -1,13 +1,18 @@
 extends Node2D
 
+
+var direction = ""
+
+
 onready var body_sprite = $body_sprite
-onready var body_bent_sprite = $body_bent_sprite 
+onready var body_bent_sprite = $body_bent_sprite
+
 
 func _ready():
 	pass
 
 
-func turn_to(direction):
+func turn():
 	match direction:
 		"left":
 			body_sprite.set_rotation_degrees(0)
@@ -19,8 +24,8 @@ func turn_to(direction):
 			body_sprite.set_rotation_degrees(-90)
 
 
-func bent_to(direction):
-	match direction:
+func bent_to(bent_direction):
+	match bent_direction:
 		"up_right":
 			body_bent_sprite.set_rotation_degress(-90)
 		"up_left":
@@ -29,3 +34,7 @@ func bent_to(direction):
 			body_bent_sprite.set_rotation_degrees(0)
 		"down_left":
 			body_bent_sprite.set_rotation_degrees(90)
+
+
+
+
