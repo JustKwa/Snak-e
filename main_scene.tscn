@@ -38,10 +38,8 @@
 [node name="main_scene" type="Node2D"]
 
 [node name="background" type="ColorRect" parent="."]
-margin_left = 1.0
-margin_top = -1.0
-margin_right = 193.0
-margin_bottom = 164.0
+margin_right = 192.0
+margin_bottom = 165.0
 color = Color( 0.607843, 0.737255, 0.0588235, 1 )
 
 [node name="grid" type="TileMap" parent="."]
@@ -63,6 +61,6 @@ position = Vector2( 30, 0 )
 [node name="head" parent="Snake" instance=ExtResource( 4 )]
 
 [node name="speed" type="Timer" parent="Snake"]
-wait_time = 0.5
+wait_time = 0.4
 
 [connection signal="timeout" from="Snake/speed" to="Snake" method="_on_speed_timeout"]

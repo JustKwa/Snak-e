@@ -25,7 +25,6 @@ onready var speed_timer = $speed
 
 func _ready():
 	_default_state()
-	# snake[0].turn_to(turn_direction)
 
 
 func _process(_delta):
@@ -39,25 +38,34 @@ func _on_speed_timeout():
 func _check_direction():
 	if turn_direction != "down" and Input.is_action_just_pressed("ui_up"):
 		turn_direction = "up"
+		return
 	if turn_direction != "up" and Input.is_action_just_pressed("ui_down"):
 		turn_direction = "down"
+		return
 	if turn_direction != "left" and Input.is_action_just_pressed("ui_right"):
 		turn_direction = "right"
+		return
 	if turn_direction != "right" and Input.is_action_just_pressed("ui_left"):
 		turn_direction = "left"
+		return
 
 
 func move_snake():
-	if snake[0].direction != turn_direction:
-		snake[0].direction = turn_direction
-	for i in snake:
-		if _out_of_bound(i) == true:
-			counter += 1
-		i.turn()
-		if counter < 2:
-			_move(i,DIRECTION[i.direction])
-		else:
-			snake.clear()
+	if !_out_of_bound(snake[0]):
+		if snake[0].direction != turn_direction:
+			snake[0].direction = turn_direction
+		for i in range(0, snake.size()):
+			print(i)
+			if i != 0:
+				if snake[i].direction != snake[i-1].direction:
+					snake[i].bent_to(snake[i-1].direction)
+				else:
+					snake[i].turn()
+			else:
+				snake[i].turn()
+			_move(snake[i],DIRECTION[snake[i].direction])
+	else:
+		_game_over()
 
 	for i in range( snake.size() - 1, 0, -1):
 		if snake[i].direction != snake[i-1].direction:
@@ -88,7 +96,6 @@ func _move(body_part ,vector):
 
 func _default_state():
 	snake = [head, body, body2]
-	counter = 1
 	turn_direction = "left"
 	old_turn_direction = turn_direction
 	direction_change = false
@@ -96,4 +103,7 @@ func _default_state():
 		i.direction = turn_direction
 	speed_timer.start()
 
+
+func _game_over():
+	speed_timer.stop()
 

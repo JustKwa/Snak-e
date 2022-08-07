@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/snake_body_bendt.png-64521673fa989167095fd323260095fd.stex"
+path="res://.import/snake_body_bent.png-cbde7188d6f4ba577daddf154b0643fe.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/snake_body_bendt.png"
-dest_files=[ "res://.import/snake_body_bendt.png-64521673fa989167095fd323260095fd.stex" ]
+source_file="res://Sprites/snake_body_bent.png"
+dest_files=[ "res://.import/snake_body_bent.png-cbde7188d6f4ba577daddf154b0643fe.stex" ]
 
 [params]
 

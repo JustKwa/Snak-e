@@ -13,6 +13,8 @@ func _ready():
 
 
 func turn():
+	body_bent_sprite.visible = false
+	body_sprite.visible = true
 	match direction:
 		"left":
 			body_sprite.set_rotation_degrees(0)
@@ -25,16 +27,30 @@ func turn():
 
 
 func bent_to(bent_direction):
-	match bent_direction:
-		"up_right":
-			body_bent_sprite.set_rotation_degress(-90)
-		"up_left":
-			body_bent_sprite.set_rotation_degress(-180)
-		"down_right":
+	body_sprite.visible = false
+	body_bent_sprite.visible = true
+	var bent_to  = direction + bent_direction
+	match bent_to:
+		"upright" ,"leftdown":
 			body_bent_sprite.set_rotation_degrees(0)
-		"down_left":
+		"upleft" ,"rightdown":
 			body_bent_sprite.set_rotation_degrees(90)
+		"downright" ,"leftup":
+			body_bent_sprite.set_rotation_degrees(-90)
+		"downleft" ,"rightup":
+			body_bent_sprite.set_rotation_degrees(180)
 
+
+	# if "left" in bent_to:
+	# 	if "up" in bent_to:
+	# 		body_bent_sprite.set_rotation_degrees(-90)
+	# 	elif "down" in bent_to:
+	# 		body_bent_sprite.set_rotation_degrees(0)
+	# elif "right" in bent_to:
+	# 	if "up" in bent_to:
+	# 		body_bent_sprite.set_rotation_degrees(-180)
+	# 	elif "down" in bent_to:
+	# 		body_bent_sprite.set_rotation_degrees(90)
 
 
 
