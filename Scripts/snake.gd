@@ -19,6 +19,7 @@ var direction_change
 onready var head = $head
 onready var body = $body
 onready var body2 = $body2
+onready var body3 = $body3
 onready var grid = get_parent().get_node("grid")
 onready var speed_timer = $speed
 
@@ -35,27 +36,24 @@ func _on_speed_timeout():
 	move_snake()
 
 
+
 func _check_direction():
-	if turn_direction != "down" and Input.is_action_just_pressed("ui_up"):
+	if old_turn_direction != "down" and Input.is_action_just_pressed("ui_up"):
 		turn_direction = "up"
-		return
-	if turn_direction != "up" and Input.is_action_just_pressed("ui_down"):
+	if old_turn_direction != "up" and Input.is_action_just_pressed("ui_down"):
 		turn_direction = "down"
-		return
-	if turn_direction != "left" and Input.is_action_just_pressed("ui_right"):
+	if old_turn_direction != "left" and Input.is_action_just_pressed("ui_right"):
 		turn_direction = "right"
-		return
-	if turn_direction != "right" and Input.is_action_just_pressed("ui_left"):
+	if old_turn_direction != "right" and Input.is_action_just_pressed("ui_left"):
 		turn_direction = "left"
-		return
 
 
 func move_snake():
 	if !_out_of_bound(snake[0]):
 		if snake[0].direction != turn_direction:
 			snake[0].direction = turn_direction
+			old_turn_direction = turn_direction 
 		for i in range(0, snake.size()):
-			print(i)
 			if i != 0:
 				if snake[i].direction != snake[i-1].direction:
 					snake[i].bent_to(snake[i-1].direction)
@@ -70,9 +68,6 @@ func move_snake():
 	for i in range( snake.size() - 1, 0, -1):
 		if snake[i].direction != snake[i-1].direction:
 			snake[i].direction = snake[i-1].direction
-
-
-# out_of_bound = (23, 143) , (143,23)
 
 
 # OUT OF BOUND SYSTEM
@@ -95,10 +90,8 @@ func _move(body_part ,vector):
 
 
 func _default_state():
-	snake = [head, body, body2]
+	snake = [head, body, body2, body3]
 	turn_direction = "left"
-	old_turn_direction = turn_direction
-	direction_change = false
 	for i in snake:
 		i.direction = turn_direction
 	speed_timer.start()

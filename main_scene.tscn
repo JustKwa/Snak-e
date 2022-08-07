@@ -55,12 +55,15 @@ script = ExtResource( 5 )
 [node name="body" parent="Snake" instance=ExtResource( 1 )]
 position = Vector2( 15, 0 )
 
+[node name="body3" parent="Snake" instance=ExtResource( 1 )]
+position = Vector2( 45, 0 )
+
 [node name="body2" parent="Snake" instance=ExtResource( 1 )]
 position = Vector2( 30, 0 )
 
 [node name="head" parent="Snake" instance=ExtResource( 4 )]
 
 [node name="speed" type="Timer" parent="Snake"]
-wait_time = 0.4
+wait_time = 0.3
 
 [connection signal="timeout" from="Snake/speed" to="Snake" method="_on_speed_timeout"]
