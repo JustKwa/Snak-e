@@ -6,17 +6,19 @@ const DIRECTION = {
 
 var gap = Vector2(7, 0);
 var old_dir = Vector2(8, 0)
-export var speed = 1
+var speed = 0.01
 
 onready var body = preload("res://scenes/body.tscn")
 
 func _ready():
-	spawn_body()
+	# spawn_body()
+	$Timer.start()
 	pass 
 
-func _physics_process(delta):
-	_move_snake(delta)
-	pass
+func _on_Timer_timeout():
+	print("working")
+	_move_snake()
+	pass 
 
 func _get_direction():
 	if Input.is_action_just_pressed("ui_up"):
@@ -30,17 +32,22 @@ func _get_direction():
 	else:
 		return old_dir
 
-func _move_snake(delta):
-	for i in get_child_count():
-		if old_dir != _get_direction():
-			
-			pass
-		else:
-			get_child(i).position = lerp(get_child(i).position, get_child(i).position + _get_direction(), speed * delta)
+func _move_snake():
+	for i in range(0,get_child_count()-1):
+		print(get_child(i).name)
+		get_child(i).add_dir(_get_direction())
+		print(speed)
+		get_child(i).position = lerp(get_child(i).position, get_child(i).current_pos + get_child(i).direction.front(), speed)
+		print(get_child(i).current_pos + get_child(i).direction.front())
+		print(get_child(i).position)
+		if get_child(i).position == get_child(i).current_pos + get_child(i).direction.front():
+			get_child(i).del_dir()
 
 func spawn_body():
 	var instance = body.instance()
 	var prev_body = get_child(get_child_count() - 1)
 	instance.position = prev_body.position + gap
 	add_child(instance)
+
+
 
