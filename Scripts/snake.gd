@@ -1,40 +1,46 @@
 extends Node2D
 
-var gap = Vector2(7, 0);
-var direction = Vector2.ZERO
+const DIRECTION = {
+	"UP": Vector2(0, -8), "DOWN": Vector2(0, 8), "LEFT": Vector2(-8, 0), "RIGHT": Vector2(8, 0)
+}
 
+var gap = Vector2(7, 0);
+var old_dir = Vector2(8, 0)
+export var speed = 1
 
 onready var body = preload("res://scenes/body.tscn")
-onready var timer = $speed_timer
 
 func _ready():
-	# spawn_body()
-	timer.start()
+	spawn_body()
 	pass 
 
-func _physics_process(_delta):
-	_check_direction()
+func _physics_process(delta):
+	_move_snake(delta)
 	pass
 
-func _timer_timeout():
-	_move()
-	pass
-
-func _check_direction():
+func _get_direction():
 	if Input.is_action_just_pressed("ui_up"):
-		direction = Vector2(0, -8)
+		return DIRECTION["UP"]
 	elif Input.is_action_just_pressed("ui_down"):
-		direction = Vector2(0, 8)
+		return DIRECTION["DOWN"]
 	elif Input.is_action_just_pressed("ui_left"):
-		direction = Vector2(-8, 0)
+		return DIRECTION["LEFT"]
 	elif Input.is_action_just_pressed("ui_right"):
-		direction = Vector2(8, 0)
-	pass
+		return DIRECTION["RIGHT"]
+	else:
+		return old_dir
 
-func _move():
-	self.position += direction
+func _move_snake(delta):
+	for i in get_child_count():
+		if old_dir != _get_direction():
+			
+			pass
+		else:
+			get_child(i).position = lerp(get_child(i).position, get_child(i).position + _get_direction(), speed * delta)
+
 func spawn_body():
 	var instance = body.instance()
-	instance.position = $head.position + gap
+	var prev_body = get_child(get_child_count() - 1)
+	instance.position = prev_body.position + gap
 	add_child(instance)
 
