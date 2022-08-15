@@ -3,6 +3,8 @@ extends Node2D
 onready var food = preload("res://scenes/food.tscn")
 
 func _ready():
+	# print($body.position)
+	# print($body2.position)
 	spawn_food()
 
 func spawn_food():
