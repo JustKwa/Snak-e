@@ -11,9 +11,7 @@ extents = Vector2( 3, 3 )
 script = ExtResource( 3 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.4
-
-[node name="Tween" type="Tween" parent="."]
+wait_time = 0.001
 
 [node name="head" type="Area2D" parent="."]
 script = ExtResource( 2 )
