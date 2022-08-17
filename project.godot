@@ -16,11 +16,12 @@ config/icon="res://icon.png"
 
 [display]
 
-window/size/width=240
-window/size/height=136
+window/size/width=336
+window/size/height=190
 window/size/test_width=1280
 window/size/test_height=720
 window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [gui]
 

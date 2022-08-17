@@ -2,71 +2,64 @@ extends Node2D
 
 const GRID_SIZE = 8
 
-var move_dir = Vector2.ZERO
-var is_turning = false
-var will_turn = false
-var percent_to_tile = 0.0
-var speed = 5.0
-var input_dir = Vector2.ZERO
+export var speed = 2.0
+var input_dir = []
+var input = Vector2.ZERO
+var gap = -8
+var length = 1
 
 onready var body = preload("res://scenes/body.tscn")
 onready var head = $head
 
 func _ready():
-	head.direction.append(Vector2(1, 0))
-	$Timer.start()
+	input_dir.append(Vector2(1, 0))
+	head.direction.append(input_dir.front())
+	spawn_body()
 	pass 
 
 func _physics_process(delta):
-	# if !is_turning:
-	# 	_check_dir()
-	# else:
-		_check_dir()
-		move(delta)
-
-func _check_dir():
-	if input_dir.x == 0:
-		input_dir.y = int(Input.is_action_just_pressed("ui_down")) - int(Input.is_action_just_pressed("ui_up")) 
-	if input_dir.y == 0:
-		input_dir.x = int(Input.is_action_just_pressed("ui_right")) - int(Input.is_action_just_pressed("ui_left")) 
-
-	if input_dir != move_dir and input_dir != Vector2.ZERO:
-		if input_dir.x + move_dir.x != 0 or input_dir.y + move_dir.y != 0:
-			move_dir = input_dir
-			if head.direction.size() <= 2:
-				head.direction.append(move_dir)
-				print(head.direction)
-			is_turning = true
+	_check_dir()
+	move(delta)
 
 func move(delta):
-	percent_to_tile += speed * delta
-	for i in range(2,get_child_count()):
-		if get_child(i-1).direction.front() == get_child(i).direction.front(): 
-			return
+	for i in get_children():
+		i.percent_to_tile += speed * delta
+
+		if i.percent_to_tile >= 1.0:
+			i.position = i.current_pos + (i.direction.front() * GRID_SIZE)
+			i.current_pos = i.position
+			i.percent_to_tile = 0.0
+			if i.direction.size() > 1:
+				var current_child_id = int(get_children().find(i))
+				print(current_child_id)
+				if current_child_id < get_child_count() - 1:
+					get_child(current_child_id + 1).direction.append(i.direction.front())
+				i.direction.pop_front()
+
 		else:
-			get_child(i).direction.append(get_child(i-1).direction.front())
-	for i in range(1,get_child_count()):
-		if percent_to_tile >= 1.0:
-			get_child(i).position = get_child(i).current_pos + (get_child(i).direction.front() * GRID_SIZE)
-			get_child(i).current_pos = get_child(i).position
-			percent_to_tile = 0.0
-			if is_turning:
-				print("pop")
-				get_child(i).direction.pop_front()
-				print(head.direction)
-				is_turning = false
-		else:
-			get_child(i).position = get_child(i).current_pos + (GRID_SIZE * percent_to_tile * get_child(i).direction.front())
+			i.position = i.current_pos + (GRID_SIZE * i.percent_to_tile * i.direction.front())
+
+func _check_dir():
+	if input.x == 0:
+		input.y = int(Input.is_action_just_pressed("ui_down")) - int(Input.is_action_just_pressed("ui_up")) 
+	if input.y == 0:
+		input.x = int(Input.is_action_just_pressed("ui_right")) - int(Input.is_action_just_pressed("ui_left")) 
+
+	if input != input_dir.back() and input != Vector2.ZERO:
+		if input.x + input_dir.back().x != 0 or input.y + input_dir.back().y != 0:
+			input_dir.append(input)
+			head.direction.append(input)
+			
 	pass
 
 func spawn_body():
-	# var instance = body.instance()
-	# var prev_body = get_child(get_child_count() - 1)
-	# instance.position = prev_body.position + gap
-	# add_child(instance)
+	length += 1
+	var instance = body.instance()
+	var prev_body = get_child(get_child_count() - 1)
+	instance.position = prev_body.position
+	instance.direction.append(Vector2.ZERO)
+	for i in prev_body.direction:
+		instance.direction.append(i)
+	add_child(instance)
 	pass
 
-func _on_Timer_timeout():
-	# print(is_turning)
-	# print(head.direction)
-	pass
