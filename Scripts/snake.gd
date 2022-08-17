@@ -8,18 +8,21 @@ var input = Vector2.ZERO
 var gap = -8
 var length = 1
 
-onready var body = preload("res://scenes/body.tscn")
+onready var body = preload("res://Scenes/body.tscn")
 onready var head = $head
+
 
 func _ready():
 	input_dir.append(Vector2(1, 0))
 	head.direction.append(input_dir.front())
 	spawn_body()
-	pass 
+	pass
+
 
 func _physics_process(delta):
 	_check_dir()
 	move(delta)
+
 
 func move(delta):
 	for i in get_children():
@@ -39,18 +42,20 @@ func move(delta):
 		else:
 			i.position = i.current_pos + (GRID_SIZE * i.percent_to_tile * i.direction.front())
 
+
 func _check_dir():
 	if input.x == 0:
-		input.y = int(Input.is_action_just_pressed("ui_down")) - int(Input.is_action_just_pressed("ui_up")) 
+		input.y = int(Input.is_action_just_pressed("ui_down")) - int(Input.is_action_just_pressed("ui_up"))
 	if input.y == 0:
-		input.x = int(Input.is_action_just_pressed("ui_right")) - int(Input.is_action_just_pressed("ui_left")) 
+		input.x = int(Input.is_action_just_pressed("ui_right")) - int(Input.is_action_just_pressed("ui_left"))
 
 	if input != input_dir.back() and input != Vector2.ZERO:
 		if input.x + input_dir.back().x != 0 or input.y + input_dir.back().y != 0:
 			input_dir.append(input)
 			head.direction.append(input)
-			
+
 	pass
+
 
 func spawn_body():
 	length += 1
@@ -62,4 +67,3 @@ func spawn_body():
 		instance.direction.append(i)
 	add_child(instance)
 	pass
-
