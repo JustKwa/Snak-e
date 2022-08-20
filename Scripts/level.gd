@@ -13,9 +13,7 @@ func spawn_food():
 	var y = rand_range(2, 21)
 	instance.position = $grid.map_to_world(Vector2(x, y)) + Vector2(4, 4)
 	instance.connect("food_eaten", self, "is_eaten")
-	add_child(instance)
-	pass
-
+	call_deferred("add_child", instance)
 
 func is_eaten():
 	spawn_food()
