@@ -1,40 +1,50 @@
 extends Node2D
 
-var input_dir = []
-var input = Vector2.ZERO
+var input_dir = [Vector2(1, 0),Vector2(1, 0),Vector2(1, 0)] 
+var old_input = [Vector2(1, 0)]
 export var global_var: Resource = preload("res://global_var.tres")
 
-onready var body = preload("res://Scenes/body.tscn")
+# onready var body = preload("res://Scenes/body.tscn")
+onready var body = $body
 onready var head = $head
 
 
 func _ready():
-	input_dir.append(Vector2(1, 0))
-	head.direction.append(input_dir.front())
-	$body.direction.append(head.direction.front())
+	head.direction = input_dir.back()
+	body.direction = input_dir[1]
+	head.connect("at_tile", self, "head_move")
+	body.connect("at_tile", self, "body_move")
 
 
-func _physics_process(_delta):
+
+func _process(_delta):
 	_check_dir()
 
 
+func head_move():
+	if old_input.size() > 1:
+		old_input.pop_front()
+	input_dir.pop_front()
+	input_dir.append(old_input.front())
+	head.direction = input_dir.back()
+
+
+
+func body_move():
+	body.direction = input_dir[1]
+
+
 func _check_dir():
+	var input = Vector2.ZERO
 	if input.x == 0:
 		input.y = int(Input.is_action_just_pressed("ui_down")) - int(Input.is_action_just_pressed("ui_up"))
 	if input.y == 0:
 		input.x = int(Input.is_action_just_pressed("ui_right")) - int(Input.is_action_just_pressed("ui_left"))
-
-	if head.direction.size() <= 2:
-		if input != input_dir.back() and input != Vector2.ZERO:
-			if input.x + input_dir.back().x != 0 or input.y + input_dir.back().y != 0:
-				input_dir.append(input)
-				head.direction.append(input)
-
-	head.connect("change_dir", self, "change_body_dir")
-
-
-func change_body_dir():
-	get_child(1).direction.append(head.direction.front())
+	
+	if input != old_input.front() and input != Vector2.ZERO:
+		if input.x + old_input.front().x != 0 or input.y + old_input.front().y != 0:
+			old_input.append(input)
+			print(old_input)
 
 
 func spawn_body():
