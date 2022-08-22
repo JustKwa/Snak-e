@@ -1,12 +1,8 @@
 extends Node2D
 
-const GRID_SIZE = 8
-
-export var speed = 2.0
 var input_dir = []
 var input = Vector2.ZERO
-var gap = -8
-var length = 1
+export var global_var: Resource = preload("res://global_var.tres")
 
 onready var body = preload("res://Scenes/body.tscn")
 onready var head = $head
@@ -19,24 +15,8 @@ func _ready():
 	pass
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	_check_dir()
-	move(delta)
-
-
-func move(delta):
-	for i in get_children():
-		i.percent_to_tile += speed * delta
-
-		if i.percent_to_tile >= 1.0:
-			i.position = i.current_pos + (i.direction.front() * GRID_SIZE)
-			i.current_pos = i.position
-			i.percent_to_tile = 0.0
-			if i.direction.size() > 1:
-				i.direction.pop_front()
-
-		else:
-			i.position = i.current_pos + (GRID_SIZE * i.percent_to_tile * i.direction.front())
 
 
 func _check_dir():
@@ -50,20 +30,19 @@ func _check_dir():
 			if input.x + input_dir.back().x != 0 or input.y + input_dir.back().y != 0:
 				input_dir.append(input)
 				head.direction.append(input)
+				head.rotate_sprite()
 
 	pass
 
-
-func spawn_body():
-	length += 1
-	var instance = body.instance()
-	var prev_body = get_child(get_child_count() - 1)
-	if prev_body.name == "head":
-		instance.position = prev_body.position * gap
-	else:
-		instance.position = prev_body.position
-	instance.direction.append(Vector2.ZERO)
-	for i in prev_body.direction:
-		instance.direction.append(i)
-	add_child(instance)
-	pass
+# func spawn_body():
+# 	var instance = body.instance()
+# 	var prev_body = get_child(get_child_count() - 1)
+# 	if prev_body.name == "head":
+# 		instance.position = prev_body.position * global_var.gap * prev_body.direction.front()
+# 	else:
+# 		instance.position = prev_body.position
+# 	instance.direction.append(Vector2.ZERO)
+# 	for i in prev_body.direction:
+# 		instance.direction.append(i)
+# 	add_child(instance)
+# 	pass

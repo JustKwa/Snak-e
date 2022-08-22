@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Resource",
+"class": "global_var",
+"language": "GDScript",
+"path": "res://Scripts/global_var.gd"
+} ]
+_global_script_class_icons={
+"global_var": ""
+}
+
 [application]
 
 config/name="Snake game"

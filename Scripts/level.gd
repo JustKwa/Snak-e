@@ -15,6 +15,7 @@ func spawn_food():
 	instance.connect("food_eaten", self, "is_eaten")
 	call_deferred("add_child", instance)
 
+
 func is_eaten():
 	spawn_food()
 	$snake.spawn_body()
