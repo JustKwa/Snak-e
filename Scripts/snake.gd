@@ -17,14 +17,17 @@ func _ready():
 
 
 
-func _physics_process(_delta):
+func _process(_delta):
 	_check_dir()
 
 
 func head_move():
+	if old_input.size() > 1:
+		old_input.pop_front()
 	input_dir.pop_front()
 	input_dir.append(old_input.front())
 	head.direction = input_dir.back()
+
 
 
 func body_move():
@@ -38,21 +41,20 @@ func _check_dir():
 	if input.y == 0:
 		input.x = int(Input.is_action_just_pressed("ui_right")) - int(Input.is_action_just_pressed("ui_left"))
 	
-	# if input_dir.size() <= 3: 
 	if input != old_input.front() and input != Vector2.ZERO:
 		if input.x + old_input.front().x != 0 or input.y + old_input.front().y != 0:
 			old_input.append(input)
-			old_input.pop_front()
+			print(old_input)
 
 
-# func spawn_body():
-# 	var instance = body.instance()
-# 	var prev_body = get_child(get_child_count() - 1)
-# 	if prev_body.name == "head":
-# 		instance.position = prev_body.position * global_var.gap * prev_body.direction.front()
-# 	else:
-# 		instance.position = prev_body.position
-# 	instance.direction.append(Vector2.ZERO)
-# 	for i in prev_body.direction:
-# 		instance.direction.append(i)
-# 	call_deferred("add_child", instance)
+func spawn_body():
+	var instance = body.instance()
+	var prev_body = get_child(get_child_count() - 1)
+	if prev_body.name == "head":
+		instance.position = prev_body.position * global_var.gap * prev_body.direction.front()
+	else:
+		instance.position = prev_body.position
+	instance.direction.append(Vector2.ZERO)
+	for i in prev_body.direction:
+		instance.direction.append(i)
+	call_deferred("add_child", instance)
