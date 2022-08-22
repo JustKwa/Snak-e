@@ -3,6 +3,7 @@ extends Area2D
 var direction = []
 var current_pos
 var percent_to_tile = 0.0
+var is_connected = true
 export var global_var: Resource = preload("res://global_var.tres")
 
 

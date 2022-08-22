@@ -5,6 +5,8 @@ var current_pos
 var percent_to_tile = 0.0
 export var global_var: Resource = preload("res://global_var.tres")
 
+signal change_dir
+
 
 func _ready():
 	current_pos = self.position
@@ -25,6 +27,7 @@ func _move(delta):
 		if direction.size() > 1:
 			direction.pop_front()
 			rotate_sprite()
+			emit_signal("change_dir")
 	else:
 		position = current_pos + (global_var.GRID_SIZE * percent_to_tile * direction.front())
 	pass
