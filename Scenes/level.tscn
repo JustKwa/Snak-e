@@ -38,4 +38,4 @@ margin_bottom = 178.0
 texture = ExtResource( 1 )
 
 [node name="snake" parent="." instance=ExtResource( 2 )]
-position = Vector2( 139, 76 )
+position = Vector2( 140, 76 )

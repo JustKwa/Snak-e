@@ -4,7 +4,8 @@ onready var food = preload("res://Scenes/food.tscn")
 
 
 func _ready():
-	spawn_food()
+	# spawn_food()
+	pass
 
 
 func spawn_food():

@@ -12,7 +12,8 @@ func _ready():
 
 
 func _physics_process(delta):
-	_move(delta)
+	print("body:" + str(direction))
+	# _move(delta)
 	pass
 
 
@@ -23,11 +24,19 @@ func _move(delta):
 		current_pos = position
 		percent_to_tile = 0.0
 		if direction.size() > 1:
-			direction.pop_front()
-			rotate_sprite()
+			remove_dir()
 	else:
 		position = current_pos + (global_var.GRID_SIZE * percent_to_tile * direction.front())
 	pass
+
+
+func add_dir(dir):
+	direction.append(dir)
+
+
+func remove_dir():
+	direction.pop_front()
+	rotate_sprite()
 
 
 func _on_body_area_entered(area: Area2D):
