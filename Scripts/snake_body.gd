@@ -4,10 +4,9 @@ const GLOBAL_VAR: Resource = preload("res://global_var.tres")
 const SPEED = GLOBAL_VAR.speed
 const GRID_SIZE = global_var.GRID_SIZE
 
-var direction 
+var direction
 var current_pos
 var percent_to_tile = 0.0
-
 
 signal at_tile
 
@@ -19,6 +18,8 @@ func _ready():
 func _physics_process(delta):
 	_move(delta)
 	rotate_sprite()
+	if "body" in self.name:
+		print(self.position)
 
 
 func _move(delta):
@@ -26,7 +27,7 @@ func _move(delta):
 
 	if percent_to_tile >= 1.0:
 		position = current_pos + (direction * GRID_SIZE)
-		current_pos = position
+		current_pos = self.position
 		percent_to_tile = 0.0
 		emit_signal("at_tile")
 
@@ -34,8 +35,18 @@ func _move(delta):
 		position = current_pos + (GRID_SIZE * percent_to_tile * direction)
 
 
+func change_dir():
+	self.position = Vector2(round(self.position.x), round(self.position.y))
+	current_pos = self.position
+	percent_to_tile = 0.0
+	direction *= -1
+	emit_signal("at_tile")
+	pass
+
+
 func rotate_sprite():
-	if self.name == 'spawn_body': return
+	if self.name == "spawn_body":
+		return
 	else:
 		match direction:
 			Vector2(-1, 0):
