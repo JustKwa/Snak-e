@@ -19,4 +19,4 @@ func spawn_food():
 
 func is_eaten():
 	spawn_food()
-	# $snake.spawn_body()
+	get_node('snake').spawn_body()

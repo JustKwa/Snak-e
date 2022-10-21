@@ -2,10 +2,9 @@ extends Node2D
 
 var input_dir = [Vector2(1, 0),Vector2(1, 0),Vector2(1, 0)] 
 var old_input = [Vector2(1, 0)]
-export var global_var: Resource = preload("res://global_var.tres")
 
-# onready var body = preload("res://Scenes/body.tscn")
-onready var body = $body
+onready var body_projectile = preload("res://Scenes/body.tscn")
+onready var body = $spawn_body
 onready var head = $head
 
 
@@ -29,7 +28,6 @@ func head_move():
 	head.direction = input_dir.back()
 
 
-
 func body_move():
 	body.direction = input_dir[1]
 
@@ -44,17 +42,21 @@ func _check_dir():
 	if input != old_input.front() and input != Vector2.ZERO:
 		if input.x + old_input.front().x != 0 or input.y + old_input.front().y != 0:
 			old_input.append(input)
-			print(old_input)
+			# print(old_input)
 
 
 func spawn_body():
-	var instance = body.instance()
-	var prev_body = get_child(get_child_count() - 1)
-	if prev_body.name == "head":
-		instance.position = prev_body.position * global_var.gap * prev_body.direction.front()
-	else:
-		instance.position = prev_body.position
-	instance.direction.append(Vector2.ZERO)
-	for i in prev_body.direction:
-		instance.direction.append(i)
+	var instance = body_projectile.instance()
+	var prev_child = get_node('spawn_body') 
+	instance.direction = head.direction * -1
+	instance.position = prev_child.position
 	call_deferred("add_child", instance)
+
+
+func _on_Level_area_exited(area):
+	if area.name == 'head':
+		print(area.name)
+	elif 'body' in area.name:
+		print(area.name)
+		get_node(area.name).direction *= -1
+	pass # Replace with function body.
