@@ -1,13 +1,15 @@
 extends Node2D
 
 const GLOBAL_VAR: Resource = preload("res://global_var.tres")
-const GAP: int = GLOBAL_VAR.gap
 
 var input_dir = [Vector2(1, 0), Vector2(1, 0), Vector2(1, 0)]
-var old_input = [Vector2(1, 0)]
+var old_input = Vector2(1, 0)
 
 onready var body = preload("res://Scenes/body.tscn")
 onready var head = $head
+onready var animation_player = get_node("head").get_node("AnimationPlayer")
+
+signal game_over
 
 
 func _ready():
@@ -20,10 +22,8 @@ func _process(_delta):
 
 
 func head_move():
-	if old_input.size() > 1:
-		old_input.pop_front()
+	input_dir.append(old_input)
 	input_dir.pop_front()
-	input_dir.append(old_input.front())
 	head.direction = input_dir.back()
 
 
@@ -39,24 +39,31 @@ func _check_dir():
 			int(Input.is_action_just_pressed("ui_right"))
 			- int(Input.is_action_just_pressed("ui_left"))
 		)
-
-	if input != old_input.front() and input != Vector2.ZERO:
-		if input.x + old_input.front().x != 0 or input.y + old_input.front().y != 0:
-			old_input.append(input)
-			# print(old_input)
+	if input_dir.size() > 3:
+		return
+	if input != old_input and input != Vector2.ZERO:
+		if input.x + old_input.x != 0 or input.y + old_input.y != 0:
+			old_input = input
 
 
 func spawn_body():
 	var instance = body.instance()
 	instance.direction = head.direction * -1
 	instance.position = head.position
+	instance.connect("game_over", self, "game_over")
 	call_deferred("add_child", instance)
 
 
-func _on_Level_area_exited(area):
-	if area.name == "head":
-		print(area.name)
+func food_eaten():
+	animation_player.play("eat_shoot")
+
+
+func game_over():
+	emit_signal("game_over")
+
+
+func _on_Level_area_entered(area: Area2D):
+	if "head" in area.name:
+		game_over()
 	elif "body" in area.name:
-		print(area.name)
-		get_node(area.name).change_dir()
-	pass  # Replace with function body.
+		get_node(area.name).bounce()

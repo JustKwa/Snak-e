@@ -1,7 +1,6 @@
 class_name global_var
 extends Resource
 
-const GRID_SIZE = 8
-const gap = -8
+const GRID_SIZE = 16
 
-export var speed: int
+export var speed: float
