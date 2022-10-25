@@ -3,15 +3,14 @@ extends Area2D
 const GLOBAL_VAR: Resource = preload("res://global_var.tres")
 const GRID_SIZE = global_var.GRID_SIZE
 
-var _disconnect: bool = false
 
-var direction
+var direction = Vector2.RIGHT
 var current_pos
 var percent_to_tile = 0.0
 
 onready var animation_player = get_node("AnimationPlayer")
 
-signal game_over
+signal at_tile
 
 
 func _ready():
@@ -23,36 +22,28 @@ func _physics_process(delta):
 
 
 func _move(delta):
+	rotate_sprite()
+
 	percent_to_tile += GLOBAL_VAR.speed * delta
 
 	if percent_to_tile >= 1.0:
 		position = current_pos + (direction * GRID_SIZE)
 		current_pos = self.position
 		percent_to_tile = 0.0
+		emit_signal('at_tile')
 
 	else:
 		position = current_pos + (GRID_SIZE * percent_to_tile * direction)
 
 
-func bounce():
-	animation_player.play("bounce")
+func rotate_sprite() -> void:
 
-
-func change_dir() -> void:
-	self.position = Vector2(round(self.position.x), round(self.position.y))
-	current_pos = self.position
-	percent_to_tile = 0.0
-	direction *= -1
-
-
-func _on_body_area_entered(area: Area2D) -> void:
-	if "body" in area.name:
-		queue_free()
-		score.player_score += 1
-	elif "head" in area.name && _disconnect:
-		emit_signal("game_over")
-
-
-func _on_body_area_exited(area: Area2D) -> void:
-	if !_disconnect && "head" in area.name:
-		_disconnect = true
+	match direction:
+		Vector2.LEFT:
+			get_child(0).set_rotation_degrees(0)
+		Vector2.RIGHT:
+			get_child(0).set_rotation_degrees(180)
+		Vector2.DOWN:
+			get_child(0).set_rotation_degrees(-90)
+		Vector2.UP:
+			get_child(0).set_rotation_degrees(90)

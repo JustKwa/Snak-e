@@ -2,8 +2,7 @@ extends Node2D
 
 const GLOBAL_VAR: Resource = preload("res://global_var.tres")
 
-var input_dir = [Vector2(1, 0), Vector2(1, 0), Vector2(1, 0)]
-var old_input = Vector2(1, 0)
+var prev_input = [] 
 
 onready var body = preload("res://Scenes/body.tscn")
 onready var head = $head
@@ -13,40 +12,48 @@ signal game_over
 
 
 func _ready():
-	head.direction = input_dir.back()
-	head.connect("at_tile", self, "head_move")
+	prev_input = [Vector2.RIGHT]
+	head.connect('at_tile', self, 'change_dir')
 
 
 func _process(_delta):
-	_check_dir()
+	_is_moving()
 
 
-func head_move():
-	input_dir.append(old_input)
-	input_dir.pop_front()
-	head.direction = input_dir.back()
+func change_dir():
+	if prev_input.size() == 1:
+		return
+	else:
+		prev_input.pop_front()
+		head.direction = prev_input.front()
+
+
+func _is_moving() -> void:
+	var input = _check_dir()
+	if input == prev_input.back():
+		return
+	elif prev_input.size() < 3:
+		prev_input.append(input)
 
 
 func _check_dir():
-	var input = Vector2.ZERO
-	if input.x == 0:
-		input.y = (
-			int(Input.is_action_just_pressed("ui_down"))
-			- int(Input.is_action_just_pressed("ui_up"))
-		)
-	if input.y == 0:
-		input.x = (
-			int(Input.is_action_just_pressed("ui_right"))
-			- int(Input.is_action_just_pressed("ui_left"))
-		)
-	if input_dir.size() > 3:
-		return
-	if input != old_input and input != Vector2.ZERO:
-		if input.x + old_input.x != 0 or input.y + old_input.y != 0:
-			old_input = input
+	if prev_input.back().x == 0:
+		if Input.is_action_just_pressed('ui_left'):
+			return Vector2.LEFT
+		elif Input.is_action_just_pressed('ui_right'):
+			return Vector2.RIGHT
+		else:
+			return prev_input.back()
+	elif prev_input.back().y == 0:
+		if Input.is_action_just_pressed('ui_up'):
+			return Vector2.UP
+		elif Input.is_action_just_pressed('ui_down'):
+			return Vector2.DOWN
+		else:
+			return prev_input.back()
 
 
-func spawn_body():
+func spawn_body() -> void:
 	var instance = body.instance()
 	instance.direction = head.direction * -1
 	instance.position = head.position
