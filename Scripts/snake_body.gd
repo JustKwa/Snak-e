@@ -23,7 +23,7 @@ func _physics_process(delta):
 
 
 func _move(delta):
-	percent_to_tile += GLOBAL_VAR.speed * delta
+	percent_to_tile += (GLOBAL_VAR.speed * 0.8) * delta
 
 	if percent_to_tile >= 1.0:
 		position = current_pos + (direction * GRID_SIZE)

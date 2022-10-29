@@ -32,7 +32,7 @@ func _is_moving() -> void:
 	var input = _check_dir()
 	if input == prev_input.back():
 		return
-	elif prev_input.size() < 3:
+	elif prev_input.size() <= 3:
 		prev_input.append(input)
 
 
