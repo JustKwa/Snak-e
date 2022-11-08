@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://PeaberryMono.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Scripts/main_menu.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 1 )
+
+[node name="main_menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="background" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="button" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="button"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -116.0
+margin_right = 40.0
+margin_bottom = -48.0
+
+[node name="start_button" type="Button" parent="button/VBoxContainer"]
+margin_right = 80.0
+margin_bottom = 20.0
+text = "Start game"
+
+[node name="option_button" type="Button" parent="button/VBoxContainer"]
+margin_top = 24.0
+margin_right = 80.0
+margin_bottom = 44.0
+text = "Option"
+
+[node name="exit_button" type="Button" parent="button/VBoxContainer"]
+margin_top = 48.0
+margin_right = 80.0
+margin_bottom = 68.0
+text = "Exit"
+
+[node name="title" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="title"]
+modulate = Color( 0.494118, 0.431373, 0.556863, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -279.0
+margin_bottom = -157.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = SubResource( 1 )
+text = "Fish Tales"
+align = 1
+valign = 1
+uppercase = true
+
+[connection signal="pressed" from="button/VBoxContainer/start_button" to="." method="_on_start_button_pressed"]
