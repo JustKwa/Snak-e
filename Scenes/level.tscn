@@ -215,7 +215,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
-speed = 4.8
+speed = 4.4
 
 [node name="grid" type="TileMap" parent="."]
 position = Vector2( 0, 1 )
