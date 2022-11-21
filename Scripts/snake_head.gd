@@ -4,7 +4,6 @@ signal at_tile
 
 
 func _ready():
-	current_pos = self.position
 	direction = Vector2.RIGHT
 
 
@@ -13,6 +12,7 @@ func _move(delta):
 
 	percent_to_tile += GLOBAL_VAR.speed * delta
 
+	# Detects movement change at < 1.0 for snappier movement
 	if percent_to_tile >= 0.94:
 		position = current_pos + (direction * GRID_SIZE)
 		current_pos = self.position

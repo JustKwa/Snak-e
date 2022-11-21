@@ -42,10 +42,10 @@ func is_eaten():
 
 
 func _on_snake_game_over():
+	score.game_over = true
 	if score.player_score > score.high_score : score.high_score = score.player_score
 	$snake.get_node('head').animation_player.play('death')
 	GLOBAL_VAR.speed = 0
-
 
 
 func restart_popup():
