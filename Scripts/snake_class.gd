@@ -4,14 +4,13 @@ const GLOBAL_VAR: Resource = preload("res://global_var.tres")
 const GRID_SIZE = global_var.GRID_SIZE
 
 var direction
-var current_pos
 var percent_to_tile = 0.0
 
+onready var current_pos = self.position
 onready var animation_player = get_node("AnimationPlayer")
 
 
 func _ready():
-	current_pos = self.position
 	pass
 
 
