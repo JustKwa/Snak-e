@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "SnakeBody",
+"language": "GDScript",
+"path": "res://scripts-rework/snake_class.gd"
+}, {
 "base": "Resource",
 "class": "global_var",
 "language": "GDScript",
 "path": "res://Scripts/global_var.gd"
 } ]
 _global_script_class_icons={
+"SnakeBody": "",
 "global_var": ""
 }
 
