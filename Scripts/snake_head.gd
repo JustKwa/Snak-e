@@ -1,23 +1,11 @@
-extends Area2D
-
-const GLOBAL_VAR: Resource = preload("res://global_var.tres")
-const GRID_SIZE = global_var.GRID_SIZE
-
-var direction = Vector2.RIGHT
-var current_pos
-var percent_to_tile = 0.0
-
-onready var animation_player = get_node("AnimationPlayer")
+extends SnakeBody
 
 signal at_tile
 
 
 func _ready():
 	current_pos = self.position
-
-
-func _physics_process(delta):
-	_move(delta)
+	direction = Vector2.RIGHT
 
 
 func _move(delta):
@@ -45,3 +33,4 @@ func rotate_sprite() -> void:
 			get_child(0).set_rotation_degrees(-90)
 		Vector2.UP:
 			get_child(0).set_rotation_degrees(90)
+

@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://Scripts/head.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/snake_head.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/canon_head.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/level.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/score_board.gd" type="Script" id=4]
 [ext_resource path="res://Sprites/grid_tile.png" type="Texture" id=5]
+[ext_resource path="res://scripts/Label.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/snake.gd" type="Script" id=7]
 [ext_resource path="res://Sprites/background.png" type="Texture" id=8]
 [ext_resource path="res://PeaberryMono.ttf" type="DynamicFontData" id=9]
@@ -323,6 +324,13 @@ z_as_relative = false
 texture = ExtResource( 10 )
 region_enabled = true
 region_rect = Rect2( 0, 184, 181, 12.069 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 470.0
+margin_top = -17.0
+margin_right = 510.0
+margin_bottom = -3.0
+script = ExtResource( 6 )
 
 [connection signal="area_entered" from="Level" to="snake" method="_on_Level_area_entered"]
 [connection signal="game_over" from="snake" to="." method="_on_snake_game_over"]

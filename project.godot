@@ -9,10 +9,10 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Area2D",
+"base": "Reference",
 "class": "SnakeBody",
 "language": "GDScript",
-"path": "res://scripts-rework/snake_class.gd"
+"path": "res://Scripts/snake_class.gd"
 }, {
 "base": "Resource",
 "class": "global_var",
@@ -33,6 +33,10 @@ config/icon="res://icon.png"
 [autoload]
 
 score="*res://Scripts/score.gd"
+
+[debug]
+
+settings/fps/force_fps=60
 
 [display]
 
