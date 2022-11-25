@@ -303,7 +303,6 @@ __meta__ = {
 speed = 4.4
 
 [node name="stage" type="Control" parent="."]
-visible = false
 margin_top = -3.0
 margin_right = 40.0
 margin_bottom = 37.0
@@ -324,6 +323,7 @@ __meta__ = {
 }
 
 [node name="stage" type="TextureRect" parent="stage"]
+visible = false
 margin_left = 14.0
 margin_top = 7.0
 margin_right = 196.0
