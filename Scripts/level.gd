@@ -31,16 +31,17 @@ func difficulty_check():
 
 func spawn_food():
 	var instance = food.instance()
-	var x = rand_range(1, 11)
-	var y = rand_range(1, 11)
-	instance.position = $grid.map_to_world(Vector2(x, y)) + Vector2(8, 9)
-	instance.connect("food_eaten", self, "is_eaten")
+	var x = rand_range(1, 13)
+	var y = rand_range(1, 13)
+	var spawn_coord =  $grid.map_to_world(Vector2(x, y)) + Vector2(8, 9)
+	instance.position = spawn_coord
+	instance.connect("food_eaten", self, "_on_eaten")
 	call_deferred("add_child", instance)
 
 
-func is_eaten():
+func _on_eaten():
 	spawn_food()
-	get_node("snake").food_eaten()
+	snake_controller.food_eaten()
 
 
 func restart_popup():
