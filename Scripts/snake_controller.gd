@@ -1,9 +1,9 @@
 extends Node2D
 
-const GLOBAL_VAR: Resource = preload("res://global_var.tres")
 
 var prev_input = [] 
 
+var global_var: Resource = preload("res://global_var.tres")
 onready var body = preload("res://Scenes/body.tscn")
 onready var head = $head
 onready var animation_player = get_node("head").get_node("AnimationPlayer")

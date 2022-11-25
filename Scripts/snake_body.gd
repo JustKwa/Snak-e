@@ -17,11 +17,11 @@ func change_dir() -> void:
 
 
 func _on_body_area_entered(area: Area2D) -> void:
-	if score.game_over: return
+	if global_var.game_over: return
 	else:
 		if "body" in area.name:
 			queue_free()
-			score.player_score += 1
+			global_var.player_score += 1
 		elif "head" in area.name && disconnect:
 			emit_signal("game_over")
 

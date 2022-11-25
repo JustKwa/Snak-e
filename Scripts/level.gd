@@ -1,9 +1,9 @@
 extends Node2D
 
-const GLOBAL_VAR: Resource = preload("res://global_var.tres")
 
 export var speed: float
 
+onready var global_var: Resource = preload("res://global_var.tres")
 onready var food = preload("res://Scenes/food.tscn")
 onready var restart = preload("res://Scenes/restart_popup.tscn")
 onready var snake = preload("res://Scenes/Snake.tscn")
@@ -12,8 +12,9 @@ var old_score: int = 0
 
 
 func _ready():
-	GLOBAL_VAR.speed = speed
-	score.player_score = 0
+	global_var.game_over = false
+	global_var.speed = speed
+	global_var.player_score = 0
 	spawn_food()
 
 
@@ -22,9 +23,9 @@ func _process(_delta):
 
 
 func difficulty_check():
-	if score.player_score - old_score >= 10:
-		old_score = score.player_score
-		GLOBAL_VAR.speed += sqrt(GLOBAL_VAR.speed) * 0.05
+	if global_var.player_score - old_score >= 10:
+		old_score = global_var.player_score
+		global_var.speed += sqrt(global_var.speed) * 0.05
 
 
 func spawn_food():
@@ -42,10 +43,10 @@ func is_eaten():
 
 
 func _on_snake_game_over():
-	score.game_over = true
-	if score.player_score > score.high_score : score.high_score = score.player_score
+	global_var.game_over = true
+	if global_var.player_score > global_var.high_score : global_var.high_score = global_var.player_score
 	$snake.get_node('head').animation_player.play('death')
-	GLOBAL_VAR.speed = 0
+	global_var.speed = 0
 
 
 func restart_popup():

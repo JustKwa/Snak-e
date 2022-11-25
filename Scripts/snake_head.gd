@@ -10,7 +10,7 @@ func _ready():
 func _move(delta):
 	rotate_sprite()
 
-	percent_to_tile += GLOBAL_VAR.speed * delta
+	percent_to_tile += global_var.speed * delta
 
 	# Detects movement change at < 1.0 for snappier movement
 	if percent_to_tile >= 0.94:
