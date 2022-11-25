@@ -4,7 +4,7 @@ signal at_tile
 
 
 func _move(delta):
-	rotate_sprite()
+	_rotate()
 
 	percent_to_tile += global_var.speed * delta
 
@@ -19,14 +19,14 @@ func _move(delta):
 		position = current_pos + (GRID_SIZE * percent_to_tile * direction)
 
 
-func rotate_sprite() -> void:
+func _rotate() -> void:
 	match direction:
 		Vector2.LEFT:
-			get_child(0).set_rotation_degrees(0)
+			set_rotation_degrees(0)
 		Vector2.RIGHT:
-			get_child(0).set_rotation_degrees(180)
+			set_rotation_degrees(180)
 		Vector2.DOWN:
-			get_child(0).set_rotation_degrees(-90)
+			set_rotation_degrees(-90)
 		Vector2.UP:
-			get_child(0).set_rotation_degrees(90)
+			set_rotation_degrees(90)
 

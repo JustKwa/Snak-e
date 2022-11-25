@@ -120,55 +120,31 @@ height = 2.0
 
 [sub_resource type="Animation" id=7]
 resource_name = "death"
-tracks/0/type = "value"
-tracks/0/path = NodePath("CanonHead:rotation_degrees")
+tracks/0/type = "method"
+tracks/0/path = NodePath("../..")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 115.0, 293.1 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("CanonHead:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 15, -12 ), Vector2( 30, 200 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("CanonHead:z_index")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.75 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 3 ]
-}
-tracks/3/type = "method"
-tracks/3/path = NodePath("../..")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
 "times": PoolRealArray( 0.8 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "restart_popup"
 } ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CanonHead:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -354,7 +330,7 @@ build_mode = 1
 polygon = PoolVector2Array( 229, 284, 12, 285, 20, 278, 224, 278, 224, 74, 20, 74, 20, 278, 11, 278, 15, 69, 227, 70 )
 
 [node name="snake" type="Node2D" parent="."]
-position = Vector2( 57, 105 )
+position = Vector2( 56, 105 )
 z_as_relative = false
 script = ExtResource( 7 )
 __meta__ = {
@@ -362,11 +338,12 @@ __meta__ = {
 }
 
 [node name="head" type="Area2D" parent="snake"]
+rotation = 3.14159
 z_index = 1
 script = ExtResource( 1 )
 
 [node name="CanonHead" type="Sprite" parent="snake/head"]
-rotation = 3.14159
+z_index = 3
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="snake/head"]
@@ -413,4 +390,3 @@ region_enabled = true
 region_rect = Rect2( 0, 184, 181, 12.069 )
 
 [connection signal="area_entered" from="level_collision" to="level_collision" method="_on_level_collision_area_entered"]
-[connection signal="area_entered" from="level_collision" to="snake" method="_on_Level_area_entered"]
