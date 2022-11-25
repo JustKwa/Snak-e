@@ -31,9 +31,8 @@ func difficulty_check():
 
 func spawn_food():
 	var instance = food.instance()
-	var x = rand_range(1, 13)
-	var y = rand_range(1, 13)
-	var spawn_coord =  $grid.map_to_world(Vector2(x, y)) + Vector2(8, 9)
+	var random_grid_coord = Vector2(rand_range(1, 13),rand_range(1, 13)) 
+	var spawn_coord =  $grid.map_to_world(random_grid_coord) + Vector2(8, 9)
 	instance.position = spawn_coord
 	instance.connect("food_eaten", self, "_on_eaten")
 	call_deferred("add_child", instance)
