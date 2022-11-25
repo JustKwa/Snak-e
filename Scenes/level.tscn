@@ -5,7 +5,7 @@
 [ext_resource path="res://Scripts/level.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/score_board.gd" type="Script" id=4]
 [ext_resource path="res://Sprites/tileset.png" type="Texture" id=5]
-[ext_resource path="res://scripts/fps_counter.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/level_collision.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/snake_controller.gd" type="Script" id=7]
 [ext_resource path="res://Sprites/background.png" type="Texture" id=8]
 [ext_resource path="res://PeaberryMono.ttf" type="DynamicFontData" id=9]
@@ -341,13 +341,14 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Level" type="Area2D" parent="."]
+[node name="level_collision" type="Area2D" parent="."]
 position = Vector2( -1, 0 )
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="level_collision"]
 position = Vector2( -1, -55 )
 build_mode = 1
 polygon = PoolVector2Array( 229, 284, 12, 285, 20, 278, 224, 278, 224, 74, 20, 74, 20, 278, 11, 278, 15, 69, 227, 70 )
@@ -386,9 +387,9 @@ anims/spawn = SubResource( 8 )
 
 [node name="score_board" type="Control" parent="."]
 modulate = Color( 0.266667, 0.254902, 0.603922, 1 )
-margin_left = 226.0
+margin_left = 239.0
 margin_top = 10.0
-margin_right = 271.0
+margin_right = 284.0
 margin_bottom = 25.0
 rect_scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 4 )
@@ -411,12 +412,6 @@ texture = ExtResource( 10 )
 region_enabled = true
 region_rect = Rect2( 0, 184, 181, 12.069 )
 
-[node name="fps_counter" type="Label" parent="."]
-margin_left = 470.0
-margin_top = -17.0
-margin_right = 510.0
-margin_bottom = -3.0
-script = ExtResource( 6 )
-
-[connection signal="area_entered" from="Level" to="snake" method="_on_Level_area_entered"]
-[connection signal="game_over" from="snake" to="." method="_on_snake_game_over"]
+[connection signal="area_entered" from="level_collision" to="level_collision" method="_on_level_collision_area_entered"]
+[connection signal="area_entered" from="level_collision" to="snake" method="_on_Level_area_entered"]
+[connection signal="game_over" from="level_collision" to="." method="_on_level_collision_game_over"]

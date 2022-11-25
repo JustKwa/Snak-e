@@ -65,12 +65,8 @@ func food_eaten():
 	animation_player.play("eat_shoot")
 
 
-func game_over():
-	emit_signal("game_over")
-
-
 func _on_Level_area_entered(area: Area2D):
 	if "head" in area.name:
-		game_over()
+		emit_signal("game_over")
 	elif "body" in area.name:
 		get_node(area.name).bounce()

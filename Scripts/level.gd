@@ -7,6 +7,7 @@ onready var global_var: Resource = preload("res://global_var.tres")
 onready var food = preload("res://Scenes/food.tscn")
 onready var restart = preload("res://Scenes/restart_popup.tscn")
 onready var snake = preload("res://Scenes/Snake.tscn")
+onready var level_collision = $level_collision
 
 var old_score: int = 0
 
@@ -41,14 +42,14 @@ func is_eaten():
 	get_node("snake").food_eaten()
 
 
-func _on_snake_game_over():
-	global_var.game_over = true
-	if global_var.player_score > global_var.high_score : global_var.high_score = global_var.player_score
-	$snake.get_node('head').animation_player.play('death')
-	global_var.speed = 0
-
-
 func restart_popup():
 	var instance = restart.instance()
 	get_tree().paused = true
 	call_deferred('add_child', instance)
+
+
+func _on_level_collision_game_over():
+	global_var.game_over = true
+	if global_var.player_score > global_var.high_score : global_var.high_score = global_var.player_score
+	$snake.get_node('head').animation_player.play('death')
+	global_var.speed = 0
