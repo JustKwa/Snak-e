@@ -59,4 +59,9 @@ func spawn_body() -> void:
 
 
 func food_eaten():
-	animation_player.play("eat_shoot")
+	animation_player.play("eat_hold")
+
+
+func _input(event):
+	if event is Input.is_key_pressed('space'):
+		return true
