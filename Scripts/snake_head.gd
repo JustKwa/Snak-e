@@ -3,10 +3,6 @@ extends SnakeBody
 signal at_tile
 
 
-func _ready():
-	direction = Vector2.RIGHT
-
-
 func _move(delta):
 	rotate_sprite()
 

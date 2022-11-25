@@ -32,7 +32,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-score="*res://Scripts/score.gd"
+FpsCounter="*res://Scenes/fps_counter.tscn"
 
 [debug]
 

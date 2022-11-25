@@ -13,6 +13,6 @@ func _ready():
 func _input(event):
 	if event is InputEventKey:
 		if event.pressed:
-			score.game_over = false
+			global_var.game_over = false
 			get_tree().paused = false
 			return get_tree().reload_current_scene()

@@ -2,7 +2,7 @@ class_name SnakeBody extends Area2D
 
 const GRID_SIZE = global_var.GRID_SIZE
 
-var direction
+var direction = Vector2.RIGHT
 var percent_to_tile = 0.0
 
 onready var global_var = preload('res://global_var.tres')

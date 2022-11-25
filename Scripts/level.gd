@@ -12,7 +12,6 @@ var old_score: int = 0
 
 
 func _ready():
-	global_var.game_over = false
 	global_var.speed = speed
 	global_var.player_score = 0
 	spawn_food()
