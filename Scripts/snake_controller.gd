@@ -8,8 +8,6 @@ onready var body = preload("res://Scenes/body.tscn")
 onready var head = $head
 onready var animation_player = get_node("head").get_node("AnimationPlayer")
 
-signal game_over
-
 
 func _ready():
 	prev_input = [Vector2.RIGHT]
@@ -57,16 +55,8 @@ func spawn_body() -> void:
 	var instance = body.instance()
 	instance.direction = head.direction * -1
 	instance.position = head.position
-	instance.connect("game_over", self, "game_over")
 	call_deferred("add_child", instance)
 
 
 func food_eaten():
 	animation_player.play("eat_shoot")
-
-
-func _on_Level_area_entered(area: Area2D):
-	if "head" in area.name:
-		emit_signal("game_over")
-	elif "body" in area.name:
-		get_node(area.name).bounce()

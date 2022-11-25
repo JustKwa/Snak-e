@@ -414,4 +414,3 @@ region_rect = Rect2( 0, 184, 181, 12.069 )
 
 [connection signal="area_entered" from="level_collision" to="level_collision" method="_on_level_collision_area_entered"]
 [connection signal="area_entered" from="level_collision" to="snake" method="_on_Level_area_entered"]
-[connection signal="game_over" from="level_collision" to="." method="_on_level_collision_game_over"]

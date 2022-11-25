@@ -13,6 +13,7 @@ var old_score: int = 0
 
 
 func _ready():
+	global_var.connect('game_over', self, '_on_game_over')
 	global_var.speed = speed
 	global_var.player_score = 0
 	spawn_food()
@@ -48,8 +49,7 @@ func restart_popup():
 	call_deferred('add_child', instance)
 
 
-func _on_level_collision_game_over():
-	global_var.game_over = true
+func _on_game_over():
 	if global_var.player_score > global_var.high_score : global_var.high_score = global_var.player_score
 	$snake.get_node('head').animation_player.play('death')
 	global_var.speed = 0
