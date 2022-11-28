@@ -1,10 +1,8 @@
 extends Node2D
 
-
 onready var global_var = preload('res://global_var.tres')
 
 signal food_eaten
-
 
 func _on_Area2D_area_entered(area: Area2D):
 	if global_var.game_over: return

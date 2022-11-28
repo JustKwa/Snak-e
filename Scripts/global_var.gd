@@ -20,7 +20,6 @@ func _set_game_over(value):
     else:
         emit_signal('game_over')
 
-
 func _set_high_score(value):
     if value < high_score: return
     else:

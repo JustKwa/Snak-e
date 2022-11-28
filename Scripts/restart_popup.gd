@@ -9,7 +9,6 @@ func _ready():
 	High score: {high_score}
 	""".format({"score": global_var.player_score, "high_score": global_var.high_score})
 
-
 func _input(event):
 	if event is InputEventKey:
 		if event.pressed:
