@@ -1,6 +1,5 @@
 extends Node2D
 
-
 var prev_input = [] 
 
 onready var global_var: Resource = preload("res://global_var.tres")
@@ -10,23 +9,19 @@ onready var animation_player = get_node("head").get_node("AnimationPlayer")
 
 signal food_eaten
 
-
 func _ready():
 	prev_input = [Vector2.RIGHT]
 	head.connect('at_tile', self, 'change_dir')
 
-
 func _process(_delta):
 	_is_moving()
 
-
-func change_dir():
+func change_dir() -> void:
 	if prev_input.size() == 1:
 		return
 	else:
 		prev_input.pop_front()
 		head.direction = prev_input.front()
-
 
 func _is_moving() -> void:
 	var input = _check_dir()
@@ -34,7 +29,6 @@ func _is_moving() -> void:
 		return
 	elif prev_input.size() <= 2:
 		prev_input.append(input)
-
 
 func _check_dir():
 	if prev_input.back().x == 0:
@@ -52,13 +46,11 @@ func _check_dir():
 		else:
 			return prev_input.back()
 
-
 func spawn_body() -> void:
 	var instance = body.instance()
 	instance.direction = head.direction * -1
 	instance.position = head.position
 	call_deferred("add_child", instance)
 
-
-func food_eaten():
+func food_eaten() -> void:
 	emit_signal('food_eaten')

@@ -9,11 +9,9 @@ onready var snake_controller = get_parent()
 
 signal at_tile
 
-
 func _ready():
 	state = State.MOVE
 	snake_controller.connect('food_eaten', self,'on_food_eaten')	
-
 
 func _physics_process(delta):
 	match state:
@@ -24,8 +22,6 @@ func _physics_process(delta):
 			_move(delta)
 			if _is_rotate():
 				state = State.ROTATE
-			pass
-
 
 func _move(delta):
 	percent_to_tile += global_var.speed * delta
@@ -39,7 +35,6 @@ func _move(delta):
 
 	else:
 		position = current_pos + (GRID_SIZE * percent_to_tile * direction)
-
 
 func _is_rotate() -> bool:
 	var new_rotation_angle: int
@@ -57,10 +52,8 @@ func _is_rotate() -> bool:
 		rotation_angle = new_rotation_angle
 		return true
 
-
 func _rotate(value: int):
 	set_rotation_degrees(value)
-
 
 func on_food_eaten() -> void:
 	animation_player.play('eat_hold')

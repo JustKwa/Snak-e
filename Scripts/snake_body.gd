@@ -1,15 +1,12 @@
 extends SnakeBody
 
-
 enum State {MOVE, BOUNCE}
 
 var disconnect: bool = false
 var is_bounce: bool = false
 
-
 func _ready() -> void:
 	state = State.MOVE
-
 
 func _physics_process(delta) -> void:
 	match state:
@@ -19,10 +16,8 @@ func _physics_process(delta) -> void:
 			_bounce()
 			state = State.MOVE
 
-
 func collided():
 	state = State.BOUNCE
-
 
 func _bounce() -> void:
 	match direction:
@@ -30,7 +25,6 @@ func _bounce() -> void:
 			animation_player.play('bounce_v')
 		Vector2.UP, Vector2.DOWN:
 			animation_player.play('bounce_h')
-
 
 func _move(delta):
 	# use to slow down the bullet movement
@@ -46,13 +40,11 @@ func _move(delta):
 	else:
 		position = current_pos + (GRID_SIZE * percent_to_tile * direction)
 
-
 func _change_dir() -> void:
 	self.position = Vector2(round(self.position.x), round(self.position.y))
 	current_pos = self.position
 	percent_to_tile = 0.0
 	direction *= -1
-
 
 func _on_body_area_entered(area: Area2D) -> void:
 	if global_var.game_over: return
@@ -62,7 +54,6 @@ func _on_body_area_entered(area: Area2D) -> void:
 			global_var.player_score += 1
 		elif "head" in area.name:
 			global_var.game_over = true
-
 
 func _on_body_area_exited(area: Area2D) -> void:
 	if !disconnect && "head" in area.name:
