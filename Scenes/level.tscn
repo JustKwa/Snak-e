@@ -118,7 +118,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
-speed = 4.4
+speed = 3.0
 
 [node name="stage" type="Control" parent="."]
 margin_top = -3.0
