@@ -1,6 +1,11 @@
 extends SnakeBody
 
+onready var snake_controller = get_parent()
+
 signal at_tile
+
+func _ready():
+	snake_controller.connect('food_eaten', self,'on_food_eaten')	
 
 
 func _move(delta):
@@ -30,3 +35,6 @@ func _rotate() -> void:
 		Vector2.UP:
 			set_rotation_degrees(90)
 
+
+func on_food_eaten() -> void:
+	emit_signal('food_eaten')

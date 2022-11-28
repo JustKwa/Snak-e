@@ -3,10 +3,12 @@ extends Node2D
 
 var prev_input = [] 
 
-var global_var: Resource = preload("res://global_var.tres")
+onready var global_var: Resource = preload("res://global_var.tres")
 onready var body = preload("res://Scenes/body.tscn")
 onready var head = $head
 onready var animation_player = get_node("head").get_node("AnimationPlayer")
+
+signal food_eaten
 
 
 func _ready():
@@ -59,9 +61,4 @@ func spawn_body() -> void:
 
 
 func food_eaten():
-	animation_player.play("eat_hold")
-
-
-func _input(event):
-	if event is Input.is_key_pressed('space'):
-		return true
+	emit_signal('food_eaten')
