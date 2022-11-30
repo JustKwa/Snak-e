@@ -1,17 +1,19 @@
 extends SnakeBody
 
-enum RotateAngle {LEFT = 0, RIGHT = 180, UP = 90,DOWN = -90}
-enum State {ROTATE, MOVE}
+signal at_tile
 
-var rotation_angle : int = RotateAngle.RIGHT
+enum RotateAngle { LEFT = 0, RIGHT = 180, UP = 90, DOWN = -90 }
+enum State { ROTATE, MOVE }
+
+var rotation_angle: int = RotateAngle.RIGHT
 
 onready var snake_controller = get_parent()
 
-signal at_tile
 
 func _ready():
 	state = State.MOVE
-	snake_controller.connect('food_eaten', self,'on_food_eaten')	
+	snake_controller.connect("food_eaten", self, "on_food_eaten")
+
 
 func _physics_process(delta):
 	match state:
@@ -23,6 +25,11 @@ func _physics_process(delta):
 			if _is_rotate():
 				state = State.ROTATE
 
+
+func on_food_eaten() -> void:
+	animation_player.play("eat_hold")
+
+
 func _move(delta):
 	percent_to_tile += global_var.speed * delta
 
@@ -33,8 +40,6 @@ func _move(delta):
 		percent_to_tile = 0.0
 		emit_signal("at_tile")
 
-	else:
-		position = current_pos + (GRID_SIZE * percent_to_tile * direction)
 
 func _is_rotate() -> bool:
 	var new_rotation_angle: int
@@ -47,13 +52,12 @@ func _is_rotate() -> bool:
 			new_rotation_angle = RotateAngle.DOWN
 		Vector2.UP:
 			new_rotation_angle = RotateAngle.UP
-	if new_rotation_angle == rotation_angle: return false
+	if new_rotation_angle == rotation_angle:
+		return false
 	else:
 		rotation_angle = new_rotation_angle
 		return true
 
+
 func _rotate(value: int):
 	set_rotation_degrees(value)
-
-func on_food_eaten() -> void:
-	animation_player.play('eat_hold')
