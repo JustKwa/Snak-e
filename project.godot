@@ -9,19 +9,19 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Resource",
+"class": "GlobalVar",
+"language": "GDScript",
+"path": "res://Scripts/global_var.gd"
+}, {
 "base": "Area2D",
 "class": "SnakeBody",
 "language": "GDScript",
 "path": "res://Scripts/snake_class.gd"
-}, {
-"base": "Resource",
-"class": "global_var",
-"language": "GDScript",
-"path": "res://Scripts/global_var.gd"
 } ]
 _global_script_class_icons={
-"SnakeBody": "",
-"global_var": ""
+"GlobalVar": "",
+"SnakeBody": ""
 }
 
 [application]
@@ -32,7 +32,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-score="*res://Scripts/score.gd"
+FpsCounter="*res://Scenes/fps_counter.tscn"
 
 [debug]
 
@@ -77,6 +77,13 @@ texture={
 
 [input]
 
+ui_accept={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777222,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
 ui_left={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
@@ -105,16 +112,12 @@ ui_down={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":83,"unicode":0,"echo":false,"script":null)
  ]
 }
-ui_restart={
+ui_shoot={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":82,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 
 [physics]
 
 common/enable_pause_aware_picking=true
-
-[rendering]
-
-environment/default_environment="res://default_env.tres"

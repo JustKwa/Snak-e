@@ -1,12 +1,10 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Scripts/snake_head.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/canon_head.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/snake_controller.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/level.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/score_board.gd" type="Script" id=4]
 [ext_resource path="res://Sprites/tileset.png" type="Texture" id=5]
-[ext_resource path="res://scripts/fps_counter.gd" type="Script" id=6]
-[ext_resource path="res://Scripts/snake_controller.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/level_collision.gd" type="Script" id=6]
 [ext_resource path="res://Sprites/background.png" type="Texture" id=8]
 [ext_resource path="res://PeaberryMono.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://Sprites/grid_walls.png" type="Texture" id=10]
@@ -111,186 +109,6 @@
 7/shapes = [  ]
 7/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 2.5, 4 )
-
-[sub_resource type="CapsuleShape2D" id=3]
-radius = 4.0
-height = 2.0
-
-[sub_resource type="Animation" id=7]
-resource_name = "death"
-tracks/0/type = "value"
-tracks/0/path = NodePath("CanonHead:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 115.0, 293.1 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("CanonHead:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 15, -12 ), Vector2( 30, 200 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("CanonHead:z_index")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.75 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 3 ]
-}
-tracks/3/type = "method"
-tracks/3/path = NodePath("../..")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0.8 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "restart_popup"
-} ]
-}
-
-[sub_resource type="Animation" id=2]
-resource_name = "eat_shoot"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("CanonHead:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1, 0.8 ), Vector2( 1, 1.2 ), Vector2( 1, 1 ) ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath("..")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "spawn_body"
-} ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath("AnimationPlayer")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.3 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "moving", -1, 1.0, false ],
-"method": "play"
-} ]
-}
-
-[sub_resource type="Animation" id=6]
-resource_name = "moving"
-length = 0.8
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("CanonHead:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 0.87, 0.87 ) ]
-}
-
-[sub_resource type="Animation" id=8]
-resource_name = "spawn"
-length = 1.2
-tracks/0/type = "value"
-tracks/0/path = NodePath("CanonHead:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 4, 4 ), Vector2( 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("CanonHead:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, -160 ), Vector2( 0, 0 ) ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"values": [ {
-"args": [ false ],
-"method": "set_physics_process"
-}, {
-"args": [ true ],
-"method": "set_physics_process"
-} ]
-}
-tracks/3/type = "method"
-tracks/3/path = NodePath("AnimationPlayer")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "moving", -1, 1.0, false ],
-"method": "play"
-} ]
-}
-
 [sub_resource type="DynamicFont" id=5]
 font_data = ExtResource( 9 )
 
@@ -300,10 +118,9 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
-speed = 4.4
+speed = 3.0
 
 [node name="stage" type="Control" parent="."]
-visible = false
 margin_top = -3.0
 margin_right = 40.0
 margin_bottom = 37.0
@@ -324,6 +141,7 @@ __meta__ = {
 }
 
 [node name="stage" type="TextureRect" parent="stage"]
+visible = false
 margin_left = 14.0
 margin_top = 7.0
 margin_right = 196.0
@@ -341,54 +159,25 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Level" type="Area2D" parent="."]
+[node name="level_collision" type="Area2D" parent="."]
 position = Vector2( -1, 0 )
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="level_collision"]
 position = Vector2( -1, -55 )
 build_mode = 1
 polygon = PoolVector2Array( 229, 284, 12, 285, 20, 278, 224, 278, 224, 74, 20, 74, 20, 278, 11, 278, 15, 69, 227, 70 )
 
-[node name="snake" type="Node2D" parent="."]
-position = Vector2( 57, 105 )
-z_as_relative = false
-script = ExtResource( 7 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="head" type="Area2D" parent="snake"]
-z_index = 1
-script = ExtResource( 1 )
-
-[node name="CanonHead" type="Sprite" parent="snake/head"]
-rotation = 3.14159
-texture = ExtResource( 2 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="snake/head"]
-position = Vector2( 2.5, 0 )
-rotation = -3.14159
-shape = SubResource( 4 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="snake/head"]
-rotation = 1.5708
-shape = SubResource( 3 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="snake/head"]
-autoplay = "spawn"
-anims/death = SubResource( 7 )
-anims/eat_shoot = SubResource( 2 )
-anims/moving = SubResource( 6 )
-anims/spawn = SubResource( 8 )
+[node name="snake" parent="." instance=ExtResource( 1 )]
 
 [node name="score_board" type="Control" parent="."]
 modulate = Color( 0.266667, 0.254902, 0.603922, 1 )
-margin_left = 226.0
+margin_left = 239.0
 margin_top = 10.0
-margin_right = 271.0
+margin_right = 284.0
 margin_bottom = 25.0
 rect_scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 4 )
@@ -411,12 +200,4 @@ texture = ExtResource( 10 )
 region_enabled = true
 region_rect = Rect2( 0, 184, 181, 12.069 )
 
-[node name="fps_counter" type="Label" parent="."]
-margin_left = 470.0
-margin_top = -17.0
-margin_right = 510.0
-margin_bottom = -3.0
-script = ExtResource( 6 )
-
-[connection signal="area_entered" from="Level" to="snake" method="_on_Level_area_entered"]
-[connection signal="game_over" from="snake" to="." method="_on_snake_game_over"]
+[connection signal="area_entered" from="level_collision" to="level_collision" method="_on_level_collision_area_entered"]
