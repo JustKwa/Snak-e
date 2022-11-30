@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/snake_controller.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/snake_head.gd" type="Script" id=2]
@@ -206,7 +206,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=9]
 resource_name = "hold_food"
-length = 4.1
+length = 4.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("CanonHead:modulate")
 tracks/0/interp = 1
@@ -219,15 +219,49 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.615686, 0.294118, 0.294118, 1 ), Color( 1, 1, 1, 1 ) ]
 }
-tracks/1/type = "animation"
-tracks/1/path = NodePath("AnimationPlayer")
+tracks/1/type = "method"
+tracks/1/path = NodePath("AnimationPlayer2")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"clips": PoolStringArray( "eat_shoot" ),
-"times": PoolRealArray( 4 )
+"times": PoolRealArray( 4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "neutral", -1, 1.0, false ],
+"method": "play"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("AnimationPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "eat_shoot", -1, 1.0, false ],
+"method": "play"
+} ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "neutral"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanonHead:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
 }
 
 [node name="snake" type="Node2D"]
@@ -247,6 +281,8 @@ z_index = 1
 script = ExtResource( 2 )
 
 [node name="CanonHead" type="Sprite" parent="head"]
+modulate = Color( 0.615686, 0.294118, 0.294118, 1 )
+position = Vector2( 0, -160 )
 z_index = 3
 texture = ExtResource( 3 )
 
@@ -268,4 +304,6 @@ anims/moving = SubResource( 6 )
 anims/spawn = SubResource( 8 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="head"]
+autoplay = "neutral"
 anims/hold_food = SubResource( 9 )
+anims/neutral = SubResource( 11 )

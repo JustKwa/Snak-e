@@ -3,7 +3,7 @@ extends SnakeBody
 signal at_tile
 
 enum RotateAngle { LEFT = 0, RIGHT = 180, UP = 90, DOWN = -90 }
-enum State { ROTATE, MOVE }
+enum State { ROTATE, MOVE, SHOOT }
 
 var rotation_angle: int = RotateAngle.RIGHT
 
@@ -24,6 +24,9 @@ func _physics_process(delta):
 			_move(delta)
 			if _is_rotate():
 				state = State.ROTATE
+		State.SHOOT:
+			_shoot()
+			state = State.MOVE
 
 
 func on_food_eaten() -> void:
@@ -39,6 +42,8 @@ func _move(delta):
 		current_pos = self.position
 		percent_to_tile = 0.0
 		emit_signal("at_tile")
+	else:
+		position = current_pos + (GRID_SIZE * percent_to_tile * direction)
 
 
 func _is_rotate() -> bool:
@@ -61,3 +66,9 @@ func _is_rotate() -> bool:
 
 func _rotate(value: int):
 	set_rotation_degrees(value)
+
+
+func _shoot():
+	if Input.is_action_just_pressed("ui_shoot"):
+		animation_player.play("eat_shoot")
+		self.modulate = 0

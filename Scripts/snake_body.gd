@@ -41,6 +41,8 @@ func _move(delta):
 		position = current_pos + (direction * GRID_SIZE)
 		current_pos = self.position
 		percent_to_tile = 0.0
+	else:
+		position = current_pos + (GRID_SIZE * percent_to_tile * direction)
 
 
 func _change_dir() -> void:
