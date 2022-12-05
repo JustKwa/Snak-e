@@ -307,3 +307,5 @@ anims/spawn = SubResource( 8 )
 autoplay = "neutral"
 anims/hold_food = SubResource( 9 )
 anims/neutral = SubResource( 11 )
+
+[connection signal="area_entered" from="head" to="head" method="_on_head_area_entered"]

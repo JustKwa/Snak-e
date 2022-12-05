@@ -61,6 +61,8 @@ func _on_body_area_entered(area: Area2D) -> void:
 			global_var.player_score += 1
 		elif "head" in area.name:
 			global_var.game_over = true
+		else:
+			collided()
 
 
 func _on_body_area_exited(area: Area2D) -> void:

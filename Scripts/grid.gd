@@ -1,9 +1,17 @@
 extends TileMap
 
-var cell_occupied
+var used_cells = get_used_cells()
+var cells_available: PoolVector2Array
 
-signal occupied_cells(cells)
+signal cells_available(cells)
 
 
-func _physics_process(_delta):
-	emit_signal("occupied_cells", cell_occupied)
+func _on_obstacle_spawned(grid_position: Vector2) -> void:
+	var cell_occupied = grid_position
+	cells_available = used_cells
+	for cell in used_cells:
+		if cell != cell_occupied:
+			cells_available.append(cell)
+		else:
+			pass
+	emit_signal("cells_available", cells_available)

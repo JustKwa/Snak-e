@@ -14,11 +14,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/global_var.gd"
 }, {
-"base": "SpawnItem",
-"class": "Obstacle",
-"language": "GDScript",
-"path": "res://Scripts/obstacle.gd"
-}, {
 "base": "Area2D",
 "class": "SnakeBody",
 "language": "GDScript",
@@ -31,7 +26,6 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "GlobalVar": "",
-"Obstacle": "",
 "SnakeBody": "",
 "SpawnItem": ""
 }
@@ -45,6 +39,7 @@ config/icon="res://icon.png"
 [autoload]
 
 FpsCounter="*res://Scenes/fps_counter.tscn"
+Grid="*res://Scenes/grid.tscn"
 
 [debug]
 

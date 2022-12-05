@@ -1,4 +1,4 @@
-extends SpawnItem
+extends Node2D
 
 signal food_eaten
 

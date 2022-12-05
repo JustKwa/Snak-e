@@ -89,3 +89,10 @@ func _is_shoot() -> bool:
 func _shoot():
 	animation_player.play("eat_shoot")
 	animation_player2.play("neutral")
+
+
+func _on_head_area_entered(area):
+	if "food" in area.name:
+		return
+	else:
+		global_var.game_over = true
