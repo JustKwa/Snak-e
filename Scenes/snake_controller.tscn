@@ -206,7 +206,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=9]
 resource_name = "hold_food"
-length = 4.0
+length = 2.7
 tracks/0/type = "value"
 tracks/0/path = NodePath("CanonHead:modulate")
 tracks/0/interp = 1
@@ -214,10 +214,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 4, 4.1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 2.7 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0.615686, 0.294118, 0.294118, 1 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.615686, 0.294118, 0.294118, 1 ) ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath("AnimationPlayer2")
@@ -226,7 +226,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 4 ),
+"times": PoolRealArray( 2.7 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ "neutral", -1, 1.0, false ],
@@ -240,7 +240,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 4 ),
+"times": PoolRealArray( 2.7 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ "eat_shoot", -1, 1.0, false ],
