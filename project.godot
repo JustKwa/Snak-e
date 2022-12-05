@@ -9,19 +9,31 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Resource",
+"base": "Reference",
 "class": "GlobalVar",
 "language": "GDScript",
 "path": "res://Scripts/global_var.gd"
+}, {
+"base": "SpawnItem",
+"class": "Obstacle",
+"language": "GDScript",
+"path": "res://Scripts/obstacle.gd"
 }, {
 "base": "Area2D",
 "class": "SnakeBody",
 "language": "GDScript",
 "path": "res://Scripts/snake_class.gd"
+}, {
+"base": "Node2D",
+"class": "SpawnItem",
+"language": "GDScript",
+"path": "res://Scripts/item.gd"
 } ]
 _global_script_class_icons={
 "GlobalVar": "",
-"SnakeBody": ""
+"Obstacle": "",
+"SnakeBody": "",
+"SpawnItem": ""
 }
 
 [application]
