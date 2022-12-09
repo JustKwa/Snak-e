@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Reference",
+"base": "Resource",
 "class": "GlobalVar",
 "language": "GDScript",
 "path": "res://Scripts/global_var.gd"

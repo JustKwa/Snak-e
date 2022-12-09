@@ -94,5 +94,7 @@ func _shoot():
 func _on_head_area_entered(area):
 	if "food" in area.name:
 		return
+	elif "disconnect_check" in area.name:
+		return
 	else:
 		global_var.game_over = true

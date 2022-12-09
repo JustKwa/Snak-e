@@ -5,6 +5,9 @@ enum State { MOVE, BOUNCE }
 var disconnect: bool = false
 var is_bounce: bool = false
 
+onready var collision_shape = $CollisionShape2D
+onready var disconnect_check = $disconnect_check
+
 
 func _ready() -> void:
 	state = State.MOVE
@@ -56,15 +59,16 @@ func _on_body_area_entered(area: Area2D) -> void:
 	if global_var.game_over:
 		return
 	elif disconnect:
+		print("work")
 		if "body" in area.name:
 			queue_free()
 			global_var.player_score += 1
-		elif "head" in area.name:
-			global_var.game_over = true
 		else:
 			collided()
 
 
-func _on_body_area_exited(area: Area2D) -> void:
+func _on_disconnect_check_area_exited(area):
 	if !disconnect && "head" in area.name:
 		disconnect = true
+		collision_shape.set_deferred("disabled", false)
+		disconnect_check.get_node("CollisionShape2D").set_deferred("disabled", true)
