@@ -20,11 +20,12 @@ func _process(_delta):
 
 
 func change_dir() -> void:
+
 	if prev_input.size() == 1:
 		return
-	else:
-		prev_input.pop_front()
-		head.direction = prev_input.front()
+
+	prev_input.pop_front()
+	head.direction = prev_input.front()
 
 
 func spawn_body() -> void:
@@ -40,9 +41,11 @@ func food_eaten() -> void:
 
 func _is_moving() -> void:
 	var input = _check_dir()
+
 	if input == prev_input.back():
 		return
-	elif prev_input.size() <= 2:
+
+	if prev_input.size() <= 2:
 		prev_input.append(input)
 
 
@@ -50,14 +53,13 @@ func _check_dir():
 	if prev_input.back().x == 0:
 		if Input.is_action_just_pressed("ui_left"):
 			return Vector2.LEFT
-		elif Input.is_action_just_pressed("ui_right"):
+		if Input.is_action_just_pressed("ui_right"):
 			return Vector2.RIGHT
-		else:
-			return prev_input.back()
-	elif prev_input.back().y == 0:
+
+	if prev_input.back().y == 0:
 		if Input.is_action_just_pressed("ui_up"):
 			return Vector2.UP
-		elif Input.is_action_just_pressed("ui_down"):
+		if Input.is_action_just_pressed("ui_down"):
 			return Vector2.DOWN
-		else:
-			return prev_input.back()
+
+	return prev_input.back()

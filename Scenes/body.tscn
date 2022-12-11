@@ -138,5 +138,4 @@ anims/moving = SubResource( 4 )
 shape = SubResource( 6 )
 
 [connection signal="area_entered" from="." to="." method="_on_body_area_entered"]
-[connection signal="area_exited" from="." to="." method="_on_body_area_exited"]
 [connection signal="area_exited" from="disconnect_check" to="." method="_on_disconnect_check_area_exited"]

@@ -25,7 +25,7 @@ func _physics_process(delta):
 			_move(delta)
 			if _is_rotate():
 				state = State.ROTATE
-			elif _is_shoot():
+			if _is_shoot():
 				state = State.SHOOT
 		State.SHOOT:
 			_shoot()
@@ -33,12 +33,15 @@ func _physics_process(delta):
 
 
 func on_food_eaten() -> void:
-	if "hold_food" in animation_player2.current_animation:
+	var is_hold_food_animation: bool = "hold_food" in animation_player2.current_animation
+
+	if is_hold_food_animation:
 		state = State.SHOOT
 		yield(animation_player2, "animation_finished")
 		animation_player2.play("hold_food")
-	else:
-		animation_player.play("eat_hold")
+		return
+
+	animation_player.play("eat_hold")
 
 
 func _move(delta):
@@ -50,12 +53,14 @@ func _move(delta):
 		current_pos = self.position
 		percent_to_tile = 0.0
 		emit_signal("at_tile")
-	else:
-		position = current_pos + (GRID_SIZE * percent_to_tile * direction)
+		return
+
+	position = current_pos + (GRID_SIZE * percent_to_tile * direction)
 
 
 func _is_rotate() -> bool:
 	var new_rotation_angle: int
+
 	match direction:
 		Vector2.LEFT:
 			new_rotation_angle = RotateAngle.LEFT
@@ -65,11 +70,12 @@ func _is_rotate() -> bool:
 			new_rotation_angle = RotateAngle.DOWN
 		Vector2.UP:
 			new_rotation_angle = RotateAngle.UP
+
 	if new_rotation_angle == rotation_angle:
 		return false
-	else:
-		rotation_angle = new_rotation_angle
-		return true
+
+	rotation_angle = new_rotation_angle
+	return true
 
 
 func _rotate(value: int):
@@ -77,13 +83,13 @@ func _rotate(value: int):
 
 
 func _is_shoot() -> bool:
-	if (
-		Input.is_action_just_pressed("ui_shoot")
-		&& "hold_food" in animation_player2.current_animation
-	):
+	var shoot_is_pressed: bool = Input.is_action_just_pressed("ui_shoot")
+	var is_hold_food_animation: bool = "hold_food" in animation_player2.current_animation
+
+	if shoot_is_pressed && is_hold_food_animation:	
 		return true
-	else:
-		return false
+
+	return false
 
 
 func _shoot():
@@ -92,9 +98,11 @@ func _shoot():
 
 
 func _on_head_area_entered(area):
+
 	if "food" in area.name:
 		return
-	elif "disconnect_check" in area.name:
+
+	if "disconnect_check" in area.name:
 		return
-	else:
-		global_var.game_over = true
+
+	global_var.game_over = true

@@ -44,8 +44,8 @@ func _move(delta):
 		position = current_pos + (direction * GRID_SIZE)
 		current_pos = self.position
 		percent_to_tile = 0.0
-	else:
-		position = current_pos + (GRID_SIZE * percent_to_tile * direction)
+
+	position = current_pos + (GRID_SIZE * percent_to_tile * direction)
 
 
 func _change_dir() -> void:
@@ -56,19 +56,21 @@ func _change_dir() -> void:
 
 
 func _on_body_area_entered(area: Area2D) -> void:
+
 	if global_var.game_over:
 		return
-	elif disconnect:
-		print("work")
-		if "body" in area.name:
-			queue_free()
-			global_var.player_score += 1
-		else:
-			collided()
+
+	if "body" in area.name:
+		queue_free()
+		global_var.player_score += 1
+		return
+
+	collided()
 
 
 func _on_disconnect_check_area_exited(area):
-	if !disconnect && "head" in area.name:
-		disconnect = true
+	var is_head = "head" in area.name
+
+	if is_head: 
 		collision_shape.set_deferred("disabled", false)
 		disconnect_check.get_node("CollisionShape2D").set_deferred("disabled", true)
