@@ -1,17 +1,21 @@
 extends TileMap
 
-var used_cells = get_used_cells()
-var cells_available: PoolVector2Array
+signal cells_available(available_cells)
 
-signal cells_available(cells)
+var available_cells : PoolVector2Array
+
+onready var item_controller = get_parent().get_node("item_controller")
 
 
-func _on_obstacle_spawned(grid_position: Vector2) -> void:
-	var cell_occupied = grid_position
-	cells_available = used_cells
+func _ready():
+	item_controller.connect("cells_occupied", self, "_on_cells_occupied")	
 
-	for cell in used_cells:
-		if cell != cell_occupied:
-			cells_available.append(cell)
 
-	emit_signal("cells_available", cells_available)
+func _on_cells_occupied(occupied_cells: PoolVector2Array):
+	var used_cells = get_used_cells()
+
+	for cell in occupied_cells:
+		used_cells.erase(cell)
+	
+	available_cells = used_cells
+	emit_signal("cells_available", available_cells)
