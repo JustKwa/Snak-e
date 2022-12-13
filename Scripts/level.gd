@@ -1,5 +1,7 @@
 extends Node2D
 
+signal spawn_obstacle
+
 export var speed: float
 
 var old_score: int = 0
@@ -22,9 +24,13 @@ func _process(_delta):
 
 
 func difficulty_check():
-	if global_var.player_score - old_score >= 10:
-		old_score = global_var.player_score
-		global_var.speed += sqrt(global_var.speed) * 0.05
+
+	if global_var.player_score - old_score < 8:
+		return
+
+	old_score = global_var.player_score
+	global_var.speed += sqrt(global_var.speed) * 0.05
+	emit_signal("spawn_obstacle")
 
 
 func spawn_food():
