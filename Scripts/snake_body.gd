@@ -55,15 +55,15 @@ func _change_dir() -> void:
 	direction *= -1
 
 
-func _on_body_area_entered(area: Area2D) -> void:
+func _on_body_area_entered(_area: Area2D) -> void:
 
 	if global_var.game_over:
 		return
 
-	if "body" in area.name:
-		queue_free()
-		global_var.player_score += 1
-		return
+	# if "body" in area.name:
+	# 	queue_free()
+	# 	global_var.player_score += 1
+	# 	return
 
 	collided()
 
