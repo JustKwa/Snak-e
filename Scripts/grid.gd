@@ -8,6 +8,7 @@ onready var item_controller = get_parent().get_node("item_controller")
 
 
 func _ready():
+	emit_signal("cells_available", available_cells)
 	item_controller.connect("cells_occupied", self, "_on_cells_occupied")	
 
 
