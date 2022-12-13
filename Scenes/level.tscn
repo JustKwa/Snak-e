@@ -20,7 +20,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
-speed = 4.0
+speed = 5.0
 
 [node name="stage" type="Control" parent="."]
 margin_top = -3.0
@@ -70,11 +70,23 @@ polygon = PoolVector2Array( 229, 284, 12, 285, 20, 278, 224, 278, 224, 74, 20, 7
 [node name="item_controller" type="Node2D" parent="."]
 script = ExtResource( 5 )
 
+[node name="obstacle3" parent="item_controller" instance=ExtResource( 7 )]
+position = Vector2( 168, 185 )
+
 [node name="obstacle" parent="item_controller" instance=ExtResource( 7 )]
-position = Vector2( 104, 105 )
+position = Vector2( 72, 57 )
 
 [node name="obstacle2" parent="item_controller" instance=ExtResource( 7 )]
-position = Vector2( 104, 153 )
+position = Vector2( 72, 185 )
+
+[node name="obstacle6" parent="item_controller" instance=ExtResource( 7 )]
+position = Vector2( 72, 121 )
+
+[node name="obstacle5" parent="item_controller" instance=ExtResource( 7 )]
+position = Vector2( 168, 121 )
+
+[node name="obstacle4" parent="item_controller" instance=ExtResource( 7 )]
+position = Vector2( 168, 57 )
 
 [node name="score_board" type="Control" parent="."]
 modulate = Color( 0.266667, 0.254902, 0.603922, 1 )
@@ -104,5 +116,3 @@ region_enabled = true
 region_rect = Rect2( 0, 184, 181, 12.069 )
 
 [connection signal="area_entered" from="level_collision" to="level_collision" method="_on_level_collision_area_entered"]
-[connection signal="spawned" from="item_controller/obstacle" to="grid" method="_on_obstacle_spawned"]
-[connection signal="spawned" from="item_controller/obstacle2" to="grid" method="_on_obstacle_spawned"]

@@ -39,7 +39,6 @@ config/icon="res://icon.png"
 [autoload]
 
 FpsCounter="*res://Scenes/fps_counter.tscn"
-Grid="*res://Scenes/grid.tscn"
 
 [debug]
 

@@ -105,20 +105,26 @@
 [sub_resource type="GDScript" id=2]
 script/source = "extends TileMap
 
+signal cells_available(available_cells)
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
+var available_cells : PoolVector2Array
+
+onready var item_controller = get_parent().get_node(\"item_controller\")
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	emit_signal(\"cells_available\", available_cells)
+	item_controller.connect(\"cells_occupied\", self, \"_on_cells_occupied\")	
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _on_cells_occupied(occupied_cells: PoolVector2Array):
+	var used_cells = get_used_cells()
+
+	for cell in occupied_cells:
+		used_cells.erase(cell)
+	
+	available_cells = used_cells
+	emit_signal(\"cells_available\", available_cells)
 "
 
 [node name="grid" type="TileMap"]
