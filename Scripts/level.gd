@@ -24,7 +24,6 @@ func _process(_delta):
 
 
 func difficulty_check():
-
 	if global_var.player_score - old_score < 8:
 		return
 
