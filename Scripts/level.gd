@@ -28,7 +28,6 @@ func difficulty_check():
 		return
 
 	old_score = global_var.player_score
-	global_var.speed += sqrt(global_var.speed) * 0.05
 	emit_signal("spawn_obstacle")
 
 
