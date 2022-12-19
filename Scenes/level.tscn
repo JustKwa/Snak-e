@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/snake_controller.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/grid.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Scripts/score_board.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/item_controller.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/level_collision.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/obstacle.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Sprites/background.png" type="Texture" id=8]
 [ext_resource path="res://PeaberryMono.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://Sprites/grid_walls.png" type="Texture" id=10]
@@ -63,30 +62,13 @@ __meta__ = {
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="level_collision"]
 position = Vector2( -1, -55 )
 build_mode = 1
-polygon = PoolVector2Array( 229, 284, 12, 285, 20, 278, 224, 278, 224, 74, 20, 74, 20, 278, 11, 278, 15, 69, 227, 70 )
+polygon = PoolVector2Array( 229, 284, 12, 285, 19, 279, 225, 279, 225, 73, 19, 73, 19, 279, 11, 278, 15, 69, 227, 70 )
 
 [node name="snake" parent="." instance=ExtResource( 1 )]
+position = Vector2( 55, 105 )
 
 [node name="item_controller" type="Node2D" parent="."]
 script = ExtResource( 5 )
-
-[node name="obstacle3" parent="item_controller" instance=ExtResource( 7 )]
-position = Vector2( 168, 185 )
-
-[node name="obstacle" parent="item_controller" instance=ExtResource( 7 )]
-position = Vector2( 72, 57 )
-
-[node name="obstacle2" parent="item_controller" instance=ExtResource( 7 )]
-position = Vector2( 72, 185 )
-
-[node name="obstacle6" parent="item_controller" instance=ExtResource( 7 )]
-position = Vector2( 72, 121 )
-
-[node name="obstacle5" parent="item_controller" instance=ExtResource( 7 )]
-position = Vector2( 168, 121 )
-
-[node name="obstacle4" parent="item_controller" instance=ExtResource( 7 )]
-position = Vector2( 168, 57 )
 
 [node name="score_board" type="Control" parent="."]
 modulate = Color( 0.266667, 0.254902, 0.603922, 1 )
