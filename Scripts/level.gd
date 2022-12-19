@@ -15,7 +15,6 @@ onready var snake_controller = $snake
 func _ready():
 	global_var.speed = speed
 	global_var.player_score = 0
-	spawn_food()
 	return global_var.connect("game_over", self, "_on_game_over")
 
 
@@ -31,24 +30,10 @@ func difficulty_check():
 	emit_signal("spawn_obstacle")
 
 
-func spawn_food():
-	var instance = food.instance()
-	var random_grid_coord = Vector2(rand_range(1, 13), rand_range(1, 13))
-	var spawn_coord = $grid.map_to_world(random_grid_coord) + Vector2(8, 9)
-	instance.position = spawn_coord
-	instance.connect("food_eaten", self, "_on_eaten")
-	call_deferred("add_child", instance)
-
-
 func restart_popup():
 	var instance = restart.instance()
 	get_tree().paused = true
 	call_deferred("add_child", instance)
-
-
-func _on_eaten():
-	spawn_food()
-	snake_controller.food_eaten()
 
 
 func _on_game_over():

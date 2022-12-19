@@ -329,7 +329,6 @@ z_index = 1
 script = ExtResource( 2 )
 
 [node name="CanonHead" type="Sprite" parent="head"]
-visible = false
 position = Vector2( 0, -160 )
 scale = Vector2( 4, 4 )
 z_index = 3

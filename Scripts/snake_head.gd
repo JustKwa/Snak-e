@@ -86,7 +86,7 @@ func _is_shoot() -> bool:
 	var shoot_is_pressed: bool = Input.is_action_just_pressed("ui_shoot")
 	var is_hold_food_animation: bool = "hold_food" in animation_player2.current_animation
 
-	if shoot_is_pressed && is_hold_food_animation:	
+	if shoot_is_pressed && is_hold_food_animation:
 		return true
 
 	return false
@@ -98,11 +98,10 @@ func _shoot():
 
 
 func _on_head_area_entered(area):
-
 	if "food" in area.name:
 		return
 
 	if "disconnect_check" in area.name:
 		return
 
-	global_var.game_over = true
+	# global_var.game_over = true

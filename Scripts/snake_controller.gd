@@ -7,12 +7,13 @@ var prev_input = []
 onready var global_var: Resource = preload("res://global_var.tres")
 onready var body = preload("res://Scenes/body.tscn")
 onready var head = $head
-onready var animation_player = get_node("head").get_node("AnimationPlayer")
+onready var item_controller = get_parent().get_node("item_controller")
 
 
 func _ready():
 	prev_input = [Vector2.RIGHT]
 	head.connect("at_tile", self, "change_dir")
+	item_controller.connect("food_eaten", self, "_on_food_eaten")
 
 
 func _process(_delta):
@@ -20,7 +21,6 @@ func _process(_delta):
 
 
 func change_dir() -> void:
-
 	if prev_input.size() == 1:
 		return
 
@@ -35,7 +35,7 @@ func spawn_body() -> void:
 	call_deferred("add_child", instance)
 
 
-func food_eaten() -> void:
+func _on_food_eaten() -> void:
 	emit_signal("food_eaten")
 
 
