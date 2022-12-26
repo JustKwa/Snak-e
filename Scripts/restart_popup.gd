@@ -14,8 +14,10 @@ func _ready():
 
 
 func _input(event):
-	if event is InputEventKey:
-		if event.pressed:
-			global_var.game_over = false
-			get_tree().paused = false
-			return get_tree().reload_current_scene()
+	if not event is InputEventKey:
+		return
+
+	if event.pressed:
+		global_var.game_over = false
+		get_tree().paused = false
+		return get_tree().reload_current_scene()

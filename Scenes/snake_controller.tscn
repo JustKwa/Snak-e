@@ -39,6 +39,30 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionShape2D2:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=10]
 resource_name = "eat_hold"
@@ -86,7 +110,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "eat_shoot"
-length = 0.5
+length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("CanonHead:scale")
 tracks/0/interp = 1
@@ -203,6 +227,30 @@ tracks/3/keys = {
 "method": "play"
 } ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("CollisionShape2D2:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=9]
 resource_name = "hold_food"
@@ -281,8 +329,8 @@ z_index = 1
 script = ExtResource( 2 )
 
 [node name="CanonHead" type="Sprite" parent="head"]
-modulate = Color( 0.615686, 0.294118, 0.294118, 1 )
 position = Vector2( 0, -160 )
+scale = Vector2( 4, 4 )
 z_index = 3
 texture = ExtResource( 3 )
 
@@ -290,10 +338,12 @@ texture = ExtResource( 3 )
 position = Vector2( 2.5, 0 )
 rotation = -3.14159
 shape = SubResource( 4 )
+disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="head"]
 rotation = 1.5708
 shape = SubResource( 3 )
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="head"]
 autoplay = "spawn"
@@ -307,3 +357,5 @@ anims/spawn = SubResource( 8 )
 autoplay = "neutral"
 anims/hold_food = SubResource( 9 )
 anims/neutral = SubResource( 11 )
+
+[connection signal="area_entered" from="head" to="head" method="_on_head_area_entered"]

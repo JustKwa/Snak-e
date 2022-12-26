@@ -1,9 +1,9 @@
 extends Node2D
 class_name SpawnItem
 
-signal spawned(spawn_location)
+signal spawned(grid_position)
 
-var spawn_location = self.location
+onready var spawn_location = self.position
 
 
 func _ready():
