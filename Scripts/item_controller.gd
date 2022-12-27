@@ -26,7 +26,7 @@ func _on_cells_available(available_cells):
 func _on_spawn_obstacle():
 	var instance = obstacle.instance()
 	var rand_index = randi() % grid_cells.size()
-	instance.position = grid.map_to_world(grid_cells[rand_index]) + Vector2(8, 9)
+	instance.position = grid.map_to_world(grid_cells[rand_index]) + Vector2(16, 18)
 	instance.connect("spawned", self, "_on_spawned")
 	call_deferred("add_child", instance)
 
@@ -40,7 +40,7 @@ func _on_spawned(grid_position):
 func _on_spawn_food():
 	var instance = food.instance()
 	var rand_index = randi() % grid_cells.size()
-	instance.position = grid.map_to_world(grid_cells[rand_index]) + Vector2(8, 9)
+	instance.position = grid.map_to_world(grid_cells[rand_index]) + Vector2(16, 18)
 	instance.connect("spawned", self, "_on_spawned")
 	instance.connect("food_eaten", self, "_on_eaten")
 	call_deferred("add_child", instance)

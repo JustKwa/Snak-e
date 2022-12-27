@@ -154,32 +154,23 @@ func _on_cells_occupied(occupied_cells: PoolVector2Array):
 font_data = ExtResource( 9 )
 
 [node name="level" type="Node2D"]
-position = Vector2( 31, 28 )
+position = Vector2( 64, 64 )
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_lock_": true
-}
 speed = 4.0
 
 [node name="stage" type="Control" parent="."]
-margin_top = -3.0
 margin_right = 40.0
-margin_bottom = 37.0
-__meta__ = {
-"_edit_lock_": true
-}
+margin_bottom = 40.0
 
 [node name="background" type="TextureRect" parent="stage"]
-margin_left = -95.0
-margin_top = -85.0
-margin_right = 259.0
-margin_bottom = 266.0
-rect_scale = Vector2( 2.95193, 1.77995 )
+self_modulate = Color( 0.156863, 0.160784, 0.231373, 1 )
+margin_left = -138.451
+margin_top = -118.431
+margin_right = 215.549
+margin_bottom = 232.569
+rect_scale = Vector2( 3.59776, 2.16592 )
 texture = ExtResource( 8 )
 expand = true
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="stage" type="TextureRect" parent="stage"]
 visible = false
@@ -191,19 +182,14 @@ texture = ExtResource( 10 )
 
 [node name="grid" type="TileMap" parent="."]
 unique_name_in_owner = true
-position = Vector2( 0, 1 )
 tile_set = SubResource( 1 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
 format = 1
-tile_data = PoolIntArray( 0, 8, 0, 2, 8, 0, 4, 8, 0, 6, 8, 0, 8, 8, 0, 10, 8, 0, 131072, 8, 0, 131074, 8, 0, 131076, 8, 0, 131078, 8, 0, 131080, 8, 0, 131082, 8, 0, 262144, 8, 0, 262146, 8, 0, 262148, 8, 0, 262150, 8, 0, 262152, 8, 0, 262154, 8, 0, 393216, 8, 0, 393218, 8, 0, 393220, 8, 0, 393222, 8, 0, 393224, 8, 0, 393226, 8, 0, 524288, 8, 0, 524290, 8, 0, 524292, 8, 0, 524294, 8, 0, 524296, 8, 0, 524297, 0, 0, 524298, 8, 0, 655360, 8, 0, 655362, 8, 0, 655363, 0, 0, 655364, 8, 0, 655366, 8, 0, 655368, 8, 0, 655370, 8, 0 )
+tile_data = PoolIntArray( 0, 8, 0, 2, 8, 0, 4, 8, 0, 6, 8, 0, 8, 8, 0, 10, 8, 0, 12, 8, 0, 14, 8, 0, 131072, 8, 0, 131074, 8, 0, 131076, 8, 0, 131078, 8, 0, 131080, 8, 0, 131082, 8, 0, 131084, 8, 0, 131086, 8, 0, 262144, 8, 0, 262146, 8, 0, 262148, 8, 0, 262150, 8, 0, 262152, 8, 0, 262154, 8, 0, 262156, 8, 0, 262158, 8, 0, 393216, 8, 0, 393218, 8, 0, 393220, 8, 0, 393222, 8, 0, 393224, 8, 0, 393226, 8, 0, 393228, 8, 0, 393230, 8, 0, 524288, 8, 0, 524290, 8, 0, 524292, 8, 0, 524294, 8, 0, 524296, 8, 0, 524297, 0, 0, 524298, 8, 0, 524300, 8, 0, 524302, 8, 0, 655360, 8, 0, 655362, 8, 0, 655363, 0, 0, 655364, 8, 0, 655366, 8, 0, 655368, 8, 0, 655370, 8, 0, 655372, 8, 0, 655374, 8, 0, 786432, 8, 0, 786434, 8, 0, 786436, 8, 0, 786438, 8, 0, 786440, 8, 0, 786442, 8, 0, 786444, 8, 0, 786446, 8, 0, 917504, 8, 0, 917506, 8, 0, 917508, 8, 0, 917510, 8, 0, 917512, 8, 0, 917514, 8, 0, 917516, 8, 0, 917518, 8, 0 )
 script = SubResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="level_collision" type="Area2D" parent="."]
-position = Vector2( -1, 0 )
 script = ExtResource( 6 )
 __meta__ = {
 "_edit_group_": true
@@ -212,10 +198,10 @@ __meta__ = {
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="level_collision"]
 position = Vector2( -1, -55 )
 build_mode = 1
-polygon = PoolVector2Array( 413.591, 482.817, -26.9259, 481.732, 4.18182, 437.955, 384.125, 438.125, 384.001, 58.1837, 3.15152, 57.247, 4.09091, 437.909, -33.6724, 477.763, -34.8235, 20.8967, 416.588, 22.0874 )
+polygon = PoolVector2Array( 580.179, 629.284, -27.9921, 590.681, 0.999695, 566.984, 513.032, 567.016, 513.012, 54.9793, 0.983704, 54.9945, 0.999695, 567, -32.9055, 593.006, -34.8235, 20.8967, 575.321, 11.4158 )
 
 [node name="snake" parent="." instance=ExtResource( 1 )]
-position = Vector2( 80, 145 )
+position = Vector2( 112, 145 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -225,10 +211,10 @@ script = ExtResource( 5 )
 
 [node name="score_board" type="Control" parent="."]
 modulate = Color( 0.266667, 0.254902, 0.603922, 1 )
-margin_left = 383.957
-margin_top = 20.6066
-margin_right = 428.957
-margin_bottom = 35.6066
+margin_left = 640.0
+margin_top = 7.0
+margin_right = 685.0
+margin_bottom = 22.0
 rect_scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 4 )
 __meta__ = {
