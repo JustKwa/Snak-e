@@ -227,13 +227,4 @@ margin_bottom = 16.0
 custom_fonts/font = SubResource( 5 )
 text = "Score: 100"
 
-[node name="walls" type="Sprite" parent="."]
-visible = false
-position = Vector2( 108, 239 )
-z_index = 1
-z_as_relative = false
-texture = ExtResource( 10 )
-region_enabled = true
-region_rect = Rect2( 0, 184, 181, 12.069 )
-
 [connection signal="area_entered" from="level_collision" to="level_collision" method="_on_level_collision_area_entered"]
