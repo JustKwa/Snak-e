@@ -4,7 +4,7 @@ extends Resource
 signal game_over
 signal score_gained
 
-const GRID_SIZE = 16
+const GRID_SIZE = 32
 
 var player_score: int = 0 setget _set_score
 var high_score: int = 0 setget _set_high_score

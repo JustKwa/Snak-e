@@ -112,7 +112,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=6]
-radius = 4.0
+radius = 12.0416
 
 [node name="body" type="Area2D"]
 script = ExtResource( 2 )

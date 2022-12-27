@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/canonball.png-231cfc7600b2db7306525be950183a68.stex"
+path="res://.import/grid-tile.png-4c1a5e204bd175374f26464cfc263ca1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/canonball.png"
-dest_files=[ "res://.import/canonball.png-231cfc7600b2db7306525be950183a68.stex" ]
+source_file="res://Sprites/grid-tile.png"
+dest_files=[ "res://.import/grid-tile.png-4c1a5e204bd175374f26464cfc263ca1.stex" ]
 
 [params]
 

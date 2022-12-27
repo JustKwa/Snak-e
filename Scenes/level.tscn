@@ -1,14 +1,154 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/snake_controller.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/grid.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Sprites/tileset.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/level.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/score_board.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/item_controller.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/level_collision.gd" type="Script" id=6]
+[ext_resource path="res://Sprites/grid-tile.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/background.png" type="Texture" id=8]
 [ext_resource path="res://PeaberryMono.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://Sprites/grid_walls.png" type="Texture" id=10]
+
+[sub_resource type="TileSet" id=1]
+1/name = "tileset.png 1"
+1/texture = ExtResource( 2 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 32, 64, 32, 32 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+2/name = "tileset.png 2"
+2/texture = ExtResource( 2 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 32, 64, 16, 32 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape_one_way = false
+2/shape_one_way_margin = 0.0
+2/shapes = [  ]
+2/z_index = 0
+3/name = "tileset.png 3"
+3/texture = ExtResource( 2 )
+3/tex_offset = Vector2( 0, 0 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 48, 64, 16, 32 )
+3/tile_mode = 0
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape_one_way = false
+3/shape_one_way_margin = 0.0
+3/shapes = [  ]
+3/z_index = 0
+4/name = "tileset.png 4"
+4/texture = ExtResource( 2 )
+4/tex_offset = Vector2( 0, 0 )
+4/modulate = Color( 1, 1, 1, 1 )
+4/region = Rect2( 32, 80, 32, 16 )
+4/tile_mode = 0
+4/occluder_offset = Vector2( 0, 0 )
+4/navigation_offset = Vector2( 0, 0 )
+4/shape_offset = Vector2( 0, 0 )
+4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+4/shape_one_way = false
+4/shape_one_way_margin = 0.0
+4/shapes = [  ]
+4/z_index = 0
+5/name = "tileset.png 5"
+5/texture = ExtResource( 2 )
+5/tex_offset = Vector2( 0, 0 )
+5/modulate = Color( 1, 1, 1, 1 )
+5/region = Rect2( 32, 64, 32, 16 )
+5/tile_mode = 0
+5/occluder_offset = Vector2( 0, 0 )
+5/navigation_offset = Vector2( 0, 0 )
+5/shape_offset = Vector2( 0, 0 )
+5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+5/shape_one_way = false
+5/shape_one_way_margin = 0.0
+5/shapes = [  ]
+5/z_index = 0
+6/name = "tileset.png 6"
+6/texture = ExtResource( 2 )
+6/tex_offset = Vector2( 0, 0 )
+6/modulate = Color( 1, 1, 1, 1 )
+6/region = Rect2( 32, 64, 16, 16 )
+6/tile_mode = 0
+6/occluder_offset = Vector2( 0, 0 )
+6/navigation_offset = Vector2( 0, 0 )
+6/shape_offset = Vector2( 0, 0 )
+6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+6/shape_one_way = false
+6/shape_one_way_margin = 0.0
+6/shapes = [  ]
+6/z_index = 0
+7/name = "tileset.png 7"
+7/texture = ExtResource( 2 )
+7/tex_offset = Vector2( 0, 0 )
+7/modulate = Color( 1, 1, 1, 1 )
+7/region = Rect2( 48, 64, 16, 16 )
+7/tile_mode = 0
+7/occluder_offset = Vector2( 0, 0 )
+7/navigation_offset = Vector2( 0, 0 )
+7/shape_offset = Vector2( 0, 0 )
+7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+7/shape_one_way = false
+7/shape_one_way_margin = 0.0
+7/shapes = [  ]
+7/z_index = 0
+8/name = "grid-tile.png 8"
+8/texture = ExtResource( 7 )
+8/tex_offset = Vector2( 0, 0 )
+8/modulate = Color( 1, 1, 1, 1 )
+8/region = Rect2( 0, 0, 64, 64 )
+8/tile_mode = 0
+8/occluder_offset = Vector2( 0, 0 )
+8/navigation_offset = Vector2( 0, 0 )
+8/shape_offset = Vector2( 0, 0 )
+8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+8/shape_one_way = false
+8/shape_one_way_margin = 0.0
+8/shapes = [  ]
+8/z_index = 0
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends TileMap
+
+signal cells_available(available_cells)
+
+var available_cells : PoolVector2Array
+
+onready var item_controller = get_parent().get_node(\"item_controller\")
+
+
+func _ready():
+	emit_signal(\"cells_available\", available_cells)
+	item_controller.connect(\"cells_occupied\", self, \"_on_cells_occupied\")	
+
+
+func _on_cells_occupied(occupied_cells: PoolVector2Array):
+	var used_cells = get_used_cells()
+
+	for cell in occupied_cells:
+		used_cells.erase(cell)
+	
+	available_cells = used_cells
+	emit_signal(\"cells_available\", available_cells)
+"
 
 [sub_resource type="DynamicFont" id=5]
 font_data = ExtResource( 9 )
@@ -19,7 +159,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
-speed = 5.0
+speed = 4.0
 
 [node name="stage" type="Control" parent="."]
 margin_top = -3.0
@@ -34,7 +174,7 @@ margin_left = -95.0
 margin_top = -85.0
 margin_right = 259.0
 margin_bottom = 266.0
-rect_scale = Vector2( 2.0182, 1.15537 )
+rect_scale = Vector2( 2.95193, 1.77995 )
 texture = ExtResource( 8 )
 expand = true
 __meta__ = {
@@ -49,8 +189,18 @@ margin_right = 196.0
 margin_bottom = 197.0
 texture = ExtResource( 10 )
 
-[node name="grid" parent="." instance=ExtResource( 2 )]
+[node name="grid" type="TileMap" parent="."]
 unique_name_in_owner = true
+position = Vector2( 0, 1 )
+tile_set = SubResource( 1 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 0, 8, 0, 2, 8, 0, 4, 8, 0, 6, 8, 0, 8, 8, 0, 10, 8, 0, 131072, 8, 0, 131074, 8, 0, 131076, 8, 0, 131078, 8, 0, 131080, 8, 0, 131082, 8, 0, 262144, 8, 0, 262146, 8, 0, 262148, 8, 0, 262150, 8, 0, 262152, 8, 0, 262154, 8, 0, 393216, 8, 0, 393218, 8, 0, 393220, 8, 0, 393222, 8, 0, 393224, 8, 0, 393226, 8, 0, 524288, 8, 0, 524290, 8, 0, 524292, 8, 0, 524294, 8, 0, 524296, 8, 0, 524297, 0, 0, 524298, 8, 0, 655360, 8, 0, 655362, 8, 0, 655363, 0, 0, 655364, 8, 0, 655366, 8, 0, 655368, 8, 0, 655370, 8, 0 )
+script = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="level_collision" type="Area2D" parent="."]
 position = Vector2( -1, 0 )
@@ -62,20 +212,23 @@ __meta__ = {
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="level_collision"]
 position = Vector2( -1, -55 )
 build_mode = 1
-polygon = PoolVector2Array( 229, 284, 12, 285, 19, 279, 225, 279, 225, 73, 19, 73, 19, 279, 11, 278, 15, 69, 227, 70 )
+polygon = PoolVector2Array( 413.591, 482.817, -26.9259, 481.732, 4.18182, 437.955, 384.125, 438.125, 384.001, 58.1837, 3.15152, 57.247, 4.09091, 437.909, -33.6724, 477.763, -34.8235, 20.8967, 416.588, 22.0874 )
 
 [node name="snake" parent="." instance=ExtResource( 1 )]
-position = Vector2( 55, 105 )
+position = Vector2( 80, 145 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="item_controller" type="Node2D" parent="."]
 script = ExtResource( 5 )
 
 [node name="score_board" type="Control" parent="."]
 modulate = Color( 0.266667, 0.254902, 0.603922, 1 )
-margin_left = 239.0
-margin_top = 10.0
-margin_right = 284.0
-margin_bottom = 25.0
+margin_left = 383.957
+margin_top = 20.6066
+margin_right = 428.957
+margin_bottom = 35.6066
 rect_scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 4 )
 __meta__ = {
