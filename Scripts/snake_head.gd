@@ -33,13 +33,13 @@ func _physics_process(delta):
 
 
 func on_food_eaten() -> void:
-	# var is_hold_food_animation: bool = "hold_food" in animation_player2.current_animation
+	var is_hold_food_animation: bool = "hold_food" in animation_player2.current_animation
 
-	# if is_hold_food_animation:
-	# 	state = State.SHOOT
-	# 	yield(animation_player2, "animation_finished")
-	# 	animation_player2.play("hold_food")
-	# 	return
+	if is_hold_food_animation:
+		state = State.SHOOT
+		yield(animation_player2, "animation_finished")
+		animation_player2.play("hold_food")
+		return
 
 	animation_player.play("eat_hold")
 
@@ -82,14 +82,14 @@ func _rotate(value: int):
 	set_rotation_degrees(value)
 
 
-func _is_shoot() -> bool:
-	var shoot_is_pressed: bool = Input.is_action_just_pressed("ui_shoot")
-	var is_hold_food_animation: bool = "hold_food" in animation_player2.current_animation
+# func _is_shoot() -> bool:
+# 	var shoot_is_pressed: bool = Input.is_action_just_pressed("ui_shoot")
+# 	var is_hold_food_animation: bool = "hold_food" in animation_player2.current_animation
 
-	if shoot_is_pressed && is_hold_food_animation:
-		return true
+# 	if shoot_is_pressed && is_hold_food_animation:
+# 		return true
 
-	return false
+# 	return false
 
 
 func _shoot():
