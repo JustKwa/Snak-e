@@ -726,7 +726,7 @@ process_material = SubResource( 20 )
 
 [node name="Particles2D2" type="Particles2D" parent="snake/head"]
 material = SubResource( 21 )
-scale = Vector2( 1.5, 1.5 )
+scale = Vector2( 1.8, 1.8 )
 z_index = 4
 emitting = false
 amount = 1
