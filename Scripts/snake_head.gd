@@ -3,7 +3,7 @@ extends SnakeBody
 signal at_tile
 
 enum RotateAngle { LEFT = 0, RIGHT = 180, UP = 90, DOWN = -90 }
-enum State { ROTATE, MOVE, SHOOT }
+enum State { ROTATE, MOVE, SHOOT, EXPLODE }
 
 var rotation_angle: int = RotateAngle.RIGHT
 
@@ -30,6 +30,8 @@ func _physics_process(delta):
 		State.SHOOT:
 			_shoot()
 			state = State.MOVE
+		State.EXPLODE:
+			_explode()
 
 
 func on_food_eaten() -> void:
@@ -90,6 +92,8 @@ func _rotate(value: int):
 # 		return true
 
 # 	return false
+func _explode():
+	animation_player.play('explode')
 
 
 func _shoot():
@@ -104,4 +108,5 @@ func _on_head_area_entered(area):
 	if "disconnect_check" in area.name:
 		return
 
-	# global_var.game_over = true
+	state = State.EXPLODE
+	global_var.game_over = true
