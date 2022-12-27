@@ -25,21 +25,21 @@ func _physics_process(delta):
 			_move(delta)
 			if _is_rotate():
 				state = State.ROTATE
-			if _is_shoot():
-				state = State.SHOOT
+			# if _is_shoot():
+			# 	state = State.SHOOT
 		State.SHOOT:
 			_shoot()
 			state = State.MOVE
 
 
 func on_food_eaten() -> void:
-	var is_hold_food_animation: bool = "hold_food" in animation_player2.current_animation
+	# var is_hold_food_animation: bool = "hold_food" in animation_player2.current_animation
 
-	if is_hold_food_animation:
-		state = State.SHOOT
-		yield(animation_player2, "animation_finished")
-		animation_player2.play("hold_food")
-		return
+	# if is_hold_food_animation:
+	# 	state = State.SHOOT
+	# 	yield(animation_player2, "animation_finished")
+	# 	animation_player2.play("hold_food")
+	# 	return
 
 	animation_player.play("eat_hold")
 

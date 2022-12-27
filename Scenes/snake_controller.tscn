@@ -1,11 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/snake_controller.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/snake_head.gd" type="Script" id=2]
 [ext_resource path="res://Sprites/snake_head.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 10.5, 12 )
+extents = Vector2( 7, 12 )
 
 [sub_resource type="CapsuleShape2D" id=3]
 radius = 12.0
@@ -252,6 +252,22 @@ tracks/5/keys = {
 "values": [ false ]
 }
 
+[sub_resource type="Animation" id=12]
+resource_name = "turn_left"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanonHead:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -90.0, -180.0 ]
+}
+
 [sub_resource type="Animation" id=9]
 resource_name = "hold_food"
 length = 2.7
@@ -325,7 +341,7 @@ z_index = 1
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="head"]
-position = Vector2( 3.5, 8.87314e-06 )
+position = Vector2( 7, 1.77463e-05 )
 rotation = -3.14159
 shape = SubResource( 4 )
 
@@ -344,6 +360,7 @@ anims/eat_hold = SubResource( 10 )
 anims/eat_shoot = SubResource( 2 )
 anims/moving = SubResource( 6 )
 anims/spawn = SubResource( 8 )
+anims/turn_left = SubResource( 12 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="head"]
 autoplay = "neutral"
