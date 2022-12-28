@@ -1,6 +1,6 @@
 extends SnakeBody
 
-enum State { MOVE, BOUNCE }
+enum State { MOVE, BOUNCE, EXPLODE }
 
 var disconnect: bool = false
 var is_bounce: bool = false
@@ -10,6 +10,7 @@ onready var disconnect_check = $disconnect_check
 
 
 func _ready() -> void:
+	print(direction)
 	state = State.MOVE
 
 
@@ -20,6 +21,8 @@ func _physics_process(delta) -> void:
 		State.BOUNCE:
 			_bounce()
 			state = State.MOVE
+		State.EXPLODE:
+			_explode()
 
 
 func collided():
@@ -55,15 +58,14 @@ func _change_dir() -> void:
 	direction *= -1
 
 
-func _on_body_area_entered(_area: Area2D) -> void:
+func _on_body_area_entered(area: Area2D) -> void:
 
 	if global_var.game_over:
 		return
 
-	# if "body" in area.name:
-	# 	queue_free()
-	# 	global_var.player_score += 1
-	# 	return
+	if "body" in area.name:
+		state = State.EXPLODE
+		return
 
 	collided()
 
@@ -74,3 +76,9 @@ func _on_disconnect_check_area_exited(area):
 	if is_head: 
 		collision_shape.set_deferred("disabled", false)
 		disconnect_check.get_node("CollisionShape2D").set_deferred("disabled", true)
+
+
+func _explode():
+	animation_player.play("explode")
+	yield(animation_player, "animation_finished")
+	queue_free()

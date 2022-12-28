@@ -38,4 +38,3 @@ func restart_popup():
 
 func _on_game_over():
 	global_var.high_score = global_var.player_score
-	snake_controller.get_node("head").animation_player.play("death")
