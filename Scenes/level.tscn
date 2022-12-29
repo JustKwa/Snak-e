@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Sprites/Explosion.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/tileset.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scripts/level_collision.gd" type="Script" id=6]
 [ext_resource path="res://Sprites/grid-tile.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/background.png" type="Texture" id=8]
+[ext_resource path="res://Scripts/score_board.gd" type="Script" id=9]
 [ext_resource path="res://Sprites/snake_head-sheet.png" type="Texture" id=11]
 [ext_resource path="res://Scripts/snake_controller.gd" type="Script" id=12]
 [ext_resource path="res://Scripts/snake_head.gd" type="Script" id=13]
@@ -658,6 +659,21 @@ anim_speed = 1.0
 load_path = "res://.import/smoke.png-94c1cbd5e9b6a8e9b1b0154fe103c363.stex"
 
 [sub_resource type="DynamicFont" id=33]
+size = 57
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=34]
+size = 65
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=35]
+size = 57
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
 [node name="level" type="Control"]
@@ -810,12 +826,13 @@ script = ExtResource( 5 )
 anchor_left = 0.649
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -91.0
+margin_left = -136.0
+margin_bottom = 1.0
 custom_constants/separation = 27
 
 [node name="TextureRect" type="TextureRect" parent="ui"]
 margin_right = 35.0
-margin_bottom = 510.0
+margin_bottom = 511.0
 rect_min_size = Vector2( 35, 0 )
 size_flags_horizontal = 0
 size_flags_vertical = 3
@@ -824,38 +841,55 @@ expand = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ui"]
 margin_left = 62.0
-margin_right = 442.0
-margin_bottom = 510.0
+margin_right = 487.0
+margin_bottom = 511.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 20
 
 [node name="TextureRect" type="TextureRect" parent="ui/VBoxContainer"]
-self_modulate = Color( 1, 1, 1, 0 )
-margin_right = 380.0
-margin_bottom = 245.0
+margin_right = 425.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 0, 160 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
 texture = ExtResource( 8 )
 expand = true
+script = ExtResource( 9 )
 
-[node name="Label" type="Label" parent="ui/VBoxContainer/TextureRect"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 40.0
-margin_bottom = 14.0
-rect_scale = Vector2( 4, 4 )
+[node name="score_text" type="Label" parent="ui/VBoxContainer/TextureRect"]
+margin_top = 11.6541
+margin_right = 70.0
+margin_bottom = 27.6541
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_fonts/font = SubResource( 33 )
 text = "Score:"
 
+[node name="score_number" type="Label" parent="ui/VBoxContainer/TextureRect"]
+margin_top = 69.6541
+margin_right = 410.0
+margin_bottom = 135.654
+custom_fonts/font = SubResource( 34 )
+text = "0000000000"
+align = 2
+
 [node name="TextureRect2" type="TextureRect" parent="ui/VBoxContainer"]
-margin_top = 265.0
-margin_right = 380.0
-margin_bottom = 510.0
+margin_top = 180.0
+margin_right = 425.0
+margin_bottom = 511.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 8 )
 expand = true
+
+[node name="score_text" type="Label" parent="ui/VBoxContainer/TextureRect2"]
+margin_top = 11.6541
+margin_right = 70.0
+margin_bottom = 27.6541
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 35 )
+text = "Next Level:"
 
 [connection signal="area_entered" from="level_collision" to="level_collision" method="_on_level_collision_area_entered"]
 [connection signal="area_entered" from="snake/head" to="snake/head" method="_on_head_area_entered"]
