@@ -1,12 +1,12 @@
 extends SpawnItem
 
 signal food_eaten
-signal food_explode
+signal food_explode(position)
 
 enum State { IDLE, EXPLODE, EATEN, DELETE}
 
 var state = State.IDLE
-var wait_time = 10
+export var wait_time: int 
 
 onready var global_var = preload("res://global_var.tres")
 onready var animation_player = $food_area/AnimationPlayer
@@ -14,7 +14,6 @@ onready var collision_shape = $food_area/CollisionShape2D
 
 
 func _ready():
-	# animation_player.play("explode")
 	$Timer.set_wait_time(wait_time)
 	$Timer.start()
 
@@ -26,7 +25,7 @@ func _physics_process(_delta):
 			return
 		State.EXPLODE:
 			_explode()
-			emit_signal("food_explode")
+			emit_signal("food_explode", self.position)
 			state = State.IDLE
 			return
 		State.EATEN:
@@ -35,6 +34,7 @@ func _physics_process(_delta):
 
 
 func _queue_free():
+	emit_signal("despawned", self.position)
 	queue_free()
 
 

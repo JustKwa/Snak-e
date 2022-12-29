@@ -1,0 +1,161 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://addons/godot_db_manager/dlgs/error_dlg.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/godot_db_manager/dlgs/load_res_path_dlg.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/godot_db_manager/table_editor.gd" type="Script" id=3]
+[ext_resource path="res://addons/godot_db_manager/dlgs/data_dlg.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/godot_db_manager/dlgs/edit_string_dlg.tscn" type="PackedScene" id=5]
+[ext_resource path="res://addons/godot_db_manager/dlgs/delete_prop_dlg.tscn" type="PackedScene" id=6]
+[ext_resource path="res://addons/godot_db_manager/assets/fnt/roboto_18.tres" type="DynamicFont" id=7]
+[ext_resource path="res://addons/godot_db_manager/assets/tex/gui.png" type="Texture" id=8]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 8 )
+region = Rect2( 2, 2, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 8 )
+region = Rect2( 2, 54, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 8 )
+region = Rect2( 2, 28, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 8 )
+region = Rect2( 2, 2, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 8 )
+region = Rect2( 2, 54, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 8 )
+region = Rect2( 2, 28, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 8 )
+region = Rect2( 132, 2, 24, 24 )
+
+[node name="table" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 584.0, 64.0, 70.0 ],
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [ 1000.47 ]
+}
+
+[node name="tabs" type="TabContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="structure" type="Tabs" parent="tabs"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 40.0
+margin_right = -4.0
+margin_bottom = -4.0
+tab_close_display_policy = 2
+
+[node name="header" type="HBoxContainer" parent="tabs/structure"]
+margin_right = 892.0
+margin_bottom = 24.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="new_property_btn" type="TextureButton" parent="tabs/structure/header"]
+margin_right = 24.0
+margin_bottom = 24.0
+texture_normal = SubResource( 1 )
+texture_pressed = SubResource( 2 )
+texture_hover = SubResource( 3 )
+
+[node name="props_lbl" type="Label" parent="tabs/structure/header"]
+margin_left = 28.0
+margin_top = 1.0
+margin_right = 114.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 7 )
+text = "Properties:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="scroll" type="ScrollContainer" parent="tabs/structure"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 30.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="properties" type="VBoxContainer" parent="tabs/structure/scroll"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="data" type="Tabs" parent="tabs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 40.0
+margin_right = -4.0
+margin_bottom = -4.0
+tab_close_display_policy = 2
+
+[node name="add_data_btn" type="TextureButton" parent="tabs/data"]
+margin_right = 24.0
+margin_bottom = 24.0
+disabled = true
+texture_normal = SubResource( 4 )
+texture_pressed = SubResource( 5 )
+texture_hover = SubResource( 6 )
+texture_disabled = SubResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="scroll" type="ScrollContainer" parent="tabs/data"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 38.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="data_holder" type="VBoxContainer" parent="tabs/data/scroll"]
+margin_bottom = 36.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="data_header" type="HBoxContainer" parent="tabs/data/scroll/data_holder"]
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+rect_clip_content = true
+
+[node name="data_container" type="VBoxContainer" parent="tabs/data/scroll/data_holder"]
+margin_top = 36.0
+margin_bottom = 36.0
+
+[node name="error_dlg" parent="." instance=ExtResource( 1 )]
+visible = false
+
+[node name="load_res_path_dlg" parent="." instance=ExtResource( 2 )]
+filters = PoolStringArray( "*.res, *.tres ; Godot resource file types", "*.scn, *.tscn, *escn ; Godot scene file types", "*.gd, *.cs, *.h, *.c, *.hpp, *.cpp ; Code file types", "*.shader ; Shader file types", "*.mat ; Material file types", "*.dae, *.gltf, *.obj, *.fbx ; Mesh file types", "*.anim ; Animation file types", "*.ttf, *.otf ; Font file types", "*.png, *.jpg, *.jpeg, *.tiff, *.tga, *.bmp, *.webp, *.gif, *.hdr ; Images file types", "*.snd, *.wav, *.ogg, *.mp3 ; Sound file types", "*.ogg, *.mpg, *.mpeg, *.avi, *.mov, *.mp4, *.webm ; Video file types", "*.txt, *.csv, *.json, *.xml, *.cfg, *.ini ; Text file types", "*.doc, *.docx, *.xls, *.xlsx, *.odt, *.ods, *.pdf ; Doc file types", "*.dat, *.raw ; Binary data file types" )
+
+[node name="data_dlg" parent="." instance=ExtResource( 4 )]
+
+[node name="edit_string_dlg" parent="." instance=ExtResource( 5 )]
+
+[node name="delete_prop_dlg" parent="." instance=ExtResource( 6 )]
+visible = false

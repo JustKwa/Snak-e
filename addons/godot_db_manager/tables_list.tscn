@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://addons/godot_db_manager/tables_list.gd" type="Script" id=1]
+[ext_resource path="res://addons/godot_db_manager/tables_header.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/godot_db_manager/debug/dbg.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/godot_db_manager/assets/tex/gui.png" type="Texture" id=4]
+
+[node name="tables_list" type="Control"]
+anchor_right = 0.2
+anchor_bottom = 1.0
+margin_right = -9.99991
+rect_min_size = Vector2( 180, 225 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 29.9686, 584.0 ],
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [ 180.0 ]
+}
+
+[node name="tables_header" parent="." instance=ExtResource( 2 )]
+anchor_right = 1.0
+anchor_bottom = 0.0
+margin_right = -9.15527e-05
+margin_bottom = 30.0
+rect_min_size = Vector2( 180, 30 )
+
+[node name="tables_container" type="ScrollContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 32.0
+rect_min_size = Vector2( 180, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="tables" type="VBoxContainer" parent="tables_container"]
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="resize_ctrl" type="NinePatchRect" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -3.0
+mouse_filter = 0
+mouse_default_cursor_shape = 15
+texture = ExtResource( 4 )
+region_rect = Rect2( 80, 12, 24, 24 )
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="dbg" parent="." instance=ExtResource( 3 )]
+visible = false
