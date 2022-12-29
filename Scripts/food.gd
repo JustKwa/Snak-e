@@ -3,7 +3,7 @@ extends SpawnItem
 signal food_eaten
 signal food_explode(position)
 
-enum State { IDLE, EXPLODE, EATEN, DELETE}
+enum State { IDLE, EXPLODE, EATEN}
 
 var state = State.IDLE
 export var wait_time: int 
