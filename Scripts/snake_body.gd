@@ -63,9 +63,16 @@ func _on_body_area_entered(area: Area2D) -> void:
 	if global_var.game_over:
 		return
 
-	if "body" in area.name:
+	if area.is_in_group("bullet_explode"):
 		state = State.EXPLODE
+		return 
+
+	if area.is_in_group("bullet_ignore"):
 		return
+
+	# if "body" in area.name:
+	# 	state = State.EXPLODE
+	# 	return
 
 	collided()
 
@@ -80,5 +87,6 @@ func _on_disconnect_check_area_exited(area):
 
 func _explode():
 	animation_player.play("explode")
+	collision_shape.set_deferred("disabled", true)
 	yield(animation_player, "animation_finished")
 	queue_free()

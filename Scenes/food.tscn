@@ -5,7 +5,7 @@
 [ext_resource path="res://Sprites/smoke.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 10.175
+radius = 7.58613
 
 [sub_resource type="Animation" id=3]
 resource_name = "explode"
@@ -41,10 +41,36 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2 ),
+"times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_queue_free"
+} ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -75,6 +101,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 3, 3, 4, 1 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="CanvasItemMaterial" id=4]
 particles_animation = true
@@ -100,15 +138,12 @@ anim_speed = 2.5
 [node name="food" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="food_area" type="Area2D" parent="."]
+[node name="food_area" type="Area2D" parent="." groups=["bullet_explode"]]
 
 [node name="Food" type="Sprite" parent="food_area"]
-self_modulate = Color( 2.67622, 2.67622, 3.51433, 1 )
-scale = Vector2( 0.891046, 0.891046 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="food_area"]
-visible = false
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="food_area"]
@@ -125,4 +160,8 @@ one_shot = true
 process_material = SubResource( 7 )
 texture = ExtResource( 3 )
 
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_entered" from="food_area" to="." method="_on_Area2D_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

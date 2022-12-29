@@ -43,9 +43,14 @@ func _on_spawn_food():
 	instance.position = grid.map_to_world(grid_cells[rand_index]) + Vector2(16, 16)
 	instance.connect("spawned", self, "_on_spawned")
 	instance.connect("food_eaten", self, "_on_eaten")
+	instance.connect("food_explode", self, "_on_explode")
 	call_deferred("add_child", instance)
 
 
 func _on_eaten():
 	_on_spawn_food()
 	emit_signal("food_eaten")
+
+
+func _on_explode():
+	_on_spawn_food()
