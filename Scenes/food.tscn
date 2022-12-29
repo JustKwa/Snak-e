@@ -100,7 +100,7 @@ anim_speed = 2.5
 [node name="food" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="food_area" type="Area2D" parent="."]
+[node name="food_area" type="Area2D" parent="." groups=["bullet_explode"]]
 
 [node name="Food" type="Sprite" parent="food_area"]
 self_modulate = Color( 2.67622, 2.67622, 3.51433, 1 )

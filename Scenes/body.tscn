@@ -242,7 +242,7 @@ orbit_velocity_random = 0.0
 scale = 0.8
 anim_speed = 1.3
 
-[node name="body" type="Area2D"]
+[node name="body" type="Area2D" groups=["bullet_explode"]]
 script = ExtResource( 2 )
 
 [node name="sprite" type="Sprite" parent="."]
@@ -260,7 +260,7 @@ anims/bounce_v = SubResource( 2 )
 anims/explode = SubResource( 7 )
 anims/moving = SubResource( 4 )
 
-[node name="disconnect_check" type="Area2D" parent="."]
+[node name="disconnect_check" type="Area2D" parent="." groups=["bullet_ignore"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="disconnect_check"]
 shape = SubResource( 6 )
