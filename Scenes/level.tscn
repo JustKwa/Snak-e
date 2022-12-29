@@ -673,6 +673,10 @@ speed = 4.4
 [node name="stage" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 1.0
+margin_bottom = 1.0
 
 [node name="background" type="TextureRect" parent="stage"]
 self_modulate = Color( 0.223529, 0.254902, 0.298039, 1 )
@@ -715,7 +719,8 @@ script = ExtResource( 12 )
 [node name="Timer" type="Timer" parent="snake"]
 wait_time = 4.0
 
-[node name="head" type="Area2D" parent="snake" groups=["bullet_explode"]]
+[node name="head" type="Area2D" parent="snake" groups=["bullet_explode", "eat_food"]]
+position = Vector2( 1, 0 )
 rotation = 3.14159
 z_index = 1
 script = ExtResource( 13 )

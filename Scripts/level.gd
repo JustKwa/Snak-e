@@ -13,6 +13,7 @@ onready var snake_controller = $snake
 
 
 func _ready():
+	randomize()
 	global_var.speed = speed
 	global_var.player_score = 0
 	return global_var.connect("game_over", self, "_on_game_over")
