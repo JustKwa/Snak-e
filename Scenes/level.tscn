@@ -1,15 +1,13 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://Sprites/Explosion.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/tileset.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/level.gd" type="Script" id=3]
-[ext_resource path="res://Scripts/score_board.gd" type="Script" id=4]
+[ext_resource path="res://PeaberryMono.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Scripts/item_controller.gd" type="Script" id=5]
 [ext_resource path="res://Scripts/level_collision.gd" type="Script" id=6]
 [ext_resource path="res://Sprites/grid-tile.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/background.png" type="Texture" id=8]
-[ext_resource path="res://PeaberryMono.ttf" type="DynamicFontData" id=9]
-[ext_resource path="res://Sprites/grid_walls.png" type="Texture" id=10]
 [ext_resource path="res://Sprites/snake_head-sheet.png" type="Texture" id=11]
 [ext_resource path="res://Scripts/snake_controller.gd" type="Script" id=12]
 [ext_resource path="res://Scripts/snake_head.gd" type="Script" id=13]
@@ -430,7 +428,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3, 0.7, 1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ), Vector2( 1, 1 ), Vector2( 0.9, 0.9 ) ]
+"values": [ Vector2( 1.2, 1.2 ), Vector2( 1, 1 ), Vector2( 1.2, 1.2 ), Vector2( 1, 1 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("CanonHead:frame")
@@ -712,39 +710,38 @@ anim_speed = 1.0
 [sub_resource type="StreamTexture" id=32]
 load_path = "res://.import/smoke.png-94c1cbd5e9b6a8e9b1b0154fe103c363.stex"
 
-[sub_resource type="DynamicFont" id=5]
-font_data = ExtResource( 9 )
+[sub_resource type="DynamicFont" id=33]
+font_data = ExtResource( 4 )
 
-[node name="level" type="Node2D"]
-position = Vector2( 64, 64 )
+[node name="level" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 60.0
+margin_top = 60.0
+margin_right = -60.0
+margin_bottom = -60.0
 script = ExtResource( 3 )
-speed = 4.0
+speed = 4.4
 
 [node name="stage" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="background" type="TextureRect" parent="stage"]
-self_modulate = Color( 0.670588, 0.768627, 0.894118, 1 )
-margin_left = -138.451
-margin_top = -118.431
-margin_right = 215.549
-margin_bottom = 232.569
+self_modulate = Color( 0.223529, 0.254902, 0.298039, 1 )
+margin_left = -96.0
+margin_top = -71.0
+margin_right = 258.0
+margin_bottom = 280.0
 rect_scale = Vector2( 3.59776, 2.16592 )
 texture = ExtResource( 8 )
 expand = true
-
-[node name="stage" type="TextureRect" parent="stage"]
-visible = false
-margin_left = 14.0
-margin_top = 7.0
-margin_right = 196.0
-margin_bottom = 197.0
-texture = ExtResource( 10 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="grid" type="TileMap" parent="."]
 unique_name_in_owner = true
-modulate = Color( 1, 1, 1, 0.52549 )
 tile_set = SubResource( 1 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
@@ -780,15 +777,13 @@ script = ExtResource( 13 )
 position = Vector2( 7, 1.77463e-05 )
 rotation = -3.14159
 shape = SubResource( 4 )
-disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="snake/head"]
 rotation = 1.5708
 shape = SubResource( 3 )
-disabled = true
 
 [node name="CanonHead" type="Sprite" parent="snake/head"]
-scale = Vector2( 0.7, 0.7 )
+position = Vector2( 0, -160 )
 z_index = 3
 texture = ExtResource( 11 )
 hframes = 5
@@ -857,23 +852,56 @@ texture = SubResource( 32 )
 [node name="item_controller" type="Node2D" parent="."]
 script = ExtResource( 5 )
 
-[node name="score_board" type="Control" parent="."]
-modulate = Color( 0.266667, 0.254902, 0.603922, 1 )
-margin_left = 640.0
-margin_top = 7.0
-margin_right = 685.0
-margin_bottom = 22.0
-rect_scale = Vector2( 1.5, 1.5 )
-script = ExtResource( 4 )
-__meta__ = {
-"_edit_group_": true
-}
+[node name="ui" type="HBoxContainer" parent="."]
+anchor_left = 0.649
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -91.0
+custom_constants/separation = 27
 
-[node name="Label" type="Label" parent="score_board"]
-margin_right = 10.0
-margin_bottom = 16.0
-custom_fonts/font = SubResource( 5 )
-text = "Score: 100"
+[node name="TextureRect" type="TextureRect" parent="ui"]
+margin_right = 35.0
+margin_bottom = 510.0
+rect_min_size = Vector2( 35, 0 )
+size_flags_horizontal = 0
+size_flags_vertical = 3
+texture = ExtResource( 8 )
+expand = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ui"]
+margin_left = 62.0
+margin_right = 442.0
+margin_bottom = 510.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="ui/VBoxContainer"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_right = 380.0
+margin_bottom = 245.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 8 )
+expand = true
+
+[node name="Label" type="Label" parent="ui/VBoxContainer/TextureRect"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 40.0
+margin_bottom = 14.0
+rect_scale = Vector2( 4, 4 )
+custom_fonts/font = SubResource( 33 )
+text = "Score:"
+
+[node name="TextureRect2" type="TextureRect" parent="ui/VBoxContainer"]
+margin_top = 265.0
+margin_right = 380.0
+margin_bottom = 510.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 8 )
+expand = true
 
 [connection signal="area_entered" from="level_collision" to="level_collision" method="_on_level_collision_area_entered"]
 [connection signal="area_entered" from="snake/head" to="snake/head" method="_on_head_area_entered"]
