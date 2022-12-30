@@ -13,12 +13,8 @@ onready var level = get_parent()
 
 
 func _ready():
-	level.connect("spawn_obstacle", self, "_on_spawn_obstacle")
 	grid.connect("cells_available", self, "_on_cells_available")
 	grid_cells = grid.get_used_cells()
-	_on_spawn_food()
-	_on_spawn_food()
-	_on_spawn_food()
 	_on_spawn_food()
 
 
@@ -32,7 +28,7 @@ func _on_spawn_obstacle(position):
 	# instance.position = grid.map_to_world(grid_cells[rand_index]) + Vector2(16, 16)
 	instance.position = position
 	instance.connect("spawned", self, "_on_spawned")
-	instance.connect("despawned", self, "_on_despawned")
+	# instance.connect("despawned", self, "_on_despawned")
 	call_deferred("add_child", instance)
 
 
@@ -42,10 +38,10 @@ func _on_spawned(grid_position):
 	emit_signal("cells_occupied", occupied_cells)
 
 
-func _on_despawned(grid_position):
-	var despawn_location = grid.world_to_map(grid_position)
-	occupied_cells.erase(despawn_location)
-	emit_signal("cells_occupied", occupied_cells)
+# func _on_despawned(grid_position):
+# 	var despawn_location = grid.world_to_map(grid_position)
+# 	occupied_cells.erase(despawn_location)
+# 	emit_signal("cells_occupied", occupied_cells)
 
 
 func _on_spawn_food():
@@ -53,7 +49,7 @@ func _on_spawn_food():
 	var rand_index = randi() % grid_cells.size()
 	instance.position = grid.map_to_world(grid_cells[rand_index]) + Vector2(16, 16)
 	instance.connect("spawned", self, "_on_spawned")
-	instance.connect("despawned", self, "_on_despawned")
+	# instance.connect("despawned", self, "_on_despawned")
 	instance.connect("food_eaten", self, "_on_eaten")
 	instance.connect("food_explode", self, "_on_explode")
 	call_deferred("add_child", instance)

@@ -1,7 +1,5 @@
 extends Control
 
-signal spawn_obstacle
-
 export var speed: float
 
 var old_score: int = 0
@@ -28,7 +26,6 @@ func difficulty_check():
 		return
 
 	old_score = global_var.player_score
-	emit_signal("spawn_obstacle")
 
 
 func restart_popup():

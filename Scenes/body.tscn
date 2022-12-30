@@ -242,7 +242,8 @@ orbit_velocity_random = 0.0
 scale = 0.8
 anim_speed = 1.3
 
-[node name="body" type="Area2D" groups=["bullet_explode", "food_explode"]]
+[node name="body" type="Area2D" groups=["food_explode"]]
+z_index = 1
 script = ExtResource( 2 )
 
 [node name="sprite" type="Sprite" parent="."]

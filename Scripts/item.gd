@@ -2,7 +2,7 @@ extends Node2D
 class_name SpawnItem
 
 signal spawned(grid_position)
-signal despawned(grid_position)
+# signal despawned(grid_position)
 
 onready var spawn_location = self.position
 

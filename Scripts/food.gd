@@ -14,6 +14,7 @@ onready var collision_shape = $food_area/CollisionShape2D
 
 
 func _ready():
+	emit_signal("spawned", self.position)
 	$Timer.set_wait_time(wait_time)
 	$Timer.start()
 
@@ -34,7 +35,7 @@ func _physics_process(_delta):
 
 
 func _queue_free():
-	emit_signal("despawned", self.position)
+	# emit_signal("despawned", self.position)
 	queue_free()
 
 

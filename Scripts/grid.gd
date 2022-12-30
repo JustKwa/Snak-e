@@ -14,7 +14,6 @@ func _ready():
 
 func _on_cells_occupied(occupied_cells: PoolVector2Array):
 	var used_cells = get_used_cells()
-	print(used_cells.size())
 
 	for cell in occupied_cells:
 		used_cells.erase(cell)

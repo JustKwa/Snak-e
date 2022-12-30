@@ -136,6 +136,7 @@ scale_curve = SubResource( 6 )
 anim_speed = 2.5
 
 [node name="food" type="Node2D"]
+z_index = 1
 script = ExtResource( 2 )
 wait_time = 7
 
