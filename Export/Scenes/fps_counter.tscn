@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/fps_counter.gd" type="Script" id=1]
+
+[node name="fps_counter" type="Label"]
+margin_left = 470.0
+margin_top = -17.0
+margin_right = 510.0
+margin_bottom = -3.0
+script = ExtResource( 1 )

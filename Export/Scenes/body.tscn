@@ -1,0 +1,288 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Sprites/canonball.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/snake_body.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Explosion.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 12.0416
+
+[sub_resource type="Animation" id=5]
+resource_name = "bounce_h"
+length = 0.4
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_change_dir"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 0.75 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("AnimationPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "moving", -1, 1.0, false ],
+"method": "play"
+} ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "bounce_v"
+length = 0.4
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_change_dir"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.75, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("AnimationPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "moving", -1, 1.0, false ],
+"method": "play"
+} ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "explode"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Particles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Particles2D2:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("sprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.5 ), Vector2( 0.6, 0.6 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("sprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("disconnect_check/CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "moving"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.875, 0.875 ), Vector2( 0.775, 0.775 ) ]
+}
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 24.0208
+
+[sub_resource type="Curve" id=8]
+min_value = -360.0
+max_value = 360.0
+_data = [ Vector2( 0, 360 ), 0.0, 0.0, 0, 0, Vector2( 1, -360 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=17]
+curve = SubResource( 8 )
+
+[sub_resource type="Gradient" id=10]
+offsets = PoolRealArray( 0, 0.00645161, 0.535484, 0.922581 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.88916, 0.855954, 0.270916, 1, 1, 0.0976563, 0.0976563, 1, 0.00244141, 0.000286102, 0.000286102, 1 )
+
+[sub_resource type="GradientTexture" id=18]
+gradient = SubResource( 10 )
+
+[sub_resource type="Curve" id=12]
+_data = [ Vector2( 0, 1 ), 0.0, -0.10373, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=19]
+curve = SubResource( 12 )
+
+[sub_resource type="ParticlesMaterial" id=14]
+emission_shape = 1
+emission_sphere_radius = 1.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 80.2
+initial_velocity_random = 0.7
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle_curve = SubResource( 17 )
+scale = 2.0
+scale_random = 0.67
+scale_curve = SubResource( 19 )
+color_ramp = SubResource( 18 )
+
+[sub_resource type="CanvasItemMaterial" id=15]
+particles_animation = true
+particles_anim_h_frames = 7
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticlesMaterial" id=16]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.8
+anim_speed = 1.3
+
+[node name="body" type="Area2D" groups=["food_explode"]]
+z_index = 1
+script = ExtResource( 2 )
+
+[node name="sprite" type="Sprite" parent="."]
+scale = Vector2( 0.875, 0.875 )
+texture = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 3 )
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "moving"
+anims/bounce_h = SubResource( 5 )
+anims/bounce_v = SubResource( 2 )
+anims/explode = SubResource( 7 )
+anims/moving = SubResource( 4 )
+
+[node name="disconnect_check" type="Area2D" parent="." groups=["bullet_ignore"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="disconnect_check"]
+shape = SubResource( 6 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+emitting = false
+amount = 25
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.77
+process_material = SubResource( 14 )
+
+[node name="Particles2D2" type="Particles2D" parent="."]
+material = SubResource( 15 )
+emitting = false
+amount = 1
+lifetime = 0.8
+one_shot = true
+speed_scale = 1.1
+process_material = SubResource( 16 )
+texture = ExtResource( 3 )
+
+[connection signal="area_entered" from="." to="." method="_on_body_area_entered"]
+[connection signal="area_exited" from="disconnect_check" to="." method="_on_disconnect_check_area_exited"]

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/level_sheet.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+level = 1.0
+lv_required = PoolIntArray( 4, 0 )
+food_amount = PoolIntArray( 2, 2 )
+speed_modifier = PoolIntArray( 0, 1, 0 )
+canon_timer = PoolIntArray( 1, 0 )
+bomb_timer = PoolIntArray( 1, 0 )
