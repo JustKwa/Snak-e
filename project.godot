@@ -65,7 +65,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/godot_db_manager/plugin.cfg" )
+enabled=PoolStringArray(  )
 
 [gui]
 
