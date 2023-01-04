@@ -35,7 +35,6 @@ func _physics_process(_delta):
 
 
 func _queue_free():
-	# emit_signal("despawned", self.position)
 	queue_free()
 
 
@@ -50,6 +49,7 @@ func _explode():
 
 func _eaten():
 	global_var.player_score += 1
+	global_var.increase_current_food_has()
 	emit_signal("food_eaten")
 
 
