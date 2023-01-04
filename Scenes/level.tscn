@@ -754,7 +754,6 @@ margin_top = -254.0
 margin_right = 528.0
 margin_bottom = 274.0
 script = ExtResource( 3 )
-speed = 4.4
 
 [node name="background" type="TextureRect" parent="."]
 self_modulate = Color( 0.341176, 0.376471, 0.509804, 1 )
