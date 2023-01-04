@@ -12,7 +12,7 @@ var high_score: int = 0 setget _set_high_score
 var game_over: bool = false setget _set_game_over
 var speed: float
 var food_required_for_next_level: int = 0
-var current_food_has: int = 0 setget _set_current_food_has
+var current_food_has: int = 0 
 
 
 func _set_score(value):
@@ -30,8 +30,8 @@ func _set_high_score(value: int):
 		high_score = value
 
 
-func _set_current_food_has(value: int):
-	current_food_has = value
+func increase_current_food_has():
+	current_food_has += 1
 	if current_food_has < food_required_for_next_level:
 		return
 	current_food_has = 0
