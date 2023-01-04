@@ -1,6 +1,7 @@
 extends Control
 
 export var speed: float
+var food_required
 
 onready var global_var: Resource = preload("res://global_var.tres")
 onready var level_sheet: Resource = preload("res://Resources/level_sheet.tres")
@@ -10,10 +11,7 @@ onready var snake_controller = $snake
 
 
 func _ready():
-	randomize()
-	global_var.speed = speed
-	global_var.player_score = 0
-	return global_var.connect("game_over", self, "_on_game_over")
+	_on_ready()
 
 
 func restart_popup():
@@ -24,3 +22,12 @@ func restart_popup():
 
 func _on_game_over():
 	global_var.high_score = global_var.player_score
+	_on_ready()
+
+
+func _on_ready():
+	randomize()
+	food_required = level_sheet.current_level.get("food_required")
+	global_var.speed = speed
+	global_var.player_score = 0
+	return global_var.connect("game_over", self, "_on_game_over")

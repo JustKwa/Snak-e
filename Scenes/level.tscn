@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://Sprites/Explosion.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/tileset.png" type="Texture" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://Sprites/grid-tile.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/background.png" type="Texture" id=8]
 [ext_resource path="res://Scripts/score_board.gd" type="Script" id=9]
-[ext_resource path="res://Sprites/food.png" type="Texture" id=10]
 [ext_resource path="res://Sprites/snake_head-sheet.png" type="Texture" id=11]
 [ext_resource path="res://Scripts/snake_controller.gd" type="Script" id=12]
 [ext_resource path="res://Scripts/snake_head.gd" type="Script" id=13]
@@ -23,13 +22,37 @@
 [sub_resource type="ShaderMaterial" id=44]
 shader = SubResource( 43 )
 
-[sub_resource type="CanvasItemMaterial" id=36]
+[sub_resource type="CanvasItemMaterial" id=46]
 
 [sub_resource type="Curve" id=37]
-_data = [ Vector2( 0, 0.914773 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.676136 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.998864 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.798864 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=38]
 curve = SubResource( 37 )
+
+[sub_resource type="ParticlesMaterial" id=47]
+emission_shape = 2
+emission_box_extents = Vector3( 500, 1, 1 )
+flag_disable_z = true
+direction = Vector3( -1, 0, 0 )
+gravity = Vector3( 0, -3, 0 )
+initial_velocity = 10.0
+initial_velocity_random = 0.45
+angular_velocity = 3.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 25.5
+angle_random = 0.56
+scale = 2.4
+scale_random = 0.5
+scale_curve = SubResource( 38 )
+color = Color( 0.662745, 0.741176, 0.866667, 0.764706 )
+
+[sub_resource type="StreamTexture" id=48]
+flags = 4
+load_path = "res://.import/bubble.png-7158fdafbd9a4cab431a459608665d16.stex"
+
+[sub_resource type="CanvasItemMaterial" id=36]
 
 [sub_resource type="ParticlesMaterial" id=39]
 emission_shape = 2
@@ -45,7 +68,7 @@ orbit_velocity_random = 0.0
 angle = 25.5
 angle_random = 0.56
 scale = 2.4
-scale_random = 0.8
+scale_random = 0.5
 scale_curve = SubResource( 38 )
 color = Color( 0.662745, 0.741176, 0.866667, 0.764706 )
 
@@ -64,7 +87,7 @@ orbit_velocity_random = 0.0
 angle = 25.5
 angle_random = 0.56
 scale = 2.4
-scale_random = 0.8
+scale_random = 0.5
 scale_curve = SubResource( 38 )
 color = Color( 0.662745, 0.741176, 0.866667, 0.764706 )
 
@@ -692,7 +715,7 @@ anim_speed = 1.0
 load_path = "res://.import/smoke.png-94c1cbd5e9b6a8e9b1b0154fe103c363.stex"
 
 [sub_resource type="DynamicFont" id=33]
-size = 40
+size = 30
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
@@ -704,7 +727,7 @@ outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=35]
-size = 32
+size = 30
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
@@ -722,12 +745,14 @@ glow_bloom = 0.1
 
 [node name="level" type="Control"]
 material = SubResource( 44 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 80.2042
-margin_top = 62.0
-margin_right = -39.7958
-margin_bottom = -58.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -504.0
+margin_top = -254.0
+margin_right = 528.0
+margin_bottom = 274.0
 script = ExtResource( 3 )
 speed = 4.4
 
@@ -744,18 +769,27 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Particles2D2" type="Particles2D" parent="."]
-material = SubResource( 36 )
-position = Vector2( 635.796, 602 )
+[node name="bubble_2" type="Particles2D" parent="."]
+material = SubResource( 46 )
+position = Vector2( 155, 602 )
 amount = 15
-lifetime = 19.97
-speed_scale = 0.6
+lifetime = 20.0
+speed_scale = 0.7
+process_material = SubResource( 47 )
+texture = SubResource( 48 )
+
+[node name="bubble_1" type="Particles2D" parent="."]
+material = SubResource( 36 )
+position = Vector2( 904, 606 )
+amount = 15
+lifetime = 20.0
+speed_scale = 0.7
 process_material = SubResource( 39 )
 texture = ExtResource( 6 )
 
-[node name="Particles2D" type="Particles2D" parent="."]
+[node name="bubble" type="Particles2D" parent="."]
 material = SubResource( 40 )
-position = Vector2( 295.796, 600 )
+position = Vector2( 520, 605 )
 amount = 15
 lifetime = 19.97
 speed_scale = 0.6
@@ -901,9 +935,9 @@ script = ExtResource( 5 )
 anchor_left = 0.649
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -93.0
+margin_left = -108.0
 margin_top = 1.0
-margin_right = 10.0
+margin_right = -5.0
 margin_bottom = 2.0
 custom_constants/separation = 14
 __meta__ = {
@@ -912,7 +946,7 @@ __meta__ = {
 
 [node name="TextureRect" type="TextureRect" parent="ui"]
 margin_right = 30.0
-margin_bottom = 511.0
+margin_bottom = 529.0
 rect_min_size = Vector2( 30, 0 )
 size_flags_horizontal = 0
 size_flags_vertical = 3
@@ -921,21 +955,27 @@ expand = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ui"]
 margin_left = 44.0
-margin_right = 454.0
-margin_bottom = 511.0
+margin_right = 465.0
+margin_bottom = 529.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 43
+custom_constants/separation = -2
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="score_board" type="TextureRect" parent="ui/VBoxContainer"]
 self_modulate = Color( 1, 1, 1, 0 )
-margin_right = 410.0
+margin_right = 421.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
 texture = ExtResource( 8 )
 expand = true
 script = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="score_text" type="Label" parent="ui/VBoxContainer/score_board"]
 margin_top = 1.0
@@ -948,22 +988,25 @@ text = "Score:"
 
 [node name="score_number" type="Label" parent="ui/VBoxContainer/score_board"]
 margin_left = -0.204224
-margin_top = 49.0
+margin_top = 40.0
 margin_right = 409.796
-margin_bottom = 114.999
+margin_bottom = 105.999
 custom_fonts/font = SubResource( 34 )
 text = "000000000000"
 valign = 1
 
 [node name="next_level_board" type="TextureRect" parent="ui/VBoxContainer"]
 self_modulate = Color( 1, 1, 1, 0 )
-margin_top = 143.0
-margin_right = 410.0
-margin_bottom = 511.0
+margin_top = 98.0
+margin_right = 421.0
+margin_bottom = 529.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 8 )
 expand = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="score_text" type="Label" parent="ui/VBoxContainer/next_level_board"]
 margin_top = 11.6541
@@ -973,356 +1016,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 35 )
 text = "Next Level:"
-
-[node name="vbox" type="VBoxContainer" parent="ui/VBoxContainer/next_level_board"]
-margin_top = 54.0
-margin_right = 392.0
-margin_bottom = 398.0
-custom_constants/separation = -3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ui/VBoxContainer/next_level_board/vbox"]
-margin_right = 392.0
-margin_bottom = 64.0
-custom_constants/separation = -30
-
-[node name="TextureRect" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer"]
-margin_right = 64.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect2" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer"]
-margin_left = 34.0
-margin_right = 98.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect3" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer"]
-margin_left = 68.0
-margin_right = 132.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect4" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer"]
-margin_left = 102.0
-margin_right = 166.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect5" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer"]
-margin_left = 136.0
-margin_right = 200.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect6" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer"]
-margin_left = 170.0
-margin_right = 234.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect7" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer"]
-margin_left = 204.0
-margin_right = 268.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect8" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer"]
-margin_left = 238.0
-margin_right = 302.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="ui/VBoxContainer/next_level_board/vbox"]
-margin_top = 61.0
-margin_right = 392.0
-margin_bottom = 125.0
-custom_constants/separation = -19
-
-[node name="TextureRect" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer2"]
-margin_right = 64.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect2" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer2"]
-margin_left = 45.0
-margin_right = 109.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect3" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer2"]
-margin_left = 90.0
-margin_right = 154.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect4" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer2"]
-margin_left = 135.0
-margin_right = 199.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect5" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer2"]
-margin_left = 180.0
-margin_right = 244.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect6" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer2"]
-margin_left = 225.0
-margin_right = 289.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect7" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer2"]
-margin_left = 270.0
-margin_right = 334.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect8" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer2"]
-margin_left = 315.0
-margin_right = 379.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="ui/VBoxContainer/next_level_board/vbox"]
-margin_top = 122.0
-margin_right = 392.0
-margin_bottom = 186.0
-custom_constants/separation = -19
-
-[node name="TextureRect" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer3"]
-margin_right = 64.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect2" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer3"]
-margin_left = 45.0
-margin_right = 109.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect3" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer3"]
-margin_left = 90.0
-margin_right = 154.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect4" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer3"]
-margin_left = 135.0
-margin_right = 199.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect5" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer3"]
-margin_left = 180.0
-margin_right = 244.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect6" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer3"]
-margin_left = 225.0
-margin_right = 289.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect7" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer3"]
-margin_left = 270.0
-margin_right = 334.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect8" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer3"]
-margin_left = 315.0
-margin_right = 379.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="HBoxContainer4" type="HBoxContainer" parent="ui/VBoxContainer/next_level_board/vbox"]
-margin_top = 183.0
-margin_right = 392.0
-margin_bottom = 247.0
-custom_constants/separation = -19
-
-[node name="TextureRect" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer4"]
-margin_right = 64.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect2" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer4"]
-margin_left = 45.0
-margin_right = 109.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect3" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer4"]
-margin_left = 90.0
-margin_right = 154.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect4" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer4"]
-margin_left = 135.0
-margin_right = 199.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect5" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer4"]
-margin_left = 180.0
-margin_right = 244.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect6" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer4"]
-margin_left = 225.0
-margin_right = 289.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect7" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer4"]
-margin_left = 270.0
-margin_right = 334.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect8" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer4"]
-margin_left = 315.0
-margin_right = 379.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="HBoxContainer5" type="HBoxContainer" parent="ui/VBoxContainer/next_level_board/vbox"]
-margin_top = 244.0
-margin_right = 392.0
-margin_bottom = 308.0
-custom_constants/separation = -19
-
-[node name="TextureRect" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer5"]
-margin_right = 64.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect2" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer5"]
-margin_left = 45.0
-margin_right = 109.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect3" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer5"]
-margin_left = 90.0
-margin_right = 154.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect4" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer5"]
-margin_left = 135.0
-margin_right = 199.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect5" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer5"]
-margin_left = 180.0
-margin_right = 244.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect6" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer5"]
-margin_left = 225.0
-margin_right = 289.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect7" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer5"]
-margin_left = 270.0
-margin_right = 334.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect8" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer5"]
-margin_left = 315.0
-margin_right = 379.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 45 )

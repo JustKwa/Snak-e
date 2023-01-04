@@ -57,21 +57,14 @@ config/name="Snake game"
 run/main_scene="res://Scenes/main_menu.tscn"
 config/icon="res://icon.png"
 
-[autoload]
-
-FpsCounter="*res://Scenes/fps_counter.tscn"
-gddb_constants="*res://addons/godot_db_manager/core/GDDBConstants.gd"
-gddb_types="*res://addons/godot_db_manager/core/GDDBTypes.gd"
-gddb_globals="*res://addons/godot_db_manager/core/GDDBGlobals.gd"
-
 [debug]
 
 settings/fps/force_fps=60
 
 [display]
 
-window/size/width=1120
-window/size/height=630
+window/size/width=1152
+window/size/height=648
 window/size/test_width=1280
 window/size/test_height=720
 window/dpi/allow_hidpi=true
