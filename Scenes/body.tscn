@@ -189,7 +189,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=6]
-radius = 24.0208
+radius = 15.0
 
 [sub_resource type="Curve" id=8]
 min_value = -360.0
