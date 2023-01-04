@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://Sprites/Explosion.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/tileset.png" type="Texture" id=2]
@@ -17,7 +17,6 @@
 [ext_resource path="res://scripts/grid.gd" type="Script" id=15]
 [ext_resource path="res://Sprites/grid_stage.png" type="Texture" id=16]
 [ext_resource path="res://Sprites/grid_wall.png" type="Texture" id=17]
-[ext_resource path="res://Sprites/wallpaper.png" type="Texture" id=18]
 
 [sub_resource type="Shader" id=43]
 
@@ -745,17 +744,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-margin_left = -80.2042
-margin_top = -63.0
-margin_right = 1041.8
-margin_bottom = 566.0
-texture = ExtResource( 18 )
-
 [node name="Particles2D2" type="Particles2D" parent="."]
 material = SubResource( 36 )
-position = Vector2( 585.796, 600 )
+position = Vector2( 635.796, 602 )
 amount = 15
 lifetime = 19.97
 speed_scale = 0.6
@@ -802,7 +793,6 @@ build_mode = 1
 polygon = PoolVector2Array( 544.846, 599.103, -31.222, 598.955, 0.813637, 566.982, 512.791, 566.992, 512.813, 55.0233, 0.814461, 55.0033, 0.798889, 566.982, -31.2044, 598.971, -31.2127, 22.8724, 544.808, 22.993 )
 
 [node name="grid" type="TileMap" parent="."]
-unique_name_in_owner = true
 z_index = -1
 tile_set = SubResource( 1 )
 cell_size = Vector2( 32, 32 )

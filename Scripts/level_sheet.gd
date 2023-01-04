@@ -1,10 +1,22 @@
 extends Resource
 class_name LevelSheet
 
+export(Array, Dictionary) var _level_sheet = [{
+    "id": 0,
+    "food_required": 0,
+    "food_amount": 0,
+    "food_timer": 0.0,
+    "speed_modifier": 0.0,
+    "canon_timer": 0.0
+}
+]
 
-export var level: int
-export var lv_required: PoolIntArray = []
-export var food_amount: PoolIntArray = []
-export var speed_modifier: PoolIntArray = []
-export var canon_timer: PoolIntArray = []
-export var bomb_timer: PoolIntArray = []
+export var current_level: int setget _set_level, _get_level
+
+
+func _set_level(value: int):
+    current_level = value 
+
+
+func _get_level():
+    return _level_sheet[current_level]
