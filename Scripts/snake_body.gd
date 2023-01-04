@@ -10,7 +10,6 @@ onready var disconnect_check = $disconnect_check
 
 
 func _ready() -> void:
-	print(direction)
 	state = State.MOVE
 
 
