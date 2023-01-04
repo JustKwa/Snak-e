@@ -38,7 +38,7 @@ func _bounce() -> void:
 
 func _move(delta):
 	# use to slow down the bullet movement
-	var speed_modifier = global_var.get_level().get("speed_modifier")
+	var speed_modifier = level_sheet.get_level().get("speed_modifier")
 
 	percent_to_tile += (global_var.speed * speed_modifier) * delta
 
