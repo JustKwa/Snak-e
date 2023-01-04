@@ -27,6 +27,7 @@ func _on_game_over():
 
 func _on_ready():
 	randomize()
+	level_sheet.current_level += 1
 	food_required = level_sheet.current_level.get("food_required")
 	global_var.speed = speed
 	global_var.player_score = 0
