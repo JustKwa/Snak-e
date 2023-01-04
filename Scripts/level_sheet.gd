@@ -11,12 +11,12 @@ export(Array, Dictionary) var _level_sheet = [{
 }
 ]
 
-export var current_level: int = 0 setget _set_level, _get_level
+export var current_level: int = 0 setget _set_level
 
 
 func _set_level(value: int):
     current_level = value 
 
 
-func _get_level():
+func get_level():
     return _level_sheet[current_level]
