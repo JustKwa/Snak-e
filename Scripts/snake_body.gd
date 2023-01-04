@@ -38,9 +38,9 @@ func _bounce() -> void:
 
 func _move(delta):
 	# use to slow down the bullet movement
-	var speed_dampener = 0.8
+	var speed_modifier = global_var.get_level().get("speed_modifier")
 
-	percent_to_tile += (global_var.speed * speed_dampener) * delta
+	percent_to_tile += (global_var.speed * speed_modifier) * delta
 
 	if percent_to_tile >= 1.0:
 		position = current_pos + (direction * GRID_SIZE)
