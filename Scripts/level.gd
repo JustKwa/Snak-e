@@ -5,7 +5,6 @@ var food_required
 
 onready var global_var: Resource = preload("res://global_var.tres")
 onready var level_sheet: Resource = preload("res://Resources/level_sheet.tres")
-onready var food = preload("res://Scenes/food.tscn")
 onready var restart = preload("res://Scenes/restart_popup.tscn")
 onready var snake_controller = $snake
 
