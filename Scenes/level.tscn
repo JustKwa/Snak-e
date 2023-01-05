@@ -1,19 +1,103 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://Sprites/Explosion.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/tileset.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/level.gd" type="Script" id=3]
 [ext_resource path="res://PeaberryMono.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Scripts/item_controller.gd" type="Script" id=5]
-[ext_resource path="res://Scripts/level_collision.gd" type="Script" id=6]
+[ext_resource path="res://Sprites/bubble.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/grid-tile.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/background.png" type="Texture" id=8]
 [ext_resource path="res://Scripts/score_board.gd" type="Script" id=9]
-[ext_resource path="res://Sprites/food.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/green_button12.png" type="Texture" id=10]
 [ext_resource path="res://Sprites/snake_head-sheet.png" type="Texture" id=11]
 [ext_resource path="res://Scripts/snake_controller.gd" type="Script" id=12]
 [ext_resource path="res://Scripts/snake_head.gd" type="Script" id=13]
 [ext_resource path="res://Sprites/smoke.png" type="Texture" id=14]
+[ext_resource path="res://scripts/grid.gd" type="Script" id=15]
+[ext_resource path="res://Sprites/grid_stage.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/grid_wall.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/red_button07.png" type="Texture" id=18]
+[ext_resource path="res://scripts/TextureProgress.gd" type="Script" id=20]
+[ext_resource path="res://scripts/Line2D.gd" type="Script" id=21]
+
+[sub_resource type="Shader" id=43]
+
+[sub_resource type="ShaderMaterial" id=44]
+shader = SubResource( 43 )
+
+[sub_resource type="CanvasItemMaterial" id=46]
+
+[sub_resource type="Curve" id=37]
+_data = [ Vector2( 0, 0.998864 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.798864 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=38]
+curve = SubResource( 37 )
+
+[sub_resource type="ParticlesMaterial" id=47]
+emission_shape = 2
+emission_box_extents = Vector3( 500, 1, 1 )
+flag_disable_z = true
+direction = Vector3( -1, 0, 0 )
+gravity = Vector3( 0, -3, 0 )
+initial_velocity = 10.0
+initial_velocity_random = 0.45
+angular_velocity = 3.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 25.5
+angle_random = 0.56
+scale = 2.4
+scale_random = 0.5
+scale_curve = SubResource( 38 )
+color = Color( 0.662745, 0.741176, 0.866667, 0.764706 )
+
+[sub_resource type="StreamTexture" id=48]
+flags = 4
+load_path = "res://.import/bubble.png-7158fdafbd9a4cab431a459608665d16.stex"
+
+[sub_resource type="CanvasItemMaterial" id=36]
+
+[sub_resource type="ParticlesMaterial" id=39]
+emission_shape = 2
+emission_box_extents = Vector3( 500, 1, 1 )
+flag_disable_z = true
+direction = Vector3( -1, 0, 0 )
+gravity = Vector3( 0, -3, 0 )
+initial_velocity = 10.0
+initial_velocity_random = 0.45
+angular_velocity = 3.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 25.5
+angle_random = 0.56
+scale = 2.4
+scale_random = 0.5
+scale_curve = SubResource( 38 )
+color = Color( 0.662745, 0.741176, 0.866667, 0.764706 )
+
+[sub_resource type="CanvasItemMaterial" id=40]
+
+[sub_resource type="ParticlesMaterial" id=41]
+emission_shape = 2
+emission_box_extents = Vector3( 500, 1, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, -3, 0 )
+initial_velocity = 10.0
+initial_velocity_random = 0.45
+angular_velocity = 3.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 25.5
+angle_random = 0.56
+scale = 2.4
+scale_random = 0.5
+scale_curve = SubResource( 38 )
+color = Color( 0.662745, 0.741176, 0.866667, 0.764706 )
+
+[sub_resource type="StreamTexture" id=42]
+flags = 4
+load_path = "res://.import/bubble.png-7158fdafbd9a4cab431a459608665d16.stex"
 
 [sub_resource type="TileSet" id=1]
 1/name = "tileset.png 1"
@@ -118,7 +202,7 @@
 8/texture = ExtResource( 7 )
 8/tex_offset = Vector2( 0, 0 )
 8/modulate = Color( 1, 1, 1, 1 )
-8/region = Rect2( 0, 0, 64, 64 )
+8/region = Rect2( 0, 0, 32, 32 )
 8/tile_mode = 0
 8/occluder_offset = Vector2( 0, 0 )
 8/navigation_offset = Vector2( 0, 0 )
@@ -128,31 +212,6 @@
 8/shape_one_way_margin = 0.0
 8/shapes = [  ]
 8/z_index = 0
-
-[sub_resource type="GDScript" id=2]
-script/source = "extends TileMap
-
-signal cells_available(available_cells)
-
-var available_cells : PoolVector2Array
-
-onready var item_controller = get_parent().get_node(\"item_controller\")
-
-
-func _ready():
-	emit_signal(\"cells_available\", available_cells)
-	item_controller.connect(\"cells_occupied\", self, \"_on_cells_occupied\")	
-
-
-func _on_cells_occupied(occupied_cells: PoolVector2Array):
-	var used_cells = get_used_cells()
-
-	for cell in occupied_cells:
-		used_cells.erase(cell)
-	
-	available_cells = used_cells
-	emit_signal(\"cells_available\", available_cells)
-"
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 7, 12 )
@@ -175,34 +234,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 1, 0.8 ), Vector2( 1, 1.2 ), Vector2( 1, 1 ) ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath("AnimationPlayer")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.3 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "moving", -1, 1.0, false ],
-"method": "play"
-} ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath("AnimationPlayer2")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.3 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "hold_food", -1, 1.0, false ],
-"method": "play"
-} ]
 }
 
 [sub_resource type="Animation" id=23]
@@ -275,7 +306,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id=14]
 resource_name = "explode"
-length = 0.7
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Particles2D:emitting")
 tracks/0/interp = 1
@@ -348,20 +379,6 @@ tracks/5/keys = {
 "update": 1,
 "values": [ true ]
 }
-tracks/6/type = "method"
-tracks/6/path = NodePath("../..")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0.7 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "restart_popup"
-} ]
-}
 
 [sub_resource type="Animation" id=6]
 resource_name = "moving"
@@ -394,64 +411,59 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=8]
 resource_name = "spawn"
-length = 1.2
+length = 0.01
 tracks/0/type = "value"
-tracks/0/path = NodePath("CanonHead:scale")
+tracks/0/path = NodePath("CollisionShape2D2:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 4, 4 ), Vector2( 1, 1 ) ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("CanonHead:position")
+tracks/1/path = NodePath("CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, -160 ), Vector2( 0, 0 ) ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 tracks/2/type = "method"
-tracks/2/path = NodePath(".")
+tracks/2/path = NodePath("AnimationPlayer2")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [ false ],
-"method": "set_physics_process"
-}, {
-"args": [ true ],
-"method": "set_physics_process"
+"args": [ "neutral", -1, 1.0, false ],
+"method": "play"
 } ]
 }
-tracks/3/type = "method"
-tracks/3/path = NodePath("AnimationPlayer")
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 1 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "moving", -1, 1.0, false ],
-"method": "play"
-} ]
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("CollisionShape2D2:disabled")
+tracks/4/path = NodePath(".:rotation_degrees")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -459,20 +471,8 @@ tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("CollisionShape2D:disabled")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
+"update": 0,
+"values": [ 180.0 ]
 }
 
 [sub_resource type="Animation" id=12]
@@ -493,7 +493,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=9]
 resource_name = "hold_food"
-length = 2.7
+length = 4.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("CanonHead:modulate")
 tracks/0/interp = 1
@@ -501,43 +501,15 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 2.7 ),
+"times": PoolRealArray( 0, 4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.615686, 0.294118, 0.294118, 1 ) ]
 }
-tracks/1/type = "method"
-tracks/1/path = NodePath("AnimationPlayer2")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 2.7 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "neutral", -1, 1.0, false ],
-"method": "play"
-} ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath("AnimationPlayer")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 2.7 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "eat_shoot", -1, 1.0, false ],
-"method": "play"
-} ]
-}
 
 [sub_resource type="Animation" id=11]
 resource_name = "neutral"
-length = 0.1
+length = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("CanonHead:modulate")
 tracks/0/interp = 1
@@ -660,47 +632,55 @@ anim_speed = 1.0
 load_path = "res://.import/smoke.png-94c1cbd5e9b6a8e9b1b0154fe103c363.stex"
 
 [sub_resource type="DynamicFont" id=33]
-size = 40
+size = 30
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=34]
-size = 50
+size = 52
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=35]
-size = 40
+size = 30
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
+[sub_resource type="Environment" id=45]
+background_mode = 4
+tonemap_mode = 3
+tonemap_exposure = 0.8
+auto_exposure_min_luma = 0.57
+auto_exposure_max_luma = 4.75
+auto_exposure_speed = 4.66
+glow_enabled = true
+glow_intensity = 1.0
+glow_bloom = 0.1
+
 [node name="level" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 60.0
-margin_top = 60.0
-margin_right = -60.0
-margin_bottom = -60.0
+material = SubResource( 44 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -504.0
+margin_top = -253.0
+margin_right = 528.0
+margin_bottom = 275.0
 script = ExtResource( 3 )
-speed = 4.4
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="stage" type="Control" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 1.0
-margin_bottom = 1.0
-
-[node name="background" type="TextureRect" parent="stage"]
-self_modulate = Color( 0.223529, 0.254902, 0.298039, 1 )
-margin_left = -96.0
-margin_top = -71.0
-margin_right = 258.0
-margin_bottom = 280.0
+[node name="background" type="TextureRect" parent="."]
+self_modulate = Color( 0.341176, 0.376471, 0.509804, 1 )
+margin_left = -156.0
+margin_top = -131.0
+margin_right = 198.0
+margin_bottom = 220.0
 rect_scale = Vector2( 3.59776, 2.16592 )
 texture = ExtResource( 8 )
 expand = true
@@ -708,28 +688,77 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="bubble_2" type="Particles2D" parent="."]
+material = SubResource( 46 )
+position = Vector2( 155, 602 )
+amount = 15
+lifetime = 20.0
+speed_scale = 0.7
+process_material = SubResource( 47 )
+texture = SubResource( 48 )
+
+[node name="bubble_1" type="Particles2D" parent="."]
+material = SubResource( 36 )
+position = Vector2( 904, 606 )
+amount = 15
+lifetime = 20.0
+speed_scale = 0.7
+process_material = SubResource( 39 )
+texture = ExtResource( 6 )
+
+[node name="bubble" type="Particles2D" parent="."]
+material = SubResource( 40 )
+position = Vector2( 520, 605 )
+amount = 15
+lifetime = 19.97
+speed_scale = 0.6
+process_material = SubResource( 41 )
+texture = SubResource( 42 )
+
+[node name="stage" type="TextureRect" parent="."]
+margin_right = 512.0
+margin_bottom = 512.0
+texture = ExtResource( 16 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="wall" type="TextureRect" parent="."]
+margin_left = -32.3529
+margin_top = -32.2007
+margin_right = 543.647
+margin_bottom = 543.799
+texture = ExtResource( 17 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="level_collision" type="Area2D" parent="wall"]
+position = Vector2( 32.3529, 32.2007 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="wall/level_collision"]
+position = Vector2( -1, -55 )
+build_mode = 1
+polygon = PoolVector2Array( 544.846, 599.103, -31.222, 598.955, 0.813637, 566.982, 512.791, 566.992, 512.813, 55.0233, 0.814461, 55.0033, 0.798889, 566.982, -31.2044, 598.971, -31.2127, 22.8724, 544.808, 22.993 )
+
 [node name="grid" type="TileMap" parent="."]
-unique_name_in_owner = true
+z_index = -1
 tile_set = SubResource( 1 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
 format = 1
-tile_data = PoolIntArray( 0, 8, 0, 2, 8, 0, 4, 8, 0, 6, 8, 0, 8, 8, 0, 10, 8, 0, 12, 8, 0, 14, 8, 0, 131072, 8, 0, 131074, 8, 0, 131076, 8, 0, 131078, 8, 0, 131080, 8, 0, 131082, 8, 0, 131084, 8, 0, 131086, 8, 0, 262144, 8, 0, 262146, 8, 0, 262148, 8, 0, 262150, 8, 0, 262152, 8, 0, 262154, 8, 0, 262156, 8, 0, 262158, 8, 0, 393216, 8, 0, 393218, 8, 0, 393220, 8, 0, 393222, 8, 0, 393224, 8, 0, 393226, 8, 0, 393228, 8, 0, 393230, 8, 0, 524288, 8, 0, 524290, 8, 0, 524292, 8, 0, 524294, 8, 0, 524296, 8, 0, 524297, 0, 0, 524298, 8, 0, 524300, 8, 0, 524302, 8, 0, 655360, 8, 0, 655362, 8, 0, 655363, 0, 0, 655364, 8, 0, 655366, 8, 0, 655368, 8, 0, 655370, 8, 0, 655372, 8, 0, 655374, 8, 0, 786432, 8, 0, 786434, 8, 0, 786436, 8, 0, 786438, 8, 0, 786440, 8, 0, 786442, 8, 0, 786444, 8, 0, 786446, 8, 0, 917504, 8, 0, 917506, 8, 0, 917508, 8, 0, 917510, 8, 0, 917512, 8, 0, 917514, 8, 0, 917516, 8, 0, 917518, 8, 0 )
-script = SubResource( 2 )
-
-[node name="level_collision" type="Area2D" parent="."]
-script = ExtResource( 6 )
+tile_data = PoolIntArray( 0, 8, 0, 1, 8, 0, 2, 8, 0, 3, 8, 0, 4, 8, 0, 5, 8, 0, 6, 8, 0, 7, 8, 0, 8, 8, 0, 9, 8, 0, 10, 8, 0, 11, 8, 0, 12, 8, 0, 13, 8, 0, 14, 8, 0, 15, 8, 0, 65536, 8, 0, 65537, 8, 0, 65538, 8, 0, 65539, 8, 0, 65540, 8, 0, 65541, 8, 0, 65542, 8, 0, 65543, 8, 0, 65544, 8, 0, 65545, 8, 0, 65546, 8, 0, 65547, 8, 0, 65548, 8, 0, 65549, 8, 0, 65550, 8, 0, 65551, 8, 0, 131072, 8, 0, 131073, 8, 0, 131074, 8, 0, 131075, 8, 0, 131076, 8, 0, 131077, 8, 0, 131078, 8, 0, 131079, 8, 0, 131080, 8, 0, 131081, 8, 0, 131082, 8, 0, 131083, 8, 0, 131084, 8, 0, 131085, 8, 0, 131086, 8, 0, 131087, 8, 0, 196608, 8, 0, 196609, 8, 0, 196610, 8, 0, 196611, 8, 0, 196612, 8, 0, 196613, 8, 0, 196614, 8, 0, 196615, 8, 0, 196616, 8, 0, 196617, 8, 0, 196618, 8, 0, 196619, 8, 0, 196620, 8, 0, 196621, 8, 0, 196622, 8, 0, 196623, 8, 0, 262144, 8, 0, 262145, 8, 0, 262146, 8, 0, 262147, 8, 0, 262148, 8, 0, 262149, 8, 0, 262150, 8, 0, 262151, 8, 0, 262152, 8, 0, 262153, 8, 0, 262154, 8, 0, 262155, 8, 0, 262156, 8, 0, 262157, 8, 0, 262158, 8, 0, 262159, 8, 0, 327680, 8, 0, 327681, 8, 0, 327682, 8, 0, 327683, 8, 0, 327684, 8, 0, 327685, 8, 0, 327686, 8, 0, 327687, 8, 0, 327688, 8, 0, 327689, 8, 0, 327690, 8, 0, 327691, 8, 0, 327692, 8, 0, 327693, 8, 0, 327694, 8, 0, 327695, 8, 0, 393216, 8, 0, 393217, 8, 0, 393218, 8, 0, 393219, 8, 0, 393220, 8, 0, 393221, 8, 0, 393222, 8, 0, 393223, 8, 0, 393224, 8, 0, 393225, 8, 0, 393226, 8, 0, 393227, 8, 0, 393228, 8, 0, 393229, 8, 0, 393230, 8, 0, 393231, 8, 0, 458752, 8, 0, 458753, 8, 0, 458754, 8, 0, 458755, 8, 0, 458756, 8, 0, 458757, 8, 0, 458758, 8, 0, 458759, 8, 0, 458760, 8, 0, 458761, 8, 0, 458762, 8, 0, 458763, 8, 0, 458764, 8, 0, 458765, 8, 0, 458766, 8, 0, 458767, 8, 0, 524288, 8, 0, 524289, 8, 0, 524290, 8, 0, 524291, 8, 0, 524292, 8, 0, 524293, 8, 0, 524294, 8, 0, 524295, 8, 0, 524296, 8, 0, 524297, 8, 0, 524298, 8, 0, 524299, 8, 0, 524300, 8, 0, 524301, 8, 0, 524302, 8, 0, 524303, 8, 0, 589824, 8, 0, 589825, 8, 0, 589826, 8, 0, 589827, 8, 0, 589828, 8, 0, 589829, 8, 0, 589830, 8, 0, 589831, 8, 0, 589832, 8, 0, 589833, 8, 0, 589834, 8, 0, 589835, 8, 0, 589836, 8, 0, 589837, 8, 0, 589838, 8, 0, 589839, 8, 0, 655360, 8, 0, 655361, 8, 0, 655362, 8, 0, 655363, 8, 0, 655364, 8, 0, 655365, 8, 0, 655366, 8, 0, 655367, 8, 0, 655368, 8, 0, 655369, 8, 0, 655370, 8, 0, 655371, 8, 0, 655372, 8, 0, 655373, 8, 0, 655374, 8, 0, 655375, 8, 0, 720896, 8, 0, 720897, 8, 0, 720898, 8, 0, 720899, 8, 0, 720900, 8, 0, 720901, 8, 0, 720902, 8, 0, 720903, 8, 0, 720904, 8, 0, 720905, 8, 0, 720906, 8, 0, 720907, 8, 0, 720908, 8, 0, 720909, 8, 0, 720910, 8, 0, 720911, 8, 0, 786432, 8, 0, 786433, 8, 0, 786434, 8, 0, 786435, 8, 0, 786436, 8, 0, 786437, 8, 0, 786438, 8, 0, 786439, 8, 0, 786440, 8, 0, 786441, 8, 0, 786442, 8, 0, 786443, 8, 0, 786444, 8, 0, 786445, 8, 0, 786446, 8, 0, 786447, 8, 0, 851968, 8, 0, 851969, 8, 0, 851970, 8, 0, 851971, 8, 0, 851972, 8, 0, 851973, 8, 0, 851974, 8, 0, 851975, 8, 0, 851976, 8, 0, 851977, 8, 0, 851978, 8, 0, 851979, 8, 0, 851980, 8, 0, 851981, 8, 0, 851982, 8, 0, 851983, 8, 0, 917504, 8, 0, 917505, 8, 0, 917506, 8, 0, 917507, 8, 0, 917508, 8, 0, 917509, 8, 0, 917510, 8, 0, 917511, 8, 0, 917512, 8, 0, 917513, 8, 0, 917514, 8, 0, 917515, 8, 0, 917516, 8, 0, 917517, 8, 0, 917518, 8, 0, 917519, 8, 0, 983040, 8, 0, 983041, 8, 0, 983042, 8, 0, 983043, 8, 0, 983044, 8, 0, 983045, 8, 0, 983046, 8, 0, 983047, 8, 0, 983048, 8, 0, 983049, 8, 0, 983050, 8, 0, 983051, 8, 0, 983052, 8, 0, 983053, 8, 0, 983054, 8, 0, 983055, 8, 0 )
+script = ExtResource( 15 )
 __meta__ = {
-"_edit_group_": true
+"_edit_lock_": true
 }
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="level_collision"]
-position = Vector2( -1, -55 )
-build_mode = 1
-polygon = PoolVector2Array( 580.179, 629.284, -27.9921, 590.681, 0.999695, 566.984, 513.032, 567.016, 513.012, 54.9793, 0.983704, 54.9945, 0.999695, 567, -32.9055, 593.006, -34.8235, 20.8967, 575.321, 11.4158 )
-
 [node name="snake" type="Node2D" parent="."]
-position = Vector2( 112, 145 )
+position = Vector2( 79, 208 )
 z_as_relative = false
 script = ExtResource( 12 )
 
@@ -737,7 +766,6 @@ script = ExtResource( 12 )
 wait_time = 4.0
 
 [node name="head" type="Area2D" parent="snake" groups=["bullet_explode", "eat_food"]]
-position = Vector2( 1, 0 )
 rotation = 3.14159
 z_index = 1
 script = ExtResource( 13 )
@@ -746,16 +774,13 @@ script = ExtResource( 13 )
 position = Vector2( 7, 1.77463e-05 )
 rotation = -3.14159
 shape = SubResource( 4 )
-disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="snake/head"]
 rotation = 1.5708
 shape = SubResource( 3 )
-disabled = true
 
 [node name="CanonHead" type="Sprite" parent="snake/head"]
-position = Vector2( 0, -160 )
-scale = Vector2( 0.7, 0.7 )
+scale = Vector2( 1.1, 1.05 )
 z_index = 3
 texture = ExtResource( 11 )
 hframes = 5
@@ -771,7 +796,6 @@ anims/spawn = SubResource( 8 )
 anims/turn_left = SubResource( 12 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="snake/head"]
-autoplay = "neutral"
 anims/hold_food = SubResource( 9 )
 anims/neutral = SubResource( 11 )
 
@@ -820,44 +844,72 @@ explosiveness = 0.1
 process_material = SubResource( 31 )
 texture = SubResource( 32 )
 
+[node name="Timer" type="Timer" parent="snake/head"]
+wait_time = 4.0
+
 [node name="item_controller" type="Node2D" parent="."]
 script = ExtResource( 5 )
+
+[node name="Timer" type="Timer" parent="item_controller"]
+wait_time = 0.3
 
 [node name="ui" type="HBoxContainer" parent="."]
 anchor_left = 0.649
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -111.0
-margin_right = -8.0
-margin_bottom = 1.0
-custom_constants/separation = 27
+margin_left = -108.0
+margin_top = 1.0
+margin_right = -5.0
+margin_bottom = 2.0
+custom_constants/separation = 14
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="TextureRect" type="TextureRect" parent="ui"]
-margin_right = 35.0
-margin_bottom = 511.0
-rect_min_size = Vector2( 35, 0 )
+margin_right = 30.0
+margin_bottom = 529.0
+rect_min_size = Vector2( 30, 0 )
 size_flags_horizontal = 0
 size_flags_vertical = 3
 texture = ExtResource( 8 )
 expand = true
 
+[node name="Line2D" type="Line2D" parent="ui/TextureRect"]
+position = Vector2( 15.232, 0 )
+scale = Vector2( 0.754098, 1 )
+points = PoolVector2Array( 0, 0, 0, 529 )
+width = 30.0
+script = ExtResource( 21 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Timer" type="Timer" parent="ui/TextureRect/Line2D"]
+
 [node name="VBoxContainer" type="VBoxContainer" parent="ui"]
-margin_left = 62.0
-margin_right = 454.0
-margin_bottom = 511.0
+margin_left = 44.0
+margin_right = 465.0
+margin_bottom = 529.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 9
+custom_constants/separation = -2
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="score_board" type="TextureRect" parent="ui/VBoxContainer"]
 self_modulate = Color( 1, 1, 1, 0 )
-margin_right = 392.0
+margin_right = 421.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
 texture = ExtResource( 8 )
 expand = true
 script = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="score_text" type="Label" parent="ui/VBoxContainer/score_board"]
 margin_top = 1.0
@@ -869,21 +921,26 @@ custom_fonts/font = SubResource( 33 )
 text = "Score:"
 
 [node name="score_number" type="Label" parent="ui/VBoxContainer/score_board"]
-margin_top = 47.8325
-margin_right = 410.0
-margin_bottom = 113.832
+margin_left = -0.204224
+margin_top = 40.0
+margin_right = 409.796
+margin_bottom = 105.999
 custom_fonts/font = SubResource( 34 )
 text = "000000000000"
+valign = 1
 
 [node name="next_level_board" type="TextureRect" parent="ui/VBoxContainer"]
 self_modulate = Color( 1, 1, 1, 0 )
-margin_top = 109.0
-margin_right = 392.0
-margin_bottom = 511.0
+margin_top = 98.0
+margin_right = 421.0
+margin_bottom = 529.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 8 )
 expand = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="score_text" type="Label" parent="ui/VBoxContainer/next_level_board"]
 margin_top = 11.6541
@@ -894,355 +951,22 @@ size_flags_vertical = 3
 custom_fonts/font = SubResource( 35 )
 text = "Next Level:"
 
-[node name="vbox" type="VBoxContainer" parent="ui/VBoxContainer/next_level_board"]
-margin_top = 65.0
-margin_right = 392.0
-margin_bottom = 402.0
-custom_constants/separation = 6
+[node name="TextureProgress" type="TextureProgress" parent="ui/VBoxContainer/next_level_board"]
+margin_top = 58.0
+margin_right = 395.0
+margin_bottom = 81.0
+texture_under = ExtResource( 18 )
+texture_progress = ExtResource( 10 )
+nine_patch_stretch = true
+script = ExtResource( 20 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ui/VBoxContainer/next_level_board/vbox"]
-margin_right = 392.0
-margin_bottom = 64.0
-custom_constants/separation = -19
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 45 )
 
-[node name="TextureRect" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer"]
-margin_right = 64.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect2" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer"]
-margin_left = 45.0
-margin_right = 109.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect3" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer"]
-margin_left = 90.0
-margin_right = 154.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect4" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer"]
-margin_left = 135.0
-margin_right = 199.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect5" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer"]
-margin_left = 180.0
-margin_right = 244.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect6" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer"]
-margin_left = 225.0
-margin_right = 289.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect7" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer"]
-margin_left = 270.0
-margin_right = 334.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect8" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer"]
-margin_left = 315.0
-margin_right = 379.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="ui/VBoxContainer/next_level_board/vbox"]
-margin_top = 70.0
-margin_right = 392.0
-margin_bottom = 134.0
-custom_constants/separation = -19
-
-[node name="TextureRect" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer2"]
-margin_right = 64.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect2" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer2"]
-margin_left = 45.0
-margin_right = 109.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect3" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer2"]
-margin_left = 90.0
-margin_right = 154.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect4" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer2"]
-margin_left = 135.0
-margin_right = 199.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect5" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer2"]
-margin_left = 180.0
-margin_right = 244.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect6" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer2"]
-margin_left = 225.0
-margin_right = 289.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect7" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer2"]
-margin_left = 270.0
-margin_right = 334.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect8" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer2"]
-margin_left = 315.0
-margin_right = 379.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="ui/VBoxContainer/next_level_board/vbox"]
-margin_top = 140.0
-margin_right = 392.0
-margin_bottom = 204.0
-custom_constants/separation = -19
-
-[node name="TextureRect" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer3"]
-margin_right = 64.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect2" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer3"]
-margin_left = 45.0
-margin_right = 109.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect3" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer3"]
-margin_left = 90.0
-margin_right = 154.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect4" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer3"]
-margin_left = 135.0
-margin_right = 199.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect5" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer3"]
-margin_left = 180.0
-margin_right = 244.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect6" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer3"]
-margin_left = 225.0
-margin_right = 289.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect7" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer3"]
-margin_left = 270.0
-margin_right = 334.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect8" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer3"]
-margin_left = 315.0
-margin_right = 379.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="HBoxContainer4" type="HBoxContainer" parent="ui/VBoxContainer/next_level_board/vbox"]
-margin_top = 210.0
-margin_right = 392.0
-margin_bottom = 274.0
-custom_constants/separation = -19
-
-[node name="TextureRect" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer4"]
-margin_right = 64.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect2" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer4"]
-margin_left = 45.0
-margin_right = 109.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect3" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer4"]
-margin_left = 90.0
-margin_right = 154.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect4" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer4"]
-margin_left = 135.0
-margin_right = 199.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect5" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer4"]
-margin_left = 180.0
-margin_right = 244.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect6" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer4"]
-margin_left = 225.0
-margin_right = 289.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect7" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer4"]
-margin_left = 270.0
-margin_right = 334.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect8" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer4"]
-margin_left = 315.0
-margin_right = 379.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="HBoxContainer5" type="HBoxContainer" parent="ui/VBoxContainer/next_level_board/vbox"]
-margin_top = 280.0
-margin_right = 392.0
-margin_bottom = 344.0
-custom_constants/separation = -19
-
-[node name="TextureRect" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer5"]
-margin_right = 64.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect2" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer5"]
-margin_left = 45.0
-margin_right = 109.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect3" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer5"]
-margin_left = 90.0
-margin_right = 154.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect4" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer5"]
-margin_left = 135.0
-margin_right = 199.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect5" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer5"]
-margin_left = 180.0
-margin_right = 244.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect6" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer5"]
-margin_left = 225.0
-margin_right = 289.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect7" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer5"]
-margin_left = 270.0
-margin_right = 334.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[node name="TextureRect8" type="TextureRect" parent="ui/VBoxContainer/next_level_board/vbox/HBoxContainer5"]
-margin_left = 315.0
-margin_right = 379.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-texture = ExtResource( 10 )
-expand = true
-
-[connection signal="area_entered" from="level_collision" to="level_collision" method="_on_level_collision_area_entered"]
+[connection signal="game_start" from="." to="ui/VBoxContainer/next_level_board/TextureProgress" method="_on_level_game_start"]
+[connection signal="food_eaten" from="snake" to="ui/TextureRect/Line2D" method="_on_snake_food_eaten"]
 [connection signal="area_entered" from="snake/head" to="snake/head" method="_on_head_area_entered"]
+[connection signal="timeout" from="snake/head/Timer" to="snake/head" method="_on_Timer_timeout"]
+[connection signal="timeout" from="item_controller/Timer" to="item_controller" method="_on_Timer_timeout"]
+[connection signal="snake_explode" from="ui/TextureRect/Line2D" to="snake/head" method="_on_Line2D_snake_explode"]
+[connection signal="timeout" from="ui/TextureRect/Line2D/Timer" to="ui/TextureRect/Line2D" method="_on_Timer_timeout"]

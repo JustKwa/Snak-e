@@ -1,6 +1,7 @@
 extends Node2D
 
 signal food_eaten
+signal move_snake(snake_direction)
 
 var prev_input = []
 
@@ -11,9 +12,10 @@ onready var item_controller = get_parent().get_node("item_controller")
 
 
 func _ready():
-	prev_input = [Vector2.RIGHT]
+	prev_input = [Vector2.ZERO]
 	head.connect("at_tile", self, "change_dir")
 	item_controller.connect("food_eaten", self, "_on_food_eaten")
+	var _connect_next_level_signal = global_var.connect("next_level", self, "_on_next_level")
 
 
 func _process(_delta):
@@ -25,7 +27,8 @@ func change_dir() -> void:
 		return
 
 	prev_input.pop_front()
-	head.direction = prev_input.front()
+	emit_signal("move_snake", prev_input.front())
+	# head.direction = prev_input.front()
 
 
 func spawn_body() -> void:
@@ -63,3 +66,11 @@ func _check_dir():
 			return Vector2.DOWN
 
 	return prev_input.back()
+
+
+func _on_next_level():
+	# for child in get_children():
+	# 	if child.is_in_group("self_destructable"):
+	# 		child.self_destruct()
+
+	prev_input = [Vector2.ZERO]

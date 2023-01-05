@@ -8,3 +8,4 @@ onready var spawn_location = self.position
 
 func _ready():
 	emit_signal("spawned", spawn_location)
+

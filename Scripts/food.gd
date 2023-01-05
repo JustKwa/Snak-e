@@ -1,21 +1,21 @@
 extends SpawnItem
 
 signal food_eaten
-signal food_explode
+signal food_explode(position)
 
-enum State { IDLE, EXPLODE, EATEN, DELETE}
+enum State { IDLE, EXPLODE, EATEN }
 
 var state = State.IDLE
-var wait_time = 10
 
 onready var global_var = preload("res://global_var.tres")
+onready var level_sheet = preload("res://resources/level_sheet.tres")
 onready var animation_player = $food_area/AnimationPlayer
 onready var collision_shape = $food_area/CollisionShape2D
 
 
 func _ready():
-	# animation_player.play("explode")
-	$Timer.set_wait_time(wait_time)
+	emit_signal("spawned", self.position)
+	$Timer.set_wait_time(level_sheet.get_level().get("bomb_timer"))
 	$Timer.start()
 
 
@@ -26,7 +26,7 @@ func _physics_process(_delta):
 			return
 		State.EXPLODE:
 			_explode()
-			emit_signal("food_explode")
+			emit_signal("food_explode", self.position)
 			state = State.IDLE
 			return
 		State.EATEN:
@@ -49,11 +49,11 @@ func _explode():
 
 func _eaten():
 	global_var.player_score += 1
+	global_var.increase_current_food_has()
 	emit_signal("food_eaten")
 
 
 func _on_Area2D_area_entered(area: Area2D):
-
 	if global_var.game_over:
 		return
 
@@ -68,3 +68,7 @@ func _on_Area2D_area_entered(area: Area2D):
 
 func _on_Timer_timeout():
 	state = State.EXPLODE
+
+
+func self_destruct():
+	_explode()
