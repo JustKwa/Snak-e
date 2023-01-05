@@ -19,5 +19,6 @@ func _input(event):
 
 	if event.pressed:
 		global_var.game_over = false
+		global_var.player_score = 0
 		get_tree().paused = false
 		return get_tree().reload_current_scene()

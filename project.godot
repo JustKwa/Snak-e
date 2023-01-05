@@ -9,20 +9,20 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Reference",
+"base": "Resource",
 "class": "GlobalVar",
 "language": "GDScript",
 "path": "res://Scripts/global_var.gd"
 }, {
-"base": "Reference",
-"class": "GutHookScript",
+"base": "Resource",
+"class": "Level",
 "language": "GDScript",
-"path": "res://addons/gut/hook_script.gd"
+"path": "res://Scripts/level_class.gd"
 }, {
-"base": "Node",
-"class": "GutTest",
+"base": "Resource",
+"class": "LevelSheet",
 "language": "GDScript",
-"path": "res://addons/gut/test.gd"
+"path": "res://Scripts/level_sheet.gd"
 }, {
 "base": "Area2D",
 "class": "SnakeBody",
@@ -36,11 +36,20 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "GlobalVar": "",
-"GutHookScript": "",
-"GutTest": "",
+"Level": "",
+"LevelSheet": "",
 "SnakeBody": "",
 "SpawnItem": ""
 }
+
+[addons]
+
+resources_spreadsheet_view/Color_Rows=true
+resources_spreadsheet_view/Color_Arrays=true
+resources_spreadsheet_view/Array_Min_Width=128.0
+resources_spreadsheet_view/Clip_Headers=false
+resources_spreadsheet_view/Dupe_Arrays=true
+resources_spreadsheet_view/Context_Menu_On_Leftclick=false
 
 [application]
 
@@ -48,18 +57,14 @@ config/name="Snake game"
 run/main_scene="res://Scenes/main_menu.tscn"
 config/icon="res://icon.png"
 
-[autoload]
-
-FpsCounter="*res://Scenes/fps_counter.tscn"
-
 [debug]
 
 settings/fps/force_fps=60
 
 [display]
 
-window/size/width=1120
-window/size/height=630
+window/size/width=1152
+window/size/height=648
 window/size/test_width=1280
 window/size/test_height=720
 window/dpi/allow_hidpi=true
