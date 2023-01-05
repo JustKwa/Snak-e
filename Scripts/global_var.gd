@@ -13,7 +13,8 @@ var player_score: int = 0 setget _set_score
 var high_score: int = 0 setget _set_high_score
 var game_over: bool = false setget _set_game_over
 var food_required_for_next_level: int = 0
-var current_food_has: int = 0 
+var _current_food_has: int = 0
+var is_transitioning: bool = false
 
 
 func _set_score(value):
@@ -24,7 +25,7 @@ func _set_score(value):
 func _set_game_over(value):
 	if !value:
 		return
-	current_food_has = 0
+	_current_food_has = 0
 	player_score = 0
 	emit_signal("game_over")
 
@@ -35,8 +36,14 @@ func _set_high_score(value: int):
 
 
 func increase_current_food_has():
-	current_food_has += 1
-	if current_food_has < food_required_for_next_level:
+	_current_food_has += 1
+	if _current_food_has < food_required_for_next_level:
 		return
-	current_food_has = 0
+
+	_current_food_has = 0
+	is_transitioning = true
+	emit_signal("next_level")
+
+
+func test_signal():
 	emit_signal("next_level")

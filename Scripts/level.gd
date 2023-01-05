@@ -1,5 +1,7 @@
 extends Control
 
+signal game_start
+
 onready var global_var: Resource = preload("res://global_var.tres")
 onready var level_sheet: Resource = preload("res://Resources/level_sheet.tres")
 onready var restart = preload("res://Scenes/restart_popup.tscn")
@@ -26,10 +28,14 @@ func _on_game_over():
 
 func _on_ready():
 	randomize()
-	level_sheet.current_level = 1
+	level_sheet.current_level = 0
 	global_var.food_required_for_next_level = level_sheet.get_level().get("food_required")
+	print(global_var.food_required_for_next_level)
+	emit_signal("game_start")
 
 
 func _on_next_level():
 	level_sheet.current_level += 1
 	global_var.food_required_for_next_level = level_sheet.get_level().get("food_required")
+	get_tree().call_group("self_destructable", "self_destruct")
+	emit_signal("game_start")

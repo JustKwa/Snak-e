@@ -3,10 +3,10 @@ extends SpawnItem
 signal food_eaten
 signal food_explode(position)
 
-enum State { IDLE, EXPLODE, EATEN}
+enum State { IDLE, EXPLODE, EATEN }
 
 var state = State.IDLE
-export var wait_time: int 
+export var wait_time: int
 
 onready var global_var = preload("res://global_var.tres")
 onready var animation_player = $food_area/AnimationPlayer
@@ -54,7 +54,6 @@ func _eaten():
 
 
 func _on_Area2D_area_entered(area: Area2D):
-
 	if global_var.game_over:
 		return
 
@@ -71,5 +70,5 @@ func _on_Timer_timeout():
 	state = State.EXPLODE
 
 
-func explode():
-	_explode()	
+func self_destruct():
+	_explode()

@@ -58,13 +58,12 @@ func _change_dir() -> void:
 
 
 func _on_body_area_entered(area: Area2D) -> void:
-
 	if global_var.game_over:
 		return
 
 	if area.is_in_group("bullet_explode"):
 		state = State.EXPLODE
-		return 
+		return
 
 	if area.is_in_group("bullet_ignore"):
 		return
@@ -79,7 +78,7 @@ func _on_body_area_entered(area: Area2D) -> void:
 func _on_disconnect_check_area_exited(area):
 	var is_head = "head" in area.name
 
-	if is_head: 
+	if is_head:
 		collision_shape.set_deferred("disabled", false)
 		disconnect_check.get_node("CollisionShape2D").set_deferred("disabled", true)
 
@@ -89,3 +88,7 @@ func _explode():
 	collision_shape.set_deferred("disabled", true)
 	yield(animation_player, "animation_finished")
 	queue_free()
+
+
+func self_destruct():
+	_explode()

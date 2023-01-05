@@ -3,7 +3,7 @@ extends Area2D
 
 const GRID_SIZE = GlobalVar.GRID_SIZE
 
-var direction = Vector2.RIGHT
+var direction = Vector2.ZERO
 var percent_to_tile = 0.0
 var state
 

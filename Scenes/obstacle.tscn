@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15.6415, 15.5867 )
 
-[node name="obstacle" type="Area2D" groups=["bullet_ignore"]]
+[node name="obstacle" type="Area2D" groups=["bullet_ignore", "self_destructable"]]
 script = ExtResource( 2 )
 
 [node name="Obstacle" type="Sprite" parent="."]

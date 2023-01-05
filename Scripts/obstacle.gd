@@ -1,5 +1,5 @@
 extends SpawnItem
 
 
-func explode():
-    queue_free()
+func self_destruct():
+	queue_free()

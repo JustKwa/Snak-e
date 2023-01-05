@@ -135,12 +135,12 @@ scale = 2.0
 scale_curve = SubResource( 6 )
 anim_speed = 2.5
 
-[node name="food" type="Node2D"]
+[node name="food" type="Node2D" groups=["self_destructable"]]
 z_index = 1
 script = ExtResource( 2 )
 wait_time = 7
 
-[node name="food_area" type="Area2D" parent="." groups=["bullet_explode"]]
+[node name="food_area" type="Area2D" parent="." groups=["bullet_explode", "head_ignore"]]
 
 [node name="Food" type="Sprite" parent="food_area"]
 texture = ExtResource( 1 )

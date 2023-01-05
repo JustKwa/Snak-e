@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://Sprites/Explosion.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/tileset.png" type="Texture" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://Sprites/grid_stage.png" type="Texture" id=16]
 [ext_resource path="res://Sprites/grid_wall.png" type="Texture" id=17]
 [ext_resource path="res://Sprites/red_button07.png" type="Texture" id=18]
+[ext_resource path="res://scripts/test_button.gd" type="Script" id=19]
 
 [sub_resource type="Shader" id=43]
 
@@ -51,7 +52,6 @@ scale_curve = SubResource( 38 )
 color = Color( 0.662745, 0.741176, 0.866667, 0.764706 )
 
 [sub_resource type="StreamTexture" id=48]
-flags = 4
 load_path = "res://.import/bubble.png-7158fdafbd9a4cab431a459608665d16.stex"
 
 [sub_resource type="CanvasItemMaterial" id=36]
@@ -94,7 +94,6 @@ scale_curve = SubResource( 38 )
 color = Color( 0.662745, 0.741176, 0.866667, 0.764706 )
 
 [sub_resource type="StreamTexture" id=42]
-flags = 4
 load_path = "res://.import/bubble.png-7158fdafbd9a4cab431a459608665d16.stex"
 
 [sub_resource type="TileSet" id=1]
@@ -232,34 +231,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 1, 0.8 ), Vector2( 1, 1.2 ), Vector2( 1, 1 ) ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath("AnimationPlayer")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.3 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "moving", -1, 1.0, false ],
-"method": "play"
-} ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath("AnimationPlayer2")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.3 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "hold_food", -1, 1.0, false ],
-"method": "play"
-} ]
 }
 
 [sub_resource type="Animation" id=23]
@@ -451,64 +422,59 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=8]
 resource_name = "spawn"
-length = 1.2
+length = 0.01
 tracks/0/type = "value"
-tracks/0/path = NodePath("CanonHead:scale")
+tracks/0/path = NodePath("CollisionShape2D2:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 4, 4 ), Vector2( 1, 1 ) ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("CanonHead:position")
+tracks/1/path = NodePath("CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, -160 ), Vector2( 0, 0 ) ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 tracks/2/type = "method"
-tracks/2/path = NodePath(".")
+tracks/2/path = NodePath("AnimationPlayer2")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [ false ],
-"method": "set_physics_process"
-}, {
-"args": [ true ],
-"method": "set_physics_process"
+"args": [ "neutral", -1, 1.0, false ],
+"method": "play"
 } ]
 }
-tracks/3/type = "method"
-tracks/3/path = NodePath("AnimationPlayer")
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 1 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "moving", -1, 1.0, false ],
-"method": "play"
-} ]
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("CollisionShape2D2:disabled")
+tracks/4/path = NodePath(".:rotation_degrees")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -516,20 +482,19 @@ tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
+"update": 0,
+"values": [ 180.0 ]
 }
-tracks/5/type = "value"
-tracks/5/path = NodePath("CollisionShape2D:disabled")
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"values": [  ]
 }
 
 [sub_resource type="Animation" id=12]
@@ -550,7 +515,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=9]
 resource_name = "hold_food"
-length = 2.7
+length = 4.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("CanonHead:modulate")
 tracks/0/interp = 1
@@ -558,43 +523,15 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 2.7 ),
+"times": PoolRealArray( 0, 4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.615686, 0.294118, 0.294118, 1 ) ]
 }
-tracks/1/type = "method"
-tracks/1/path = NodePath("AnimationPlayer2")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 2.7 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "neutral", -1, 1.0, false ],
-"method": "play"
-} ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath("AnimationPlayer")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 2.7 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "eat_shoot", -1, 1.0, false ],
-"method": "play"
-} ]
-}
 
 [sub_resource type="Animation" id=11]
 resource_name = "neutral"
-length = 0.1
+length = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("CanonHead:modulate")
 tracks/0/interp = 1
@@ -756,6 +693,9 @@ margin_top = -253.0
 margin_right = 528.0
 margin_bottom = 275.0
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="background" type="TextureRect" parent="."]
 self_modulate = Color( 0.341176, 0.376471, 0.509804, 1 )
@@ -840,7 +780,7 @@ __meta__ = {
 }
 
 [node name="snake" type="Node2D" parent="."]
-position = Vector2( 78.7958, 208 )
+position = Vector2( 79, 208 )
 z_as_relative = false
 script = ExtResource( 12 )
 
@@ -848,7 +788,6 @@ script = ExtResource( 12 )
 wait_time = 4.0
 
 [node name="head" type="Area2D" parent="snake" groups=["bullet_explode", "eat_food"]]
-position = Vector2( 1, 0 )
 rotation = 3.14159
 z_index = 1
 script = ExtResource( 13 )
@@ -863,8 +802,6 @@ rotation = 1.5708
 shape = SubResource( 3 )
 
 [node name="CanonHead" type="Sprite" parent="snake/head"]
-position = Vector2( 0, -160 )
-scale = Vector2( 4, 4 )
 z_index = 3
 texture = ExtResource( 11 )
 hframes = 5
@@ -880,7 +817,6 @@ anims/spawn = SubResource( 8 )
 anims/turn_left = SubResource( 12 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="snake/head"]
-autoplay = "neutral"
 anims/hold_food = SubResource( 9 )
 anims/neutral = SubResource( 11 )
 
@@ -928,6 +864,9 @@ one_shot = true
 explosiveness = 0.1
 process_material = SubResource( 31 )
 texture = SubResource( 32 )
+
+[node name="Timer" type="Timer" parent="snake/head"]
+wait_time = 4.0
 
 [node name="item_controller" type="Node2D" parent="."]
 script = ExtResource( 5 )
@@ -1033,5 +972,15 @@ nine_patch_stretch = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 45 )
 
+[node name="Button" type="Button" parent="."]
+margin_left = 639.0
+margin_top = 252.0
+margin_right = 854.0
+margin_bottom = 344.0
+text = "Test"
+script = ExtResource( 19 )
+
 [connection signal="area_entered" from="snake/head" to="snake/head" method="_on_head_area_entered"]
+[connection signal="timeout" from="snake/head/Timer" to="snake/head" method="_on_Timer_timeout"]
 [connection signal="timeout" from="item_controller/Timer" to="item_controller" method="_on_Timer_timeout"]
+[connection signal="pressed" from="Button" to="Button" method="_on_Button_pressed"]
