@@ -91,4 +91,4 @@ func _explode():
 
 
 func self_destruct():
-	_explode()
+	state = State.EXPLODE

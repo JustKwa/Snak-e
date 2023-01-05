@@ -22,15 +22,17 @@ func restart_popup():
 
 
 func _on_game_over():
-	global_var.high_score = global_var.player_score
-	_on_ready()
+	print(global_var.player_score)
+	print(global_var.high_score)
+	# global_var.high_score = global_var.player_score
+	restart_popup()
+	# _on_ready()
 
 
 func _on_ready():
 	randomize()
 	level_sheet.current_level = 0
 	global_var.food_required_for_next_level = level_sheet.get_level().get("food_required")
-	print(global_var.food_required_for_next_level)
 	emit_signal("game_start")
 
 

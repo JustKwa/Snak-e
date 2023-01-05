@@ -25,8 +25,8 @@ func _set_score(value):
 func _set_game_over(value):
 	if !value:
 		return
+	high_score = player_score
 	_current_food_has = 0
-	player_score = 0
 	emit_signal("game_over")
 
 

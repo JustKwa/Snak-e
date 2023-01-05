@@ -20,8 +20,6 @@ func _ready():
 
 func _physics_process(delta):
 	match state:
-		# State.IDLE:
-		# 	_idle()
 		State.ROTATE:
 			_rotate(rotation_angle)
 			state = State.MOVE
@@ -109,6 +107,8 @@ func _rotate(value: int):
 
 func _explode():
 	animation_player.play("explode")
+	yield(animation_player, "animation_finished")
+	global_var.game_over = true
 
 
 func _shoot():
@@ -121,7 +121,6 @@ func _on_head_area_entered(area):
 		return
 
 	state = State.EXPLODE
-	global_var.game_over = true
 
 
 func change_state(value):
@@ -139,3 +138,7 @@ func change_state(value):
 func _on_Timer_timeout():
 	state = State.SHOOT
 	timer.stop()
+
+
+func _on_Line2D_snake_explode():
+	state = State.EXPLODE

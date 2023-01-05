@@ -6,16 +6,16 @@ signal food_explode(position)
 enum State { IDLE, EXPLODE, EATEN }
 
 var state = State.IDLE
-export var wait_time: int
 
 onready var global_var = preload("res://global_var.tres")
+onready var level_sheet = preload("res://resources/level_sheet.tres")
 onready var animation_player = $food_area/AnimationPlayer
 onready var collision_shape = $food_area/CollisionShape2D
 
 
 func _ready():
 	emit_signal("spawned", self.position)
-	$Timer.set_wait_time(wait_time)
+	$Timer.set_wait_time(level_sheet.get_level().get("bomb_timer"))
 	$Timer.start()
 
 
