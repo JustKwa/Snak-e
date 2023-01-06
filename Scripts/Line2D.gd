@@ -31,13 +31,14 @@ func _on_Timer_timeout():
 
 	if points[0].y < (529/3) * 2:
 		return
-
+	
 	emit_signal("shoot_time")
 	shoot_mode = true
 
 	if !points[0].y == 529:
 		return
-
+	
+	$Timer.stop()
 	emit_signal("snake_explode")
 
 
@@ -48,7 +49,8 @@ func _on_next_level():
 
 func _on_snake_food_eaten():
 	if !$Timer.is_stopped():
-		wait_time -= 0.01
+		wait_time -= 0.03
+		wait_time = clamp(wait_time, 0.01, 0.2)
 		$Timer.set_wait_time(wait_time)
 		return
 
@@ -73,3 +75,4 @@ func _reset():
 	_count = 0
 	points[0].y = 0
 	wait_time = 0.1
+	$Timer.set_wait_time(wait_time)

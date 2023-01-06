@@ -1,0 +1,133 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Sprites/background.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/bubble.png" type="Texture" id=2]
+
+[sub_resource type="Curve" id=37]
+_data = [ Vector2( 0, 0.998864 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.798864 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=38]
+curve = SubResource( 37 )
+
+[sub_resource type="ParticlesMaterial" id=47]
+emission_shape = 2
+emission_box_extents = Vector3( 500, 1, 1 )
+flag_disable_z = true
+direction = Vector3( -1, 0, 0 )
+gravity = Vector3( 0, -3, 0 )
+initial_velocity = 10.0
+initial_velocity_random = 0.45
+angular_velocity = 3.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 25.5
+angle_random = 0.56
+scale = 2.4
+scale_random = 0.5
+scale_curve = SubResource( 38 )
+color = Color( 0.662745, 0.741176, 0.866667, 0.764706 )
+
+[sub_resource type="StreamTexture" id=48]
+flags = 4
+load_path = "res://.import/bubble.png-7158fdafbd9a4cab431a459608665d16.stex"
+
+[sub_resource type="CanvasItemMaterial" id=36]
+
+[sub_resource type="ParticlesMaterial" id=39]
+emission_shape = 2
+emission_box_extents = Vector3( 500, 1, 1 )
+flag_disable_z = true
+direction = Vector3( -1, 0, 0 )
+gravity = Vector3( 0, -3, 0 )
+initial_velocity = 10.0
+initial_velocity_random = 0.45
+angular_velocity = 3.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 25.5
+angle_random = 0.56
+scale = 2.4
+scale_random = 0.5
+scale_curve = SubResource( 38 )
+color = Color( 0.662745, 0.741176, 0.866667, 0.764706 )
+
+[sub_resource type="CanvasItemMaterial" id=40]
+
+[sub_resource type="ParticlesMaterial" id=41]
+emission_shape = 2
+emission_box_extents = Vector3( 500, 1, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, -3, 0 )
+initial_velocity = 10.0
+initial_velocity_random = 0.45
+angular_velocity = 3.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 25.5
+angle_random = 0.56
+scale = 2.4
+scale_random = 0.5
+scale_curve = SubResource( 38 )
+color = Color( 0.662745, 0.741176, 0.866667, 0.764706 )
+
+[sub_resource type="StreamTexture" id=42]
+flags = 4
+load_path = "res://.import/bubble.png-7158fdafbd9a4cab431a459608665d16.stex"
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = -1
+
+[node name="background" type="TextureRect" parent="."]
+self_modulate = Color( 0.262745, 0.301961, 0.380392, 1 )
+margin_left = -100.0
+margin_top = -69.0
+margin_right = 254.0
+margin_bottom = 282.0
+rect_scale = Vector2( 3.59776, 2.16592 )
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="bubble_2" type="Particles2D" parent="background"]
+pause_mode = 2
+position = Vector2( 86.4427, 338.424 )
+scale = Vector2( 0.277951, 0.461698 )
+amount = 15
+lifetime = 20.0
+speed_scale = 0.7
+process_material = SubResource( 47 )
+texture = SubResource( 48 )
+
+[node name="bubble_1" type="Particles2D" parent="background"]
+pause_mode = 2
+material = SubResource( 36 )
+position = Vector2( 294.628, 340.271 )
+scale = Vector2( 0.277951, 0.461698 )
+amount = 15
+lifetime = 20.0
+speed_scale = 0.7
+process_material = SubResource( 39 )
+texture = ExtResource( 2 )
+
+[node name="bubble" type="Particles2D" parent="background"]
+pause_mode = 2
+material = SubResource( 40 )
+position = Vector2( 187.895, 339.809 )
+scale = Vector2( 0.277951, 0.461698 )
+amount = 15
+lifetime = 19.97
+speed_scale = 0.6
+process_material = SubResource( 41 )
+texture = SubResource( 42 )
+
+[node name="dimmed_background2" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1722.0
+margin_top = 1022.0
+margin_right = 800.0
+margin_bottom = 611.0
+rect_scale = Vector2( -11.5333, -6.49791 )
+color = Color( 0, 0, 0, 0.0980392 )

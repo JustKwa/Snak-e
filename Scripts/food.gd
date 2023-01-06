@@ -39,6 +39,12 @@ func _queue_free():
 
 
 func _idle():
+	if $Timer.time_left == 0:
+		return
+	if $Timer.time_left > 2:
+		return
+	animation_player.play("about_to_explode")
+
 	return
 
 
@@ -48,7 +54,7 @@ func _explode():
 
 
 func _eaten():
-	global_var.player_score += 1
+	global_var.increase_score()
 	global_var.increase_current_food_has()
 	emit_signal("food_eaten")
 

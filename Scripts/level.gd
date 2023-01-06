@@ -11,8 +11,9 @@ onready var snake_controller = $snake
 
 func _ready():
 	_on_ready()
-	var _connect_next_level = global_var.connect("next_level", self, "_on_next_level")
-	var _connect_game_over = global_var.connect("game_over", self, "_on_game_over")
+	global_var.connect("next_level", self, "_on_next_level")
+	global_var.connect("game_over", self, "_on_game_over")
+	global_var.connect("high_score", self, "_on_high_score")
 
 
 func restart_popup():
@@ -22,13 +23,13 @@ func restart_popup():
 
 
 func _on_game_over():
-	# global_var.high_score = global_var.player_score
 	restart_popup()
-	# _on_ready()
+	_save()
 
 
 func _on_ready():
 	randomize()
+	global_var.high_score = _load().high_score
 	level_sheet.current_level = 0
 	global_var.food_required_for_next_level = level_sheet.get_level().get("food_required")
 	emit_signal("game_start")
@@ -47,3 +48,18 @@ func _on_head_is_shoot():
 
 func _on_shoot_function_shoot_turn(_snake_direction):
 	get_tree().paused = false
+
+
+func _save():
+	var save = ResourceSaver.save("user://save.tres", global_var)
+	assert(save == OK)
+
+
+func _load():
+	if ResourceLoader.exists("user://save.tres"):
+		var global_var_load = ResourceLoader.load("user://save.tres")
+		return global_var_load
+
+
+func _on_high_score():
+	_save()

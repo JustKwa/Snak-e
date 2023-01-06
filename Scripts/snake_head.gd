@@ -23,6 +23,8 @@ func _ready():
 
 func _physics_process(delta):
 	match state:
+		State.IDLE:
+			return
 		State.ROTATE:
 			_rotate(rotation_angle)
 			state = State.MOVE
@@ -39,11 +41,13 @@ func _physics_process(delta):
 			state = State.MOVE
 		State.EXPLODE:
 			_explode()
+			state = State.IDLE
+
 
 
 func on_food_eaten() -> void:
 	animation_player.play("eat_hold")
-
+	$eat.play()
 	if global_var.is_transitioning:
 		animation_player2.play("neutral")
 
@@ -98,6 +102,7 @@ func _rotate(value: int):
 
 func _explode():
 	animation_player.play("explode")
+	$explode.play()
 	yield(animation_player, "animation_finished")
 	global_var.game_over = true
 
@@ -130,10 +135,10 @@ func _on_shoot_function_shoot_turn(snake_direction):
 	is_in_tile = false
 	is_about_to_shoot = false
 	state = State.MOVE
+	animation_player.play("eat_shoot")
+	$shoot.play()
 
 
 func _on_Line2D_shoot():
 	is_about_to_shoot = true
 	emit_signal("is_shoot")
-	animation_player.play("eat_hold")
-	# state = State.SHOOT

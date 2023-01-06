@@ -14,6 +14,8 @@ func _on_score_gained():
 
 
 func _on_next_level():
+	$AnimationPlayer.play("level_up")
+	$lv_up.play()
 	self.value = 0
 	self.max_value = global_var.food_required_for_next_level
 

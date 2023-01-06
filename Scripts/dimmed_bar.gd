@@ -1,20 +1,23 @@
 extends ColorRect
 
+signal visible(value)
+
 onready var global_var = preload("res://global_var.tres")
 
+
 func _ready():
-	visible = true
 	global_var.connect("next_level", self, "_on_next_level")
-	pass # Replace with function body.
 
 
 func _on_Line2D_shoot_time():
-	visible = false
+	$AnimationPlayer.play("alert_on")
+	emit_signal("visible",false)
 
 
 func _on_next_level():
-	visible = true
-
+	$AnimationPlayer.play("alert_off")
+	emit_signal("visible",true)
 
 func _on_Line2D_shoot():
-	visible = true
+	$AnimationPlayer.play("alert_off")
+	emit_signal("visible",true)

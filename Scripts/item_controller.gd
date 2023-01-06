@@ -17,7 +17,6 @@ onready var timer = $Timer
 
 func _ready():
 	grid_cells = grid.get_used_cells()
-	# global_var.connect("next_level", self, "_on_next_level")
 	grid.connect("cells_available", self, "_on_cells_available")
 	level.connect("game_start", self, "_on_game_start")
 
@@ -28,11 +27,8 @@ func _on_cells_available(available_cells):
 
 func _on_spawn_obstacle(position):
 	var instance = obstacle.instance()
-	# var rand_index = randi() % grid_cells.size()
-	# instance.position = grid.map_to_world(grid_cells[rand_index]) + Vector2(16, 16)
 	instance.position = position
 	instance.connect("spawned", self, "_on_spawned")
-	# instance.connect("despawned", self, "_on_despawned")
 	call_deferred("add_child", instance)
 
 

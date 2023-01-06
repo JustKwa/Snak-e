@@ -1,15 +1,15 @@
-[gd_scene load_steps=74 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://Sprites/Explosion.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/tileset.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/level.gd" type="Script" id=3]
 [ext_resource path="res://PeaberryMono.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Scripts/item_controller.gd" type="Script" id=5]
-[ext_resource path="res://Sprites/bubble.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/bg.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Sprites/grid-tile.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/background.png" type="Texture" id=8]
 [ext_resource path="res://Scripts/score_board.gd" type="Script" id=9]
-[ext_resource path="res://Sprites/green_button12.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/under_texture.png" type="Texture" id=10]
 [ext_resource path="res://Sprites/snake_head-sheet.png" type="Texture" id=11]
 [ext_resource path="res://Scripts/snake_controller.gd" type="Script" id=12]
 [ext_resource path="res://Scripts/snake_head.gd" type="Script" id=13]
@@ -17,7 +17,7 @@
 [ext_resource path="res://scripts/grid.gd" type="Script" id=15]
 [ext_resource path="res://Sprites/grid_stage.png" type="Texture" id=16]
 [ext_resource path="res://Sprites/grid_wall.png" type="Texture" id=17]
-[ext_resource path="res://Sprites/red_button07.png" type="Texture" id=18]
+[ext_resource path="res://Sprites/texture_progress.png" type="Texture" id=18]
 [ext_resource path="res://Scenes/blinking_arrow.tscn" type="PackedScene" id=19]
 [ext_resource path="res://scripts/TextureProgress.gd" type="Script" id=20]
 [ext_resource path="res://scripts/Line2D.gd" type="Script" id=21]
@@ -27,84 +27,20 @@
 [ext_resource path="res://scripts/dimmed_bar.gd" type="Script" id=25]
 [ext_resource path="res://Scenes/press_space_prompt.tscn" type="PackedScene" id=26]
 [ext_resource path="res://scripts/press_space_prompt.gd" type="Script" id=27]
+[ext_resource path="res://sounds/eat.wav" type="AudioStream" id=28]
+[ext_resource path="res://sounds/shoot.wav" type="AudioStream" id=29]
+[ext_resource path="res://sounds/lv_up2.wav" type="AudioStream" id=30]
+[ext_resource path="res://Scripts/dimmed_bar2.gd" type="Script" id=31]
+[ext_resource path="res://scripts/score_multiplier.gd" type="Script" id=32]
+[ext_resource path="res://Sprites/score_multiplier.png" type="Texture" id=33]
+[ext_resource path="res://sounds/alert.wav" type="AudioStream" id=34]
+[ext_resource path="res://Sprites/shadow.png" type="Texture" id=35]
+[ext_resource path="res://sounds/player_explode.wav" type="AudioStream" id=36]
 
 [sub_resource type="Shader" id=43]
 
 [sub_resource type="ShaderMaterial" id=44]
 shader = SubResource( 43 )
-
-[sub_resource type="CanvasItemMaterial" id=46]
-
-[sub_resource type="Curve" id=37]
-_data = [ Vector2( 0, 0.998864 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.798864 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=38]
-curve = SubResource( 37 )
-
-[sub_resource type="ParticlesMaterial" id=47]
-emission_shape = 2
-emission_box_extents = Vector3( 500, 1, 1 )
-flag_disable_z = true
-direction = Vector3( -1, 0, 0 )
-gravity = Vector3( 0, -3, 0 )
-initial_velocity = 10.0
-initial_velocity_random = 0.45
-angular_velocity = 3.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-angle = 25.5
-angle_random = 0.56
-scale = 2.4
-scale_random = 0.5
-scale_curve = SubResource( 38 )
-color = Color( 0.662745, 0.741176, 0.866667, 0.764706 )
-
-[sub_resource type="StreamTexture" id=48]
-flags = 4
-load_path = "res://.import/bubble.png-7158fdafbd9a4cab431a459608665d16.stex"
-
-[sub_resource type="CanvasItemMaterial" id=36]
-
-[sub_resource type="ParticlesMaterial" id=39]
-emission_shape = 2
-emission_box_extents = Vector3( 500, 1, 1 )
-flag_disable_z = true
-direction = Vector3( -1, 0, 0 )
-gravity = Vector3( 0, -3, 0 )
-initial_velocity = 10.0
-initial_velocity_random = 0.45
-angular_velocity = 3.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-angle = 25.5
-angle_random = 0.56
-scale = 2.4
-scale_random = 0.5
-scale_curve = SubResource( 38 )
-color = Color( 0.662745, 0.741176, 0.866667, 0.764706 )
-
-[sub_resource type="CanvasItemMaterial" id=40]
-
-[sub_resource type="ParticlesMaterial" id=41]
-emission_shape = 2
-emission_box_extents = Vector3( 500, 1, 1 )
-flag_disable_z = true
-gravity = Vector3( 0, -3, 0 )
-initial_velocity = 10.0
-initial_velocity_random = 0.45
-angular_velocity = 3.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-angle = 25.5
-angle_random = 0.56
-scale = 2.4
-scale_random = 0.5
-scale_curve = SubResource( 38 )
-color = Color( 0.662745, 0.741176, 0.866667, 0.764706 )
-
-[sub_resource type="StreamTexture" id=42]
-flags = 4
-load_path = "res://.import/bubble.png-7158fdafbd9a4cab431a459608665d16.stex"
 
 [sub_resource type="TileSet" id=1]
 1/name = "tileset.png 1"
@@ -243,12 +179,26 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1, 0.8 ), Vector2( 1, 1.2 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 1.2, 1.2 ), Vector2( 1.2, 0.7 ), Vector2( 1, 1.5 ), Vector2( 1.2, 1.2 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("AnimationPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "moving", -1, 1.0, false ],
+"method": "play"
+} ]
 }
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=55]
 resource_name = "eat_shoot"
-length = 0.6
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("CanonHead:scale")
 tracks/0/interp = 1
@@ -259,10 +209,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1, 0.8 ), Vector2( 1, 1.2 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 1.2, 1.2 ), Vector2( 1.2, 0.7 ), Vector2( 1, 1.5 ), Vector2( 1.2, 1.2 ) ]
 }
-tracks/1/type = "method"
-tracks/1/path = NodePath("..")
+tracks/1/type = "value"
+tracks/1/path = NodePath("Particles2D3:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -270,48 +220,34 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "spawn_body"
-} ]
+"update": 1,
+"values": [ true ]
 }
-tracks/2/type = "method"
-tracks/2/path = NodePath("AnimationPlayer")
+tracks/2/type = "value"
+tracks/2/path = NodePath("Particles2D4:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("AnimationPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0.3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ "moving", -1, 1.0, false ],
 "method": "play"
 } ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Particles2D3:emitting")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0.15 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Particles2D4:emitting")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0.15 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
 }
 
 [sub_resource type="Animation" id=14]
@@ -395,28 +331,28 @@ resource_name = "moving"
 length = 1.5
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("CanonHead:scale")
+tracks/0/path = NodePath("CanonHead:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.7, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1.2, 1.2 ), Vector2( 1, 1 ), Vector2( 1.2, 1.2 ), Vector2( 1, 1 ) ]
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 1, 0, 1, 2, 3, 4, 3 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("CanonHead:frame")
+tracks/1/path = NodePath("CanonHead:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 2, 1, 0, 1, 2, 3, 4, 3 ]
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.2, 1.2 ), Vector2( 1.4, 1.4 ) ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -484,21 +420,19 @@ tracks/4/keys = {
 "update": 0,
 "values": [ 180.0 ]
 }
-
-[sub_resource type="Animation" id=12]
-resource_name = "turn_left"
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("CanonHead:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ -90.0, -180.0 ]
+tracks/5/type = "method"
+tracks/5/path = NodePath("AnimationPlayer")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "moving", -1, 1.0, false ],
+"method": "play"
+} ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -641,6 +575,67 @@ anim_speed = 1.0
 [sub_resource type="StreamTexture" id=32]
 load_path = "res://.import/smoke.png-94c1cbd5e9b6a8e9b1b0154fe103c363.stex"
 
+[sub_resource type="Animation" id=54]
+resource_name = "alert_off"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.576471 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "stop"
+} ]
+}
+
+[sub_resource type="Animation" id=53]
+resource_name = "alert_on"
+length = 1.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.576471 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+
 [sub_resource type="DynamicFont" id=33]
 size = 30
 outline_size = 1
@@ -653,10 +648,106 @@ outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
+[sub_resource type="Animation" id=51]
+resource_name = "level_up"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.2 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 58 ), Vector2( -10, 58 ), Vector2( 0, 58 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+
 [sub_resource type="DynamicFont" id=35]
 size = 30
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=52]
+resource_name = "idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.90093, 1.90093 ), Vector2( 2, 2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Label:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.0656, 1.0656 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Sprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -3.0, 3.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Label:rect_rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 5.6, 8.6 ]
+}
+
+[sub_resource type="DynamicFont" id=50]
+size = 30
 font_data = ExtResource( 4 )
 
 [sub_resource type="Environment" id=45]
@@ -685,48 +776,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="background" type="TextureRect" parent="."]
-self_modulate = Color( 0.341176, 0.376471, 0.509804, 1 )
-margin_left = -156.0
-margin_top = -131.0
-margin_right = 198.0
-margin_bottom = 220.0
-rect_scale = Vector2( 3.59776, 2.16592 )
-texture = ExtResource( 8 )
-expand = true
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="bubble_2" type="Particles2D" parent="."]
-pause_mode = 2
-material = SubResource( 46 )
-position = Vector2( 155, 602 )
-amount = 15
-lifetime = 20.0
-speed_scale = 0.7
-process_material = SubResource( 47 )
-texture = SubResource( 48 )
-
-[node name="bubble_1" type="Particles2D" parent="."]
-pause_mode = 2
-material = SubResource( 36 )
-position = Vector2( 904, 606 )
-amount = 15
-lifetime = 20.0
-speed_scale = 0.7
-process_material = SubResource( 39 )
-texture = ExtResource( 6 )
-
-[node name="bubble" type="Particles2D" parent="."]
-pause_mode = 2
-material = SubResource( 40 )
-position = Vector2( 520, 605 )
-amount = 15
-lifetime = 19.97
-speed_scale = 0.6
-process_material = SubResource( 41 )
-texture = SubResource( 42 )
+[node name="CanvasLayer" parent="." instance=ExtResource( 6 )]
 
 [node name="stage" type="TextureRect" parent="."]
 margin_right = 512.0
@@ -771,6 +821,7 @@ __meta__ = {
 }
 
 [node name="dimmed_background" type="ColorRect" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1118.0
@@ -789,9 +840,10 @@ script = ExtResource( 12 )
 [node name="Timer" type="Timer" parent="snake"]
 wait_time = 4.0
 
-[node name="head" type="Area2D" parent="snake" groups=["bullet_explode", "eat_food"]]
+[node name="head" type="Area2D" parent="snake" groups=["eat_food"]]
 pause_mode = 2
 rotation = 3.14159
+scale = Vector2( 0.9, 0.9 )
 z_index = 1
 script = ExtResource( 13 )
 
@@ -827,26 +879,34 @@ z_index = 1
 position = Vector2( 7, 1.77463e-05 )
 rotation = -3.14159
 shape = SubResource( 4 )
+disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="snake/head"]
 rotation = 1.5708
 shape = SubResource( 3 )
+disabled = true
 
 [node name="CanonHead" type="Sprite" parent="snake/head"]
-scale = Vector2( 1.1, 1.05 )
+scale = Vector2( 0.7, 0.7 )
 z_index = 3
 texture = ExtResource( 11 )
 hframes = 5
-frame = 2
+frame = 3
+
+[node name="Sprite" type="Sprite" parent="snake/head/CanonHead"]
+self_modulate = Color( 0.509804, 0.513726, 0.537255, 0.560784 )
+show_behind_parent = true
+position = Vector2( 0.464042, -0.154646 )
+scale = Vector2( 1.24167, 1.04834 )
+texture = ExtResource( 35 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="snake/head"]
 autoplay = "spawn"
 anims/eat_hold = SubResource( 10 )
-anims/eat_shoot = SubResource( 23 )
+anims/eat_shoot = SubResource( 55 )
 anims/explode = SubResource( 14 )
 anims/moving = SubResource( 6 )
 anims/spawn = SubResource( 8 )
-anims/turn_left = SubResource( 12 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="snake/head"]
 anims/hold_food = SubResource( 9 )
@@ -900,6 +960,17 @@ texture = SubResource( 32 )
 [node name="Timer" type="Timer" parent="snake/head"]
 wait_time = 4.0
 
+[node name="eat" type="AudioStreamPlayer" parent="snake/head"]
+stream = ExtResource( 28 )
+volume_db = -8.0
+
+[node name="shoot" type="AudioStreamPlayer" parent="snake/head"]
+stream = ExtResource( 29 )
+volume_db = -6.0
+
+[node name="explode" type="AudioStreamPlayer" parent="snake/head"]
+stream = ExtResource( 36 )
+
 [node name="item_controller" type="Node2D" parent="."]
 script = ExtResource( 5 )
 
@@ -914,6 +985,10 @@ margin_left = -108.0
 margin_top = -1.0
 margin_right = -5.0
 custom_constants/separation = 14
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="TextureRect" type="ColorRect" parent="ui"]
 margin_right = 30.0
@@ -958,6 +1033,20 @@ points = PoolVector2Array( 68, 310, 83.7846, 310, 100, 310 )
 width = 5.0
 default_color = Color( 0.996078, 1, 0.917647, 1 )
 
+[node name="dimmed_bar2" type="ColorRect" parent="ui/TextureRect"]
+self_modulate = Color( 1, 1, 1, 0.576471 )
+anchor_left = -0.059
+anchor_top = 0.665
+anchor_right = 1.108
+anchor_bottom = 1.004
+margin_left = 1.77
+margin_top = -355.775
+margin_right = -3.24
+margin_bottom = -181.14
+rect_pivot_offset = Vector2( -653, -133 )
+color = Color( 0, 0, 0, 1 )
+script = ExtResource( 31 )
+
 [node name="dimmed_bar" type="ColorRect" parent="ui/TextureRect"]
 self_modulate = Color( 1, 1, 1, 0.576471 )
 anchor_left = -0.059
@@ -968,10 +1057,20 @@ margin_left = 0.00199568
 margin_top = 0.224976
 margin_right = -0.00800705
 margin_bottom = -0.140015
+rect_pivot_offset = Vector2( -653, -133 )
 color = Color( 0, 0, 0, 1 )
 script = ExtResource( 25 )
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ui/TextureRect/dimmed_bar"]
+autoplay = "alert_off"
+anims/alert_off = SubResource( 54 )
+anims/alert_on = SubResource( 53 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ui/TextureRect/dimmed_bar"]
+stream = ExtResource( 34 )
+
 [node name="Sprite" parent="ui/TextureRect" instance=ExtResource( 26 )]
+visible = false
 position = Vector2( -79.768, 316 )
 scale = Vector2( 2, 2 )
 script = ExtResource( 27 )
@@ -1015,7 +1114,7 @@ margin_top = 40.0
 margin_right = 409.796
 margin_bottom = 105.999
 custom_fonts/font = SubResource( 34 )
-text = "000000000000"
+text = "0000000000"
 valign = 1
 
 [node name="next_level_board" type="TextureRect" parent="ui/VBoxContainer"]
@@ -1031,23 +1130,69 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="TextureProgress" type="TextureProgress" parent="ui/VBoxContainer/next_level_board"]
+margin_top = 58.0
+margin_right = 395.0
+margin_bottom = 81.0
+texture_under = ExtResource( 10 )
+texture_progress = ExtResource( 18 )
+nine_patch_stretch = true
+script = ExtResource( 20 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ui/VBoxContainer/next_level_board/TextureProgress"]
+anims/level_up = SubResource( 51 )
+
+[node name="Line2D" type="Line2D" parent="ui/VBoxContainer/next_level_board/TextureProgress"]
+position = Vector2( 1.23199, 0 )
+points = PoolVector2Array( 0.231995, 0, 0.231995, 23 )
+width = 4.0
+default_color = Color( 0.996078, 1, 0.917647, 1 )
+
+[node name="Line2D2" type="Line2D" parent="ui/VBoxContainer/next_level_board/TextureProgress"]
+position = Vector2( 395.232, 0 )
+points = PoolVector2Array( 0.231995, 0, 0.231995, 23 )
+width = 4.0
+default_color = Color( 0.996078, 1, 0.917647, 1 )
+
+[node name="lv_up" type="AudioStreamPlayer" parent="ui/VBoxContainer/next_level_board/TextureProgress"]
+stream = ExtResource( 30 )
+volume_db = -5.0
+
 [node name="score_text" type="Label" parent="ui/VBoxContainer/next_level_board"]
 margin_top = 11.6541
-margin_right = 70.0
-margin_bottom = 27.6541
+margin_right = 209.0
+margin_bottom = 42.6541
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 35 )
 text = "Next Level:"
 
-[node name="TextureProgress" type="TextureProgress" parent="ui/VBoxContainer/next_level_board"]
-margin_top = 58.0
-margin_right = 395.0
-margin_bottom = 81.0
-texture_under = ExtResource( 18 )
-texture_progress = ExtResource( 10 )
-nine_patch_stretch = true
-script = ExtResource( 20 )
+[node name="Sprite" type="Sprite" parent="ui/VBoxContainer/next_level_board"]
+position = Vector2( 364.232, -84 )
+rotation = -0.0210303
+scale = Vector2( 1.93057, 1.93057 )
+texture = ExtResource( 33 )
+script = ExtResource( 32 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ui/VBoxContainer/next_level_board/Sprite"]
+root_node = NodePath("../../TextureProgress")
+autoplay = "idle"
+anims/idle = SubResource( 52 )
+
+[node name="Label" type="Label" parent="ui/VBoxContainer/next_level_board"]
+self_modulate = Color( 0.168627, 0.2, 0.333333, 1 )
+margin_left = 349.232
+margin_top = -104.0
+margin_right = 389.328
+margin_bottom = -38.9045
+rect_rotation = 6.67703
+rect_scale = Vector2( 1.02355, 1.02355 )
+custom_fonts/font = SubResource( 50 )
+text = "x1
+"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 45 )
@@ -1076,4 +1221,5 @@ script = ExtResource( 23 )
 [connection signal="shoot_time" from="ui/TextureRect/Line2D" to="ui/TextureRect/Sprite" method="_on_Line2D_shoot_time"]
 [connection signal="snake_explode" from="ui/TextureRect/Line2D" to="snake/head" method="_on_Line2D_snake_explode"]
 [connection signal="timeout" from="ui/TextureRect/Line2D/Timer" to="ui/TextureRect/Line2D" method="_on_Timer_timeout"]
+[connection signal="visible" from="ui/TextureRect/dimmed_bar" to="ui/TextureRect/dimmed_bar2" method="_on_dimmed_bar_visible"]
 [connection signal="move_snake" from="direction_checker" to="snake/head" method="_on_direction_checker_move_snake"]
