@@ -37,7 +37,7 @@ func _bounce() -> void:
 
 
 func _move(delta):
-	var speed_modifier = level_sheet.get_level().get("speed_modifier")
+	var speed_modifier = level_sheet.get_speed_modifier(global_var.lv())
 
 	percent_to_tile += (global_var.speed * speed_modifier) * delta
 

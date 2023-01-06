@@ -33,7 +33,7 @@
 [ext_resource path="res://Scripts/dimmed_bar2.gd" type="Script" id=31]
 [ext_resource path="res://scripts/score_multiplier.gd" type="Script" id=32]
 [ext_resource path="res://Sprites/score_multiplier.png" type="Texture" id=33]
-[ext_resource path="res://sounds/alert.wav" type="AudioStream" id=34]
+[ext_resource path="res://sounds/alert2.wav" type="AudioStream" id=34]
 [ext_resource path="res://Sprites/shadow.png" type="Texture" id=35]
 [ext_resource path="res://sounds/player_explode.wav" type="AudioStream" id=36]
 
@@ -607,7 +607,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=53]
 resource_name = "alert_on"
-length = 1.4
+length = 0.8
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:self_modulate")
@@ -616,7 +616,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.7 ),
+"times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0.576471 ), Color( 1, 1, 1, 0 ) ]
@@ -628,7 +628,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.5 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ 0.0 ],
@@ -1000,7 +1000,7 @@ color = Color( 0.996078, 1, 0.917647, 1 )
 
 [node name="ColorRect2" type="ColorRect" parent="ui/TextureRect"]
 margin_left = -2.0
-margin_top = 356.0
+margin_top = 306.0
 margin_right = 33.0
 margin_bottom = 537.0
 color = Color( 0.996078, 1, 0.917647, 1 )
@@ -1027,7 +1027,7 @@ __meta__ = {
 pause_mode = 1
 
 [node name="Line2D2" type="Line2D" parent="ui/TextureRect"]
-position = Vector2( -59.768, 49 )
+position = Vector2( -59.768, -2 )
 scale = Vector2( 0.893616, 1 )
 points = PoolVector2Array( 68, 310, 83.7846, 310, 100, 310 )
 width = 5.0
@@ -1042,7 +1042,7 @@ anchor_bottom = 1.004
 margin_left = 1.77
 margin_top = -355.775
 margin_right = -3.24
-margin_bottom = -181.14
+margin_bottom = -231.14
 rect_pivot_offset = Vector2( -653, -133 )
 color = Color( 0, 0, 0, 1 )
 script = ExtResource( 31 )
@@ -1053,10 +1053,10 @@ anchor_left = -0.059
 anchor_top = 0.665
 anchor_right = 1.108
 anchor_bottom = 1.004
-margin_left = 0.00199568
-margin_top = 0.224976
-margin_right = -0.00800705
-margin_bottom = -0.140015
+margin_left = -0.23
+margin_top = -49.775
+margin_right = -0.240002
+margin_bottom = -0.139954
 rect_pivot_offset = Vector2( -653, -133 )
 color = Color( 0, 0, 0, 1 )
 script = ExtResource( 25 )
@@ -1068,11 +1068,11 @@ anims/alert_on = SubResource( 53 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ui/TextureRect/dimmed_bar"]
 stream = ExtResource( 34 )
+volume_db = -5.897
 
 [node name="Sprite" parent="ui/TextureRect" instance=ExtResource( 26 )]
-visible = false
-position = Vector2( -79.768, 316 )
-scale = Vector2( 2, 2 )
+position = Vector2( -211.768, 244 )
+scale = Vector2( 2.56299, 2.56299 )
 script = ExtResource( 27 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ui"]

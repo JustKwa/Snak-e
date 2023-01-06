@@ -65,9 +65,12 @@ func _on_explode(position):
 
 
 func _on_game_start():
-	var food_amount = level_sheet.get_level().get("food_amount")
+	var food_amount = level_sheet.get_food_amount(global_var.lv())
 
 	for _i in range(food_amount):
+		if get_tree().get_nodes_in_group("food_item").size() == food_amount:
+			return
+
 		var temp_timer = Timer.new()
 		self.add_child(temp_timer)
 		temp_timer.set_wait_time(2)
@@ -77,7 +80,5 @@ func _on_game_start():
 
 		_on_spawn_food()
 
-		if !global_var.is_transitioning:
-			return
-
-		global_var.is_transitioning = false
+		if global_var.is_transitioning:
+			global_var.is_transitioning = false

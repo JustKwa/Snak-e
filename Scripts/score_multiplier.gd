@@ -2,7 +2,6 @@ extends Sprite
 
 var multiplier = 1  
 
-onready var level_sheet = preload("res://resources/level_sheet.tres")
 onready var global_var = preload("res://global_var.tres")
 onready var label = get_parent().get_node("Label")
 

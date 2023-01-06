@@ -15,7 +15,7 @@ onready var collision_shape = $food_area/CollisionShape2D
 
 func _ready():
 	emit_signal("spawned", self.position)
-	$Timer.set_wait_time(level_sheet.get_level().get("bomb_timer"))
+	$Timer.set_wait_time(level_sheet.get_bomb_timer(global_var.lv()))
 	$Timer.start()
 
 

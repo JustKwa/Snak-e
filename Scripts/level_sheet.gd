@@ -1,22 +1,28 @@
 extends Resource
 class_name LevelSheet
 
-export(Array, Dictionary) var _level_sheet = [{
-    "id": 0,
-    "food_required": 0,
-    "food_amount": 0,
-    "food_timer": 0.0,
-    "speed_modifier": 0.0,
-    "canon_timer": 0.0
-}
-]
-
-export var current_level: int = 0 setget _set_level
+export(Array, Dictionary) var _level_sheet = []
 
 
-func _set_level(value: int):
-    current_level = value 
+func get_level(id: int):
+    return _level_sheet[id]
 
 
-func get_level():
-    return _level_sheet[current_level]
+func get_food_required(id: int):
+    return _level_sheet[id].get("food_required")
+
+
+func get_food_amount(id: int):
+    return _level_sheet[id].get("food_amount")
+
+
+func get_canon_timer(id: int):
+    return _level_sheet[id].get("canon_timer")
+
+
+func get_speed_modifier(id: int):
+    return _level_sheet[id].get("speed_modifier")
+
+
+func get_bomb_timer(id: int):
+    return _level_sheet[id].get("bomb_timer")

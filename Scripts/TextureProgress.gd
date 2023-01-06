@@ -1,7 +1,6 @@
 extends TextureProgress
 
 onready var global_var = preload("res://global_var.tres")
-onready var level_sheet = preload("res://resources/level_sheet.tres")
 
 
 func _ready():

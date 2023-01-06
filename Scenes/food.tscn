@@ -220,7 +220,7 @@ scale = 2.0
 scale_curve = SubResource( 6 )
 anim_speed = 2.5
 
-[node name="food" type="Node2D" groups=["self_destructable"]]
+[node name="food" type="Node2D" groups=["food_item", "self_destructable"]]
 z_index = 1
 script = ExtResource( 2 )
 

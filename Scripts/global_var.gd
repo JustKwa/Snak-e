@@ -10,8 +10,9 @@ const GRID_SIZE = 32
 
 export var speed: float
 
-var player_score: int = 0 setget setscore
-export var high_score: int setget _set_high_score
+var _current_level: int = 0
+var player_score: int = 0 
+export var high_score: int
 var game_over: bool = false setget _set_game_over
 var food_required_for_next_level: int = 0
 var _current_food_has: int = 0
@@ -23,15 +24,17 @@ func _set_game_over(value):
 	if !value:
 		return
 	_current_food_has = 0
+	_current_level = 0
 	multiplier = 1
+	speed = 5
+	_set_high_score()
 	emit_signal("game_over")
 
 
-func _set_high_score(value: int):
-	if player_score >= value:
+func _set_high_score():
+	if high_score >= player_score:
 		return
-
-	high_score = value
+	high_score = player_score
 	emit_signal("high_score")
 
 
@@ -43,18 +46,18 @@ func increase_current_food_has():
 	_current_food_has = 0
 	is_transitioning = true
 	multiplier += 1
-	emit_signal("next_level")
-
-
-func test_signal():
+	lv_up()
 	emit_signal("next_level")
 
 
 func increase_score():
 	player_score += 1 * multiplier
-	high_score = player_score
 	emit_signal("score_gained")
 
 
-func setscore(value):
-	player_score = value
+func lv_up():
+	_current_level += 1
+
+
+func lv():
+	return _current_level

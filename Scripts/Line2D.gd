@@ -16,7 +16,7 @@ onready var global_var = preload("res://global_var.tres")
 func _ready():
 	$Timer.set_wait_time(wait_time)
 	global_var.connect("next_level", self, "_on_next_level")
-	canon_timer = level_sheet.get_level().get("canon_timer")
+	canon_timer = level_sheet.get_canon_timer(global_var.lv())
 
 
 func _increment():
@@ -29,7 +29,7 @@ func _increment():
 func _on_Timer_timeout():
 	_increment()
 
-	if points[0].y < (529/3) * 2:
+	if points[0].y < 261:
 		return
 	
 	emit_signal("shoot_time")
@@ -44,7 +44,7 @@ func _on_Timer_timeout():
 
 func _on_next_level():
 	_reset()
-	canon_timer = level_sheet.get_level().get("canon_timer")
+	canon_timer = level_sheet.get_canon_timer(global_var.lv())
 
 
 func _on_snake_food_eaten():

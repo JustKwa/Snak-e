@@ -30,14 +30,12 @@ func _on_game_over():
 func _on_ready():
 	randomize()
 	global_var.high_score = _load().high_score
-	level_sheet.current_level = 0
-	global_var.food_required_for_next_level = level_sheet.get_level().get("food_required")
+	global_var.food_required_for_next_level = level_sheet.get_food_required(global_var.lv())
 	emit_signal("game_start")
 
 
 func _on_next_level():
-	level_sheet.current_level += 1
-	global_var.food_required_for_next_level = level_sheet.get_level().get("food_required")
+	global_var.food_required_for_next_level = level_sheet.get_food_required(global_var.lv())
 	get_tree().call_group("self_destructable", "self_destruct")
 	emit_signal("game_start")
 
