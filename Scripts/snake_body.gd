@@ -37,7 +37,6 @@ func _bounce() -> void:
 
 
 func _move(delta):
-	# use to slow down the bullet movement
 	var speed_modifier = level_sheet.get_level().get("speed_modifier")
 
 	percent_to_tile += (global_var.speed * speed_modifier) * delta
@@ -61,16 +60,9 @@ func _on_body_area_entered(area: Area2D) -> void:
 	if global_var.game_over:
 		return
 
-	if area.is_in_group("bullet_explode"):
-		state = State.EXPLODE
-		return
 
 	if area.is_in_group("bullet_ignore"):
 		return
-
-	# if "body" in area.name:
-	# 	state = State.EXPLODE
-	# 	return
 
 	collided()
 

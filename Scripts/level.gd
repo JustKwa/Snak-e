@@ -22,8 +22,6 @@ func restart_popup():
 
 
 func _on_game_over():
-	print(global_var.player_score)
-	print(global_var.high_score)
 	# global_var.high_score = global_var.player_score
 	restart_popup()
 	# _on_ready()
@@ -41,3 +39,11 @@ func _on_next_level():
 	global_var.food_required_for_next_level = level_sheet.get_level().get("food_required")
 	get_tree().call_group("self_destructable", "self_destruct")
 	emit_signal("game_start")
+
+
+func _on_head_is_shoot():
+	get_tree().paused = true
+
+
+func _on_shoot_function_shoot_turn(_snake_direction):
+	get_tree().paused = false

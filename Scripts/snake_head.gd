@@ -1,11 +1,14 @@
 extends SnakeBody
 
 signal at_tile
+signal is_shoot
 
 enum RotateAngle { LEFT = 0, RIGHT = 180, UP = 90, DOWN = -90 }
 enum State { IDLE, ROTATE, MOVE, SHOOT, EXPLODE }
 
 var rotation_angle: int = RotateAngle.RIGHT
+var is_about_to_shoot: bool = false
+var is_in_tile: bool = false
 
 onready var snake_controller = get_parent()
 onready var animation_player2 = $AnimationPlayer2
@@ -13,9 +16,9 @@ onready var timer = $Timer
 
 
 func _ready():
+	direction = Vector2.RIGHT
 	state = State.MOVE
 	snake_controller.connect("food_eaten", self, "on_food_eaten")
-	snake_controller.connect("move_snake", self, "_on_move_snake")
 
 
 func _physics_process(delta):
@@ -28,54 +31,42 @@ func _physics_process(delta):
 			if _is_rotate():
 				state = State.ROTATE
 		State.SHOOT:
-			print("shoot")
 			_shoot()
+			
+			if is_about_to_shoot:
+				return
+
 			state = State.MOVE
 		State.EXPLODE:
 			_explode()
 
 
-func _on_move_snake(snake_direction):
-	direction = snake_direction
-
-
-# func _idle():
-# 	direction = Vector2.ZERO
-# 	state = State.MOVE
-
-
 func on_food_eaten() -> void:
-	# var is_hold_food_animation: bool = "hold_food" in animation_player2.current_animation
-
-	# if is_hold_food_animation:
-	# 	state = State.SHOOT
-	# 	yield(animation_player2, "animation_finished")
-	# 	animation_player2.play("hold_food")
-	# 	return
-
-	# if is_transitioning:
-	# 	return
+	animation_player.play("eat_hold")
 
 	if global_var.is_transitioning:
-		timer.stop()
 		animation_player2.play("neutral")
-
-	timer.start()
-	animation_player.play("eat_hold")
-	animation_player2.play("hold_food")
 
 
 func _move(delta):
 	percent_to_tile += global_var.speed * delta
 
-	# Detects movement change at < 1.0 for snappier movement
 	if percent_to_tile >= 0.94:
 		position = current_pos + (direction * GRID_SIZE)
 		current_pos = self.position
 		percent_to_tile = 0.0
 		emit_signal("at_tile")
+
+		if !is_about_to_shoot:
+			return
+		
+		is_in_tile = true
+		global_var.speed = 0
+		state = State.SHOOT
+
 		return
 
+	is_in_tile = false
 	position = current_pos + (GRID_SIZE * percent_to_tile * direction)
 
 
@@ -112,9 +103,9 @@ func _explode():
 
 
 func _shoot():
-	animation_player.play("eat_shoot")
-	animation_player2.play("neutral")
-
+	animation_player.play("eat_hold")
+	return
+	
 
 func _on_head_area_entered(area):
 	if area.is_in_group("head_ignore"):
@@ -123,22 +114,26 @@ func _on_head_area_entered(area):
 	state = State.EXPLODE
 
 
-func change_state(value):
-	match value:
-		"IDLE":
-			state = State.IDLE
-		"MOVE":
-			state = State.MOVE
-		"ROTATE":
-			state = State.ROTATE
-		"EXPLODE":
-			state = State.EXPLODE
-
-
-func _on_Timer_timeout():
-	state = State.SHOOT
-	timer.stop()
-
-
 func _on_Line2D_snake_explode():
 	state = State.EXPLODE
+
+
+func _on_direction_checker_move_snake(snake_direction):
+	if is_about_to_shoot:
+		return
+
+	direction = snake_direction
+
+
+func _on_shoot_function_shoot_turn(snake_direction):
+	direction = snake_direction
+	is_in_tile = false
+	is_about_to_shoot = false
+	state = State.MOVE
+
+
+func _on_Line2D_shoot():
+	is_about_to_shoot = true
+	emit_signal("is_shoot")
+	animation_player.play("eat_hold")
+	# state = State.SHOOT
